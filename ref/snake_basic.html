@@ -1,0 +1,218 @@
+<!doctype html>
+<html>
+<body style="background: grey">
+	<h1 style="text-align: center; font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif; font-weight: 1000; font-size:50px; color: black">SNAKE</h1>
+	<canvas width="800" height="500" style="margin: auto; display: block"></canvas>
+ 
+	<script>
+	var canvas = document.querySelector("canvas");
+	var ctx = canvas.getContext("2d");
+	ctx.fillStyle = "black";
+	ctx.fillRect(0,0,canvas.width, canvas.height);
+	var labelSize = 40;
+	var gameTableHeight = canvas.height - labelSize;
+	var gameTableWidth = canvas.width
+	
+	// prepare the label
+	ctx.fillStyle = "blue";
+	ctx.fillRect(0, canvas.height - labelSize, canvas.width, labelSize);
+	ctx.font = "30px Arial";
+	ctx.fillStyle = "white";
+	ctx.fillText("Score: 0" + "       Body length: 3" + "      Max score: 0", 5, (canvas.height - labelSize) + 30);
+	
+	
+	class Snake{
+		constructor(initial_length){
+			// head position
+			this.pos_x = ((gameTableWidth / grid_size) / 2) * grid_size + 5;
+			this.pos_y = ((gameTableHeight / grid_size) / 2) * grid_size + 5;
+			//console.log(this.pos_x);
+			// velocity
+			this.vel_x = 1;
+			this.vel_y = 0;
+			// snake body
+			this.body = [];
+			for(var i = initial_length - 1; i >= 0; i--)
+				this.body.push([this.pos_x-i*grid_size,this.pos_y]);
+				
+			this.score = 0;
+			this.ready = true;
+			this.max_score = 0;
+		}
+		
+		changeVelPar(new_vel_x, new_vel_y){
+			if(this.ready){
+				this.vel_x = new_vel_x;
+				this.vel_y = new_vel_y;
+				this.ready = false;
+			}
+		}
+		
+		isDead(){
+			if(this.pos_x + grid_size/2 > gameTableWidth || this.pos_x - grid_size/2 < 0)
+				return true;
+			if(this.pos_y + grid_size/2 > gameTableHeight || this.pos_y - grid_size/2 < 0)
+				return true;
+			
+			// only the head can hit the body
+			for(var i = 0; i < this.body.length - 1; i++){
+				if(this.body[this.body.length - 1][0] == this.body[i][0] &&
+					this.body[this.body.length - 1][1] == this.body[i][1]){
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		
+		isEaten(){
+			if(this.pos_x == pillow.x && this.pos_y == pillow.y)
+				return true;
+			return false;
+		}
+		
+		clearSnake(){
+			ctx.fillStyle = "black";
+			for(var i = 0; i < this.body.length; i++)
+				ctx.fillRect(this.body[i][0] - grid_size/2, this.body[i][1] - grid_size/2, grid_size, grid_size);
+		}
+		
+		drawSnake(){
+			ctx.fillStyle = "white";
+			for(var i = 0; i < this.body.length; i++)
+				ctx.fillRect(this.body[i][0] - grid_size/2, this.body[i][1] - grid_size/2, grid_size, grid_size);
+		}
+		
+		updateLabel(){
+			ctx.fillStyle = "blue";
+			ctx.fillRect(0, canvas.height - labelSize, canvas.width, labelSize);
+			ctx.font = "30px Arial";
+			ctx.fillStyle = "white";
+			ctx.fillText("Score: " + this.score + "       Body length: " + this.body.length + "      Max score: " + this.max_score, 5, (canvas.height - labelSize) + 30);
+		}
+		
+		//body
+		// tail               head
+		// | 0 | 1 | 2 | ... | n |
+		update(){
+			this.clearSnake();
+			
+			if(this.isEaten()){
+				this.score += 100;
+				if(this.score > this.max_score)
+					this.max_score = this.score;
+				pillow.newPillow();
+				
+				// add the new head
+				this.pos_x += this.vel_x * grid_size;
+				this.pos_y += this.vel_y * grid_size;
+				this.body.push([this.pos_x, this.pos_y]);
+			}
+		
+			else{
+				this.pos_x += this.vel_x * grid_size;
+				this.pos_y += this.vel_y * grid_size;
+				// shift every coordinate by one on the left (toward the tail) and destroy the tail body[0]
+				for(var i = 0; i < this.body.length - 1; i++){
+					this.body[i] = this.body[i+1];
+				}
+				// add the new head to the body (update body[lenght-1])
+				this.body[this.body.length-1] = [this.pos_x, this.pos_y];
+				//console.log(this.body)
+			}
+			
+			this.drawSnake();
+			this.score -= 1;
+			this.ready = true;
+			
+			// update the label
+			this.updateLabel();
+
+			// check if the snake is dead
+			if(this.isDead()){
+				this.vel_x = 0;
+				this.vel_y = 0;
+				// stop the update Updateinterval
+				clearInterval(intervalUpdateId);
+			}
+		}
+	}
+	
+	class Pillow{
+		constructor(){
+			this.x_dim = (gameTableWidth / grid_size) - 1;
+			this.y_dim = (gameTableHeight / grid_size) - 1;
+		}
+	
+		newPillow(){
+			var change;
+			do{
+				var change = false;
+				this.x = (Math.floor((Math.random() * this.x_dim) + 1))*grid_size + 5;
+				this.y = (Math.floor((Math.random() * this.y_dim) + 1))*grid_size + 5;
+				//console.log(this.x);
+				for(var i = 0; i < snake.body.length; i++){
+					if(this.x == snake.body[i][0] && this.y == snake.body[i][1]){
+						change = true;
+						break;
+					}
+				}
+			}while(change);
+			
+			// draw pillow
+			ctx.fillStyle = "red";
+			ctx.fillRect(this.x - grid_size/2, this.y - grid_size/2, grid_size, grid_size);
+		}
+	}
+	
+	var grid_size = 10;
+	var snake = new Snake(3);
+	var pillow = new Pillow();
+	pillow.newPillow();
+	
+	var load_function = function(){
+		// start the update inteval
+		intervalUpdateId = setInterval(function(){snake.update()}, 50);
+	}
+	
+	var arrow_function = function(e){
+		e = e || window.event;
+		//console.log(e.keyCode);
+		if (e.keyCode == '38') {
+			// up arrow
+			if(snake.vel_y != 1) // avoid inversions of direction
+				snake.changeVelPar(0, -1);
+		}
+		else if (e.keyCode == '40') {
+			// down arrow
+			if(snake.vel_y != -1)
+				snake.changeVelPar(0, +1);
+		}
+		else if (e.keyCode == '37') {
+			// left arrow
+			if(snake.vel_x != 1)
+				snake.changeVelPar(-1, 0);
+		}
+		else if (e.keyCode == '39') {
+			// right arrow
+			if(snake.vel_x != -1)
+				snake.changeVelPar(1, 0);
+		}
+	}
+	
+	window.addEventListener('keydown', arrow_function );
+	window.addEventListener('load', load_function );
+	</script>
+	<div style="text-align:center">  
+		<button type="button" style="background-color:green; margin-top: 20px;
+		font-size: 40px; border:green; padding: 15px 32px; margin-left: 100;
+		font-family:'Lucida Sans Unicode', 'Lucida Grande', sans-serif; font-weight: 500;" 
+		onclick="Restart();">Restart</button>
+		<script>
+		function Restart() {
+			location.reload();
+		}
+		</script>
+	</div> 
+</body>
+</html>
