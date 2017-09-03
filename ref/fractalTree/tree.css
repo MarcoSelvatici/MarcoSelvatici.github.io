@@ -45,6 +45,18 @@ canvas{
 
 form{
 	line-height: 32px;
+	margin-bottom: 5px;
+}
+
+#layoutSelector{
+	margin-right: 10;
+}
+
+#moveButton{
+	border-radius: 3px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	margin-left: 10;
 }
 
 #suggestions{

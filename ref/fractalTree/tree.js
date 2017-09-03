@@ -64,18 +64,98 @@ function readNewValues(){
 	}
 }
 
-function newTree(){
+function clearCanvas(){
 	ctx.fillStyle = "black";
 	ctx.fillRect(0,0,canvas.width, canvas.height);
-	
+}
+
+function newTree(){
+	clearCanvas();
 	readNewValues();
+	
 	if(startPosition == "bottom")
 		createTree(firstLineLenght, 1, canvas.width / 2, canvas.height, 90);
-	else{
+	else
 		createTree(firstLineLenght, 1, canvas.width / 2, Number(canvas.height / 2) + Number(firstLineLenght), 90);
+}
+
+window.onload = newTree();
+
+// CHANGE LAYOUT
+
+function loadLayout(_branches, _spreadingAngle, _firstLineLenght, _iterations, _scalingFactor, _startPoint){
+	document.getElementById("treeValues")[0].value = _branches;
+	document.getElementById("treeValues")[1].value = _spreadingAngle;
+	document.getElementById("treeValues")[2].value = _firstLineLenght;
+	document.getElementById("treeValues")[3].value = _iterations;
+	document.getElementById("treeValues")[4].value = _scalingFactor;
+	document.getElementById("positionSelector").value = _startPoint;
+}
+
+function changeLayout(){
+	layout = document.getElementById("layoutSelector").value;
+	console.log(layout);
+	if(layout == "layout1")
+		loadLayout(2, 60, 100, 7, 0.8, "bottom");
+	else if(layout == "layout2")
+		loadLayout(2, 0, 2, 10, 1.8, "center");
+	else if(layout == "layout3")
+		loadLayout(2, 180, 280, 10, 0.7, "center");
+	else if(layout == "layout4")
+		loadLayout(4, 360, 160, 6, 0.8, "center");
+	newTree();
+}
+
+// MOVE ANIMATION
+
+var intervalId = 5;
+var over = false;
+
+function goUp(startX, startY){
+	if(spreadingAngle < 360){
+		spreadingAngle++;
+		document.getElementById("treeValues")[1].value = spreadingAngle;
+		clearCanvas();
+		createTree(firstLineLenght, 1, startX, startY, 90);
+	}
+	else{
+		over = true;
+		move();
+		document.getElementById("moveButton").textContent = "Move!";
 	}
 }
 
-window.onload = newTree(); 
+function move(){
+	if(document.getElementById("moveButton").textContent == "Move!" && !over){
+		document.getElementById("moveButton").textContent = "Stop!";
+		readNewValues();
+		var startX = canvas.width / 2;
+		var startY;
+		if(startPosition == "bottom")
+			startY = canvas.height;
+		else
+			 startY = Number(canvas.height / 2) + Number(firstLineLenght);
+	
+		var tmp = spreadingAngle;
+		intervalId = setInterval(goUp, 50, startX, startY);
+	}
+	else{
+		clearInterval(intervalId);
+		document.getElementById("moveButton").textContent = "Move!";
+		over=false;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 

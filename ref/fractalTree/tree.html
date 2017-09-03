@@ -26,7 +26,16 @@
 						<option value="bottom">Bottom</option>
 						<option value="center">Center</option>
 					</select>
-				</form>		
+				</form>
+				<div>
+					<select id="layoutSelector" onchange="changeLayout()">
+						<option value="layout1">Layout 1</option>
+						<option value="layout2">Layout 2</option>
+						<option value="layout3">Layout 3</option>
+						<option value="layout4">Layout 4</option>
+					</select>
+					<button id="moveButton" onclick="move()">Move!</button>
+				</div>
 			</div>
 			<div id="suggestions">
 				<p><b>Attention:</b> the time complexity of the algorithm is exponential: O(branches^iterations).<br>That means that you should be careful when increasing these two parameters since it could take longer for your device to load the tree, in particular if you are not using "simple" spreading angles like 0, 90, 180...</p>
