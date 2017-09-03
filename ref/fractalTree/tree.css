@@ -1,0 +1,61 @@
+body{
+	font-family: Arial;
+	text-align: center;
+	background-color:#999;
+}
+
+h1{
+	font-size: 30;
+}
+
+#mainPart{
+	width: 900;
+	height: auto;
+	margin: auto;
+}
+
+canvas{
+	display: inline-block;	
+	height: 500;
+	width: 500;
+	float: left;
+}
+
+#rightSide{
+	display: inline-block;
+	height: auto;
+	width: 300;
+	float:right;
+}
+
+#parametersArea{
+	height: auto;
+	width: 300;
+	border: 2px solid black;
+	border-radius: 5px;
+	margin-bottom: 10;
+}
+
+
+#parametersArea p{
+	font-size: 20;
+	font-weight: bold;	
+	margin: 10 5;
+}
+
+form{
+	line-height: 32px;
+}
+
+#suggestions{
+	height: auto;
+	width: 300;
+	border: 2px solid black;
+	border-radius: 5px;
+}
+
+#suggestions p{
+	margin: 5 5;
+}
+
+

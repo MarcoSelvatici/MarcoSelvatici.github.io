@@ -1,0 +1,38 @@
+<html>
+<head>
+	<link rel="stylesheet" href="tree.css" type="text/css">
+</head>
+
+<body>
+	<h1>Fractal Tree</h1>
+	<div id="mainPart">
+		<canvas width="800" height="800"></canvas>
+		<div id="rightSide">
+			<div id="parametersArea">
+				<p>Set your parameters to create your amazing tree!</p>
+				<form id="treeValues" action="javascript:void(0);">
+					Branches (2 -> 5):
+					<input type="number" name="quantity" min="2" max="5" value="2" onchange="newTree()">
+					<br>Angle of spreading (0 -> 360):
+					<input type="number" name="quantity" min="0" max="360" value="60" onchange="newTree()">
+					<br>First line lenght (1 -> 300):
+					<input type="number" name="quantity" min="1" max="300" value="100" onchange="newTree()">
+					<br>Iterations number (1 -> 10):
+					<input type="number" name="quantity" min="1" max="10" value="7" onchange="newTree()">
+					<br>Scaling factor (0.1 -> 2):
+					<input type="number" name="quantity" min="0.1" max="2" step="0.1" value="0.8" onchange="newTree()">
+					<br>Start position:
+					<select id="positionSelector" onchange="newTree()">
+						<option value="bottom">Bottom</option>
+						<option value="center">Center</option>
+					</select>
+				</form>		
+			</div>
+			<div id="suggestions">
+				<p><b>Attention:</b> the time complexity of the algorithm is exponential: O(branches^iterations).<br>That means that you should be careful when increasing these two parameters since it could take longer for your device to load the tree, in particular if you are not using "simple" spreading angles like 0, 90, 180...</p>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="tree.js"></script>
+</body>
+</html>
