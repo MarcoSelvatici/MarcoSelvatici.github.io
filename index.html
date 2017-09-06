@@ -5,32 +5,36 @@
 	<style type="text/css">
 		/* GENERAL############################################################ */
 		body{
-			/* background: #ffad33; */
+			background: #ffad33; 
 			font-family: Arial;
-			background-image: url('ref/orange.jpg');
+			/*background-image: url('ref/orange.jpg');*/
 			background-attachment: fixed;
 			background-position: center;
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
 		h2{
-			font-size: 20px;
+			font-size: 30px;
 			font-weight: bold;
 			text-align: center;
 		}
 		.mainHr{
-			width: 540;
+			width: 1050;
 			text-align: center;
 		}
+		#studiesPart .smallHr{
+			width: 470;
+			border-top: 1px solid gray;
+		}
 		.smallHr{
-			width: 230;
+			width: 240;
 			border-top: 1px solid gray;
 		}
 		
 		/* POPUP ############################################################ */
 		.popup{
 			visibility: hidden;
-			width: 540px;
+			width: 1100px;
 			height: auto;
 			background-color: #555;
 			color: #fff;
@@ -40,8 +44,9 @@
 			position: absolute;
 			z-index: 1; /* foreground*/
 			left: 50%;
-			margin-left: -280px;
+			margin-left: -550px;
 			line-height: 1.3em;
+			font-size: 20px;
 		}
 		.closePopup{
 			width: 20;
@@ -58,7 +63,7 @@
 		.topnav {
 			position: fixed;
 			background-color: #333333;
-			width: 600;
+			width: 1200;
 			top: 0;
 			margin:auto;
 			z-index: 2;
@@ -70,7 +75,7 @@
 			text-align: center;
 			padding: 14px 16px;
 			text-decoration: none;
-			font-size: 17px;
+			font-size: 22px;
 		}
 		.topnav a:hover {
 			background-color: #ddd;
@@ -79,7 +84,7 @@
 		
 		/* PARTS ############################################################ */
 		#mainPart{
-			width: 600;
+			width: 1200;
 			height: auto;
 			color: black;
 			text-align: center;
@@ -87,20 +92,19 @@
 			margin: auto;
 		}
 		#profileImage{
-			width: 600;
-			height: 460;
+			width: 1200;
 		}
 		#name{
-			font-size: 30;
+			font-size: 40;
 		}
-		.briefly{
-			font-size: 17px;
+		#briefly{
+			font-size: 25px;
 			text-align: center;
 		}
 		.parallaxImage{
 			background-image: url('ref/image1.jpg');
-			width: 600;
-			height: 460;
+			width: 1200;
+			height: 600;
 
 			/* Create the parallax scrolling effect */
 			background-attachment: fixed;
@@ -108,126 +112,116 @@
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
-		.blockLeft{
-			margin-left: 40;
-			width: 250;
-			height: 300;
-			display: inline-block;
-			float: left;
-			margin-bottom: 20;
-			border-radius: 5%;
-		}
-		.blockRight{
-			margin-right: 40;
-			width: 250;
-			height: 300;
-			display: inline-block;
-			float: right;
-			margin-bottom: 20;
-			border-radius: 5%;
-		}
+		
 		.blockTitle{
-			font-size: 20px;
+			font-size: 27px;
 			font-weight: bold;
 			text-align: center;
 			margin: 10;
 			cursor: pointer;
 		}
 		.blockParagraph{
-			font-size: 15px;
+			font-size: 18px;
 			text-align: center;
 			margin: 15;
 		}
 		
 			/* STUDIES ############################################################ */
+			.blockLeftStudies{
+				margin-left: 70;
+				width: 500;
+				height: 450;
+				display: inline-block;
+				float: left;
+				background: #ffc299;
+				margin-bottom: 20;
+				border-radius: 10px;
+			}
+			.blockRightStudies{
+				margin-right: 70;
+				width: 500;
+				height: 450;
+				display: inline-block;
+				float: right;
+				margin-bottom: 20;
+				border-radius: 10px;
+				background: #ffc299;
+			}
+			
 			#studiesPart{
-				height: 360;
-			}
-			#blockStudies1{
-				height: auto;
-				background: #ffc299;
-			}
-			#blockStudies2{
-				height: auto;
-				background: #ffc299;
+				height: 500;
 			}
 			#imperialImage{
-				width: 250;
-				height: 130;
+				width: 500;
 			}
 			#alberghettiImage{
-				width: 250;
-				height: 130;
+				width: 500;
 			}
 			
 			/* PROJECTS ############################################################ */
+			.blockProject{
+				background: #ffcc80;
+				margin: 10;
+				width: 250;
+				height: 270;
+				display: inline-block;
+				float: left;
+				margin-bottom: 20;
+				border-radius: 10px;
+				valign: middle;
+			}
+			
 			#projectsPart{
-				height: 500;
-			}
-			#blockProjects1{
-				height: auto;
-				background: #ffcc80;
-			}
-			#blockProjects2{
-				height: auto;
-				background: #ffcc80;
-			}
-			#blockProjects3{
-				height: auto;
-				background: #ffcc80;
-			}
-			#blockProjects4{
-				height: auto;
-				background: #ffcc80;
+				margin: auto;
+				height: 340;
+				width: 1085;
 			}
 			#oiiImage{
 				width: 250;
-				height: 130;
+				height: 185;
 			}
 			#tutorImage{
 				width: 250;
-				height: 130;
+				height: 185;
 			}
 			#svImage{
 				width: 250;
-				height: 130;
+				height: 185;
 			}
 			#snakeGif{
 				width: 250;
-				height: 150;
+				height: 185;
 			}
 			
 			/* ARTIFICIAL INTELLIGENCE ############################################################ */
+			.blockAI{
+				background: #e6e6e6;
+				margin: 10;
+				width: 250;
+				height: 255;
+				display: inline-block;
+				float: left;
+				margin-bottom: 20;
+				border-radius: 10px;
+				valign: middle;
+			}
+			
 			#AIPart{
-				height: 700;
-			}
-			#blockAI1{
-				height: auto;
-				background: #d3d3d3;
-			}
-			#blockAI2{
-				height: auto;
-				background: #d3d3d3;
-			}
-			#blockAI3{
-				height: auto;
-				background: #d3d3d3;
-			}
-			#blockAI4{
-				height: auto;
-				background: #d3d3d3;
+				margin: auto;
+				height: 340;
+				width: 1085;
 			}
 			#AIgif{
 				width: 250;
-				height: 170;
+				height: 160;
 			}
 			#crawlerGif{
 				width: 250;
-				height: 150;
+				height: 160;
 			}
 			#pacmanGif{
 				width: 250;
-				height: 150;
+				height: 160;
 			}
 			#nnImage{
 				width: 250;
@@ -237,7 +231,7 @@
 			
 			/* PHOTOS ############################################################ */
 			#photosPart{
-				height: 450;
+				height: 470;
 			}
 			.slideshowBlock{
 				height: 375;
@@ -274,43 +268,22 @@
 			
 			/* END ############################################################ */
 			#endPart{
-				background-color: #333333;
+				background-color: #808080;
 				height: 160;
-				color: white;
 				text-align: center;
 				font-weight: bold;
 			}
-			.contactIcons{
-			
+			#copyright{
+				padding: 1.5em 0em;
+				position: relative;
+				text-align: center;
+				font-size: 20px;
 			}
-			.icon{
-				border-radius: 10%;
-				line-height: 30px;
-				background: #ffad33;
-				width: 100px;
-				height: 30px;
-				margin: auto;
-				color: black;
-				margin-bottom: 10;
+			#copyright img:hover{
+				background-color: white;
+				border-radius: 25px;
 			}
-			#social{
-				display: inline-block;
-				float: left;
-				margin-left:80;
-			}
-			#github{
-				display: inline-block;
-				float: right;
-				margin-right: 80;
-			}
-			.finalLink{
-				text-decoration: none;
-				color: black;
-			}
-			.finalText{
-				margin-top: 0;
-				font-size: 20;
-			}
+
 		
 	</style>
 </head>
@@ -327,13 +300,12 @@
 		</div>
 		<div class="parallaxImage"></div>
 		<h1 id="name">MARCO SELVATICI</h1>
-		<hr class="mainHr"></hr>
-		
 		<p id="briefly">Italian student with a passion for tecnology and informatics.</p>
+		<hr class="mainHr"></hr>
 		
 		<div id="studiesPart">
 			<h2>STUDIES</h2>
-			<div class="blockLeft" id="blockStudies1">
+			<div class="blockLeftStudies">
 				<img id="alberghettiImage" src="ref/alberghetti.jpg" alt="image not found"></img>
 				<h3 class="blockTitle"   onclick=showPopup('alberghettiPopup')>High School</h3>
 				<span class="popup" id="alberghettiPopup">
@@ -346,7 +318,7 @@
 				<p class="blockParagraph">Studied at Alberghetti's high school in Imola from 2012 to 2017.</p>
 				<p class="blockParagraph">Recently got the high school diploma with score 100/100.</p>
 			</div>
-			<div class="blockRight" id="blockStudies2">
+			<div class="blockRightStudies">
 				<img id="imperialImage" src="ref/icl.jpg" alt="image not found"></img>
 				<h3 class="blockTitle"  onclick=showPopup('imperialPopup')>College</h3>
 				<span class="popup" id="imperialPopup">
@@ -361,10 +333,12 @@
 		</div>
 		
 		<!---------------------------------------------------------------------------------------------------------->
+		<br><br>
 		<hr class="mainHr"></hr>
+		<br>
 		<div id="projectsPart">
 			<h2>PROJECTS AND ACHIEVEMENTS</h2>
-			<div class="blockLeft" id="blockProjects1">
+			<div class="blockProject">
 				<img id="oiiImage" src="ref/oii.jpg" alt="image not found"></img>
 				<h3 class="blockTitle" onclick="showPopup('oiiPopup')">Informatics Olympiads</h3>
 				<span class="popup" id="oiiPopup">
@@ -379,11 +353,12 @@
 					The language used was C++.
 					</p>
 				</span>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Won a silver medal at individual Informatics Olympiads in 2016 (placed 13th over 20'000+ initial contestnats).</p>
+				<!-- <hr class="smallHr"></hr>
+				<p class="blockParagraph">Won a silver medal at individual Informatics Olympiads in 2016 (placed 13th over 20'000+ initial contestnats).</p>-->
 			</div>
-			<div class="blockRight" id="blockProjects2">
+			<div class="blockProject">
 				<img id="snakeGif" src="ref/snake.gif" alt="sorry:( gif not found"></img>
+				<br><br>
 				<h3 class="blockTitle" onclick="showPopup('webPopup')">Web developing</h3>
 				<span class="popup" id="webPopup">
 					<span class="closePopup" onclick="closePopup('webPopup')">X</span>
@@ -396,12 +371,13 @@
 					Have a look also at the <a class="popupLink" href="ref/fractalTree/tree.html" target="_blank">fractal tree generator</a>.
 					</p>
 				</span>
-				<hr class="smallHr"></hr>
+				<!-- <hr class="smallHr"></hr>
 				<p class="blockParagraph">Recently started coding web pages using HTML, CSS and JavaScript.</p>
-				<p class="blockParagraph">Have a look at <a href="ref/snake_basic.html" target="_blank" style="color: black">this</a>.</p>
+				<p class="blockParagraph">Have a look at <a href="ref/snake_basic.html" target="_blank" style="color: black">this</a>.</p> -->
 			</div>
-			<div class="blockLeft" id="blockProjects3">
+			<div class="blockProject">
 				<img id="svImage" src="ref/sv.png" alt="image not found"></img>
+				<br><br>
 				<h3 class="blockTitle" onclick="showPopup('svPopup')">SpecialVideo</h3>
 				<span class="popup" id="svPopup">
 					<span class="closePopup" onclick="closePopup('svPopup')">X</span>
@@ -411,12 +387,13 @@
 					Tests gave positive responses and in summer 2017 the complete system started working.
 					</p>
 				</span>
-				<hr class="smallHr"></hr>
+				<!-- <hr class="smallHr"></hr>
 				<p class="blockParagraph">In summer 2016 I got an internship at SpecialVideo where I developed the software for an OCR based system.</p>
-				<p class="blockParagraph">Now that system worths more than half million euros.</p>
+				<p class="blockParagraph">Now that system worths more than half million euros.</p> -->
 			</div>
-			<div class="blockRight" id="blockProjects4">
+			<div class="blockProject">
 				<img id="tutorImage" src="ref/tutor.jpg" alt="sorry:( image not found"></img>
+				<br><br>
 				<h3 class="blockTitle" onclick="showPopup('tutorPopup')">Informatics Tutor</h3>
 				<span class="popup" id="tutorPopup">
 					<span class="closePopup" onclick="closePopup('tutorPopup')">X</span>
@@ -425,44 +402,50 @@
 					In that way, one of our teams managed to won 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
 					</p>
 				</span>
-				<hr class="smallHr"></hr>
+				<!-- <hr class="smallHr"></hr>
 				<p class="blockParagraph">In 2016 and 2017 I tutored some of the informatics top ranked students in Italy.</p>
-				<p class="blockParagraph">We achieved several national level placements and winnings in Team Informatics Olympiads.</p>
+				<p class="blockParagraph">We achieved several national level placements and winnings in Team Informatics Olympiads.</p> -->
 			</div>
 		</div>
 		
 		<!---------------------------------------------------------------------------------------------------------->
+		<br><br>
 		<hr class="mainHr"></hr>
+		<br>
 		<div id="AIPart">
 			<h2>ARTIFICIAL INTELLIGENCE</h2>
-			<div class="blockLeft" id="blockAI1">
+			<div class="blockAI">
 				<img id="nnImage" src="ref/nn.png" alt="image not found"></img>
+				<br><br>
 				<h3 class="blockTitle">Neural Networks</h3>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Worked on several projects including Neural Networks.</p>
+				<!-- <hr class="smallHr"></hr>
+				<p class="blockParagraph">Worked on several projects including Neural Networks.</p> -->
 			</div>
-			<div class="blockRight" id="blockAI2">
+			<div class="blockAI">
 				<img id="crawlerGif" src="ref/crawler.gif" alt="gif not found"></img>
+				<br><br>
 				<h3 class="blockTitle">Q-Learning</h3>
-				<hr class="smallHr"></hr>
+				<!-- <hr class="smallHr"></hr>
 				<p class="blockParagraph">Q-agents manage to learn from outside environment by experiencing new actions.</p>
-				<p class="blockParagraph">The above robot learned to crawl completely by itself.<p>
+				<p class="blockParagraph">The above robot learned to crawl completely by itself.<p> -->
 			</div>
-			<div class="blockLeft" id="blockAI3">
+			<div class="blockAI">
 				<img id="pacmanGif" src="ref/pacman.gif" alt="gif not found"></img>
+				<br><br>
 				<h3 class="blockTitle">MiniMax</h3>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Minimax and expectimax agents try to forsee their opponents actions and act by consequence.</p>
+				<!-- <hr class="smallHr"></hr>
+				<p class="blockParagraph">Minimax and expectimax agents try to forsee their opponents actions and act by consequence.</p> -->
 			</div>
-			<div class="blockRight" id="blockAI4">
+			<div class="blockAI">
 				<img id="AIgif" src="ref/AIgif.gif" alt="gif not found"></img>
 				<h3 class="blockTitle">Genetic Algorithms</h3>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Get incredible AI agents miming the natural evolution process.</p>
+				<!-- <hr class="smallHr"></hr>
+				<p class="blockParagraph">Get incredible AI agents miming the natural evolution process.</p> -->
 			</div>
 		</div>
 		<!---------------------------------------------------------------------------------------------------------->
 		<hr class="mainHr"></hr>
+		<br>
 		<div id="photosPart">
 			<h2>PHOTOS</h2>
 			<div class="slideshowBlock">
@@ -474,19 +457,14 @@
 		
 		<!---------------------------------------------------------------------------------------------------------->
 		<div id="endPart">
-			<div id="emptySpace" style="height: 20;"></div>
-			
-			<div id="social">
-				<p class="finalText">Follow me on:</p>
-				<div id="contactIcons">
-					<div class="icon"><a class="finalLink" target="_blank" href="https://www.instagram.com/marco_selvatici/">Instagram</a></div>
-					<div class="icon"><a class="finalLink" target="_blank" href="https://www.facebook.com/marco.selvatici.98">Facebook</a></div>
-				</div>
-			</div>
-			<div id="github">
-				<p class="finalText">Visit my GitHub<br> page for more:</p>
-					<div class="icon"><a class="finalLink" target="_blank" href="https://github.com/MarcoSelvatici">GitHub</a></div>
-				</div>
+			<div id="copyright">
+				CONTACTS 
+				<br><br>
+				<a href="https://www.facebook.com/marco.selvatici.98" title="Facebook" target="_blank"><img src="ref/FB.png" width="50"></a>
+				&nbsp
+				<a href="https://www.instagram.com/marco_selvatici/" title="Instagram" target="_blank"><img src="ref/Insta.png" width="50"></a>
+				&nbsp
+				<a href="https://github.com/MarcoSelvatici" title="Github" target="_blank"><img src="ref/Github.png" width="50"></a>
 			</div>
 		</div>
 		
@@ -532,7 +510,7 @@
 		}
 	}
 	function closePopup(id){
-		document.getElementById(id).style.visibility="hidden";
+		document.getElementById (id).style.visibility="hidden";
 	}
 </script>
 
