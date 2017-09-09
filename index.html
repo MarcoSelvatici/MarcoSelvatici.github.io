@@ -2,472 +2,202 @@
 
 <head>
 	<script src="ref/jquery-3.2.1.js"></script>
-	<style type="text/css">
-		/* GENERAL############################################################ */
-		body{
-			background: #ffad33; 
-			font-family: Arial;
-			/*background-image: url('ref/orange.jpg');*/
-			background-attachment: fixed;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-		h2{
-			font-size: 30px;
-			font-weight: bold;
-			text-align: center;
-		}
-		.mainHr{
-			width: 1050;
-			text-align: center;
-		}
-		#studiesPart .smallHr{
-			width: 470;
-			border-top: 1px solid gray;
-		}
-		.smallHr{
-			width: 240;
-			border-top: 1px solid gray;
-		}
-		
-		/* POPUP ############################################################ */
-		.popup{
-			visibility: hidden;
-			width: 1100px;
-			height: auto;
-			background-color: #555;
-			color: #fff;
-			text-align: center;
-			border-radius: 6px;
-			padding: 2px 8px 0px 8px;
-			position: absolute;
-			z-index: 1; /* foreground*/
-			left: 50%;
-			margin-left: -550px;
-			line-height: 1.3em;
-			font-size: 20px;
-		}
-		.closePopup{
-			width: 20;
-			height: 20;
-			font-weight: bold;
-			cursor: pointer;
-			float: right;
-		}
-		.popupLink{
-			text-decoration: underline;
-			color: white;
-		}
-		/* NAVIGATION BAR ############################################################ */
-		.topnav {
-			position: fixed;
-			background-color: #333333;
-			width: 1200;
-			top: 0;
-			margin:auto;
-			z-index: 2;
-		}
-		.topnav a {
-			float: left;
-			display: block;
-			color: #f2f2f2;
-			text-align: center;
-			padding: 14px 16px;
-			text-decoration: none;
-			font-size: 22px;
-		}
-		.topnav a:hover {
-			background-color: #ddd;
-			color: black;
-		}
-		
-		/* PARTS ############################################################ */
-		#mainPart{
-			width: 1200;
-			height: auto;
-			color: black;
-			text-align: center;
-			background: #ffffe6;
-			margin: auto;
-		}
-		#profileImage{
-			width: 1200;
-		}
-		#name{
-			font-size: 40;
-		}
-		#briefly{
-			font-size: 25px;
-			text-align: center;
-		}
-		.parallaxImage{
-			background-image: url('ref/image1.jpg');
-			width: 1200;
-			height: 600;
-
-			/* Create the parallax scrolling effect */
-			background-attachment: fixed;
-			background-position: center;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-		
-		.blockTitle{
-			font-size: 27px;
-			font-weight: bold;
-			text-align: center;
-			margin: 10;
-			cursor: pointer;
-		}
-		.blockParagraph{
-			font-size: 18px;
-			text-align: center;
-			margin: 15;
-		}
-		
-			/* STUDIES ############################################################ */
-			.blockLeftStudies{
-				margin-left: 70;
-				width: 500;
-				height: 450;
-				display: inline-block;
-				float: left;
-				background: #ffc299;
-				margin-bottom: 20;
-				border-radius: 10px;
-			}
-			.blockRightStudies{
-				margin-right: 70;
-				width: 500;
-				height: 450;
-				display: inline-block;
-				float: right;
-				margin-bottom: 20;
-				border-radius: 10px;
-				background: #ffc299;
-			}
-			
-			#studiesPart{
-				height: 500;
-			}
-			#imperialImage{
-				width: 500;
-			}
-			#alberghettiImage{
-				width: 500;
-			}
-			
-			/* PROJECTS ############################################################ */
-			.blockProject{
-				background: #ffcc80;
-				margin: 10;
-				width: 250;
-				height: 270;
-				display: inline-block;
-				float: left;
-				margin-bottom: 20;
-				border-radius: 10px;
-				valign: middle;
-			}
-			
-			#projectsPart{
-				margin: auto;
-				height: 340;
-				width: 1085;
-			}
-			#oiiImage{
-				width: 250;
-				height: 185;
-			}
-			#tutorImage{
-				width: 250;
-				height: 185;
-			}
-			#svImage{
-				width: 250;
-				height: 185;
-			}
-			#snakeGif{
-				width: 250;
-				height: 185;
-			}
-			
-			/* ARTIFICIAL INTELLIGENCE ############################################################ */
-			.blockAI{
-				background: #e6e6e6;
-				margin: 10;
-				width: 250;
-				height: 255;
-				display: inline-block;
-				float: left;
-				margin-bottom: 20;
-				border-radius: 10px;
-				valign: middle;
-			}
-			
-			#AIPart{
-				margin: auto;
-				height: 340;
-				width: 1085;
-			}
-			#AIgif{
-				width: 250;
-				height: 160;
-			}
-			#crawlerGif{
-				width: 250;
-				height: 160;
-			}
-			#pacmanGif{
-				width: 250;
-				height: 160;
-			}
-			#nnImage{
-				width: 250;
-				height: 160;
-				background: #f2f2f2;
-			}
-			
-			/* PHOTOS ############################################################ */
-			#photosPart{
-				height: 470;
-			}
-			.slideshowBlock{
-				height: 375;
-				width: 500;
-				background: red;
-				margin: auto;
-			}
-			.prev, .next{
-				height: 25;
-				width: 60;
-				font-weight: bold;
-				font-size: 18px;
-				color: gray;
-				position: absolute;
-			}
-			/* Position the "next button" to the right */
-			.next {
-				margin-left: 440;
-				text-align:right;
-				border-radius: 3px 3px 3px 3px;
-			}
-			.prev {
-				text-align:left;
-				border-radius: 3px 3px 3px 3px;
-			}
-			/* On hover, add a black background color with a little bit see-through */
-			.prev:hover, .next:hover {
-				background-color: rgba(0,0,0,0.8);
-			}
-			#displayedImage{
-				height: 375;
-				width: 500;
-			}
-			
-			/* END ############################################################ */
-			#endPart{
-				background-color: #808080;
-				height: 160;
-				text-align: center;
-				font-weight: bold;
-			}
-			#copyright{
-				padding: 1.5em 0em;
-				position: relative;
-				text-align: center;
-				font-size: 20px;
-			}
-			#copyright img:hover{
-				background-color: white;
-				border-radius: 25px;
-			}
-
-		
-	</style>
+	<link rel="stylesheet" href="style.css" type="text/css">
 </head>
 
 <body>
 	<div id="mainPart">
 		<div class="topnav">
-			<a href="#mainPart">Home</a>
-			<a href="#studiesPart">Studies</a>
-			<a href="#projectsPart">Projects</a>
-			<a href="#AIPart">AI</a>
-			<a href="#photosPart">Photos</a>
-			<a href="#endPart">Follow</a>
+			<div onclick="moveTop()" style="cursor: pointer">Home</div>
+			<div onclick="moveToId('studiesPart')" style="cursor: pointer">Studies</div>
+			<div onclick="moveToId('projectsPart')" style="cursor: pointer">Projects</div>
+			<div onclick="moveToId('AIPart')" style="cursor: pointer">AI</div>
+			<div onclick="moveToId('photosPart')" style="cursor: pointer">Photos</div>
+			<div onclick="moveToId('endPart')" style="cursor: pointer">Follow</div>
 		</div>
-		<div class="parallaxImage"></div>
-		<h1 id="name">MARCO SELVATICI</h1>
-		<p id="briefly">Italian student with a passion for tecnology and informatics.</p>
-		<hr class="mainHr"></hr>
-		
-		<div id="studiesPart">
-			<h2>STUDIES</h2>
-			<div class="blockLeftStudies">
-				<img id="alberghettiImage" src="ref/alberghetti.jpg" alt="image not found"></img>
-				<h3 class="blockTitle"   onclick=showPopup('alberghettiPopup')>High School</h3>
-				<span class="popup" id="alberghettiPopup">
-					<span class="closePopup" onclick="closePopup('alberghettiPopup')">X</span>
-					<p>The Liceo Scientifico F. Alberghetti is an high school where the main focus is on scientific subjects, like maths, physics or science.<br>
-					In the last 3 years my average of marks was the higest among all the students of my year.
-					</p>
-				</span>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Studied at Alberghetti's high school in Imola from 2012 to 2017.</p>
-				<p class="blockParagraph">Recently got the high school diploma with score 100/100.</p>
+		<div class="parallaxImage" id="mainImage">
+			<image src="ref/image1.jpg" height="600" width="1200"></image>
+		</div>
+		<div id="info">
+			<h1 id="name" style="padding-top: 20px">MARCO SELVATICI</h1>
+			<p id="briefly">Italian student with a passion for tecnology and informatics.</p>
+			<hr class="mainHr"></hr>
+			<div id="studiesPart">
+				<h2>STUDIES</h2>
+				<div class="blockLeftStudies">
+					<img id="alberghettiImage" src="ref/alberghetti.jpg" onclick=showPopup('alberghettiPopup')></img>
+					<h3 class="blockTitle"  onclick=showPopup('alberghettiPopup') style="font-size: 27px">High School</h3>
+					<span class="popup" id="alberghettiPopup">
+						<span class="closePopup" onclick="closePopup('alberghettiPopup')">X</span>
+						<p>The Liceo Scientifico F. Alberghetti is an high school where the main focus is on scientific subjects, like maths, physics or science.<br>
+						In the last 3 years my average of marks was the higest among all the students of my year.
+						</p>
+					</span>
+					<hr class="smallHr"></hr>
+					<p class="blockParagraph">Studied at Alberghetti's high school in Imola from 2012 to 2017.</p>
+					<p class="blockParagraph">Recently got the high school diploma with score 100/100.</p>
+				</div>
+				<div class="blockRightStudies">
+					<img id="imperialImage" src="ref/icl.jpg" onclick=showPopup('imperialPopup')></img>
+					<h3 class="blockTitle"  onclick=showPopup('imperialPopup') style="font-size: 27px">College</h3>
+					<span class="popup" id="imperialPopup">
+						<span class="closePopup" onclick="closePopup('imperialPopup')">X</span>
+						<p>Imperial College London is one of the best universities in the world, in particular for engineering.<br>
+						Only a very small number of students from all over the world are admitted after a long selection process.<br>
+						Have a look at the <a href="http://www.imperial.ac.uk/study/ug/why-imperial/reputation-and-rankings/" target="_blank" style="color: white">rankings</a> for more informations.
+						</p>
+					</span>
+					<hr class="smallHr"></hr>
+					<p class="blockParagraph">Got admitted at Imperial College London for a Master in Electronic and Information Engineering.</p>
+				</div>
 			</div>
-			<div class="blockRightStudies">
-				<img id="imperialImage" src="ref/icl.jpg" alt="image not found"></img>
-				<h3 class="blockTitle"  onclick=showPopup('imperialPopup')>College</h3>
-				<span class="popup" id="imperialPopup">
-					<span class="closePopup" onclick="closePopup('imperialPopup')">X</span>
-					<p>Imperial College London is one of the best universities in the world, in particular for engineering.<br>
-					Only a very small number of students from all over the world are admitted after a long selection process.
-					</p>
-				</span>
-				<hr class="smallHr"></hr>
-				<p class="blockParagraph">Got admitted at Imperial College London for a Master in Electronic and Information Engineering.</p>
+			
+			<!---------------------------------------------------------------------------------------------------------->
+			<br><br>
+			<hr class="mainHr"></hr>
+			<br>
+			<div id="projectsPart">
+				<h2>PROJECTS AND ACHIEVEMENTS</h2>
+				<div class="blockProject">
+					<img id="oiiImage" class="projectsImage" src="ref/oii.jpg" onclick="showPopup('oiiPopup')"></img>
+					<h3 class="blockTitle" onclick="showPopup('oiiPopup')">Informatics Olympiads</h3>
+					<span class="popup" id="oiiPopup">
+						<span class="closePopup" onclick="closePopup('oiiPopup')">X</span>
+						<p>OII Olympiads are national competiotions both individual or in teams.<br>
+						In the years 2015 and 2016 I competed in both of them achieving remarkable results:<br>
+						&bull; 6th position at national level in Team Informatics Olympiads (over 300+ initial teams);<br>
+						&bull; silver medal (13th overall position at national level) in Individual Informatics Olympiads (over 20'000+ initial contestants).<br>
+						In these competitions you have to create your own algorithms in order to solve the task proposed with both time and memory limitations.<br>
+						The language used was C++.
+						</p>
+					</span>
+				</div>
+				<div class="blockProject">
+					<img id="snakeGif" class="projectsImage" src="ref/snake.gif" onclick="showPopup('webPopup')"></img>
+					<br><br>
+					<h3 class="blockTitle" onclick="showPopup('webPopup')">Web developing</h3>
+					<span class="popup" id="webPopup">
+						<span class="closePopup" onclick="closePopup('webPopup')">X</span>
+						<p>After having coded for a while in C++ and Python, in 2017, I started to learn HTML, CSS and javascript.<br>
+						The simple snake game you see in the gif was my first project (
+						<a class="popupLink" href="https://github.com/MarcoSelvatici/snake" target="_blank">see code</a>
+						or 
+						<a class="popupLink" href="ref/snake_basic.html" target="_blank">play</a>
+						) and then I created this web page about me.
+						Have a look also at the <a class="popupLink" href="ref/fractalTree/tree.html" target="_blank">fractal tree generator</a>.
+						</p>
+					</span>
+				</div>
+				<div class="blockProject">
+					<img id="svImage" class="projectsImage" src="ref/sv.png" onclick="showPopup('svPopup')"></img>
+					<br><br>
+					<h3 class="blockTitle" onclick="showPopup('svPopup')">SpecialVideo</h3>
+					<span class="popup" id="svPopup">
+						<span class="closePopup" onclick="closePopup('svPopup')">X</span>
+						<p>In summer 2016 I got an internship at SpecialVideo, a company that deals with industrial vision systems.<br>
+						I worked for them on the feasibility study of an important application for the pharmaceutical industry.<br>
+						I had to develop a C# code that used three different Computer Vision libraries in order to test the performances of different OCR (Optical Charachter Recognition) algorithms.<br>
+						Tests gave positive responses and in summer 2017 the complete system started working.
+						</p>
+					</span>
+				</div>
+				<div class="blockProject">
+					<img id="tutorImage" class="projectsImage" src="ref/tutor.jpg" onclick="showPopup('tutorPopup')"></img>
+					<h3 class="blockTitle" onclick="showPopup('tutorPopup')">Informatics Tutor</h3>
+					<span class="popup" id="tutorPopup">
+						<span class="closePopup" onclick="closePopup('tutorPopup')">X</span>
+						<p>Because of my good results at Informatics Olympiads I volounteered as a tutor for students in my school that were interested in that kind of competition.<br>
+						Together with a friend of mine (a volounteer too) we involved more than 50 students from 14 to 18 and started to teach them both the basics of programming and more advanced algorithms.<br>
+						In that way, one of our teams managed to won 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
+						</p>
+					</span>
+				</div>
+				<div class="blockProject">
+					<img id="botsImage" class="projectsImage" src="ref/bot.jpg" onclick="showPopup('botsPopup')"></img>
+					<br><br>
+					<h3 class="blockTitle" onclick="showPopup('botsPopup')">Telegram bots</h3>
+					<span class="popup" id="botsPopup">
+						<span class="closePopup" onclick="closePopup('botsPopup')">X</span>
+						<p>In 2017 I started to create telegram bots in Python using the <a href="https://core.telegram.org/bots/api" target="_blank" style="color: white">Telegram Bot API</a>.<br>
+						Bots are automatic users that can help you in several everiday life actions, making your life easier. Unfortunatly, you need your own server in order to have them running and therefore noone of my bots is currently online.<br>
+						The most interesting bot I created is the @ms_notification_bot that sends you a message if you have new instagram or facebook notifications (very useful if you use web versions of the apps and therefore you should everytime manually check for new notifications by opening the broswer).<br>
+						In creating this bot I also learnt how to interact with web pages with a Python code.
+						</p>
+					</span>
+				</div>
+				<div class="blockProject">
+					<img id="olyImage" class="projectsImage" src="ref/oly.jpg" onclick="showPopup('olympiadsPopup')"></img>
+					<h3 class="blockTitle" onclick="showPopup('olympiadsPopup')">Natural Science Olympiads</h3>
+					<span class="popup" id="olympiadsPopup">
+						<span class="closePopup" onclick="closePopup('olympiadsPopup')">X</span>
+						<p>Natural Science Olympiads are national level competitions in natural science and biology.<br>
+						In 2014 I placed myself 12th at national level.<br>
+						I also took part at several other competitions, performing quite well in physics (bronze medal at regional level) and chemistry.
+						</p>
+					</span>
+				</div>
+			</div>
+			
+			<!---------------------------------------------------------------------------------------------------------->
+			<br><br>
+			<hr class="mainHr"></hr>
+			<br>
+			<div id="AIPart">
+				<h2>ARTIFICIAL INTELLIGENCE</h2>
+				<div class="blockAI">
+					<img id="nnImage" class="AIImage" src="ref/nn.png"></img>
+					<br><br>
+					<h3 class="blockTitle">Neural Networks</h3>
+					<!-- <hr class="smallHr"></hr>
+					<p class="blockParagraph">Worked on several projects including Neural Networks.</p> -->
+				</div>
+				<div class="blockAI">
+					<img id="crawlerGif" class="AIImage" src="ref/crawler.gif"></img>
+					<br><br>
+					<h3 class="blockTitle">Q-Learning</h3>
+					<!-- <hr class="smallHr"></hr>
+					<p class="blockParagraph">Q-agents manage to learn from outside environment by experiencing new actions.</p>
+					<p class="blockParagraph">The above robot learned to crawl completely by itself.<p> -->
+				</div>
+				<div class="blockAI">
+					<img id="pacmanGif" class="AIImage" src="ref/pacman.gif"></img>
+					<br><br>
+					<h3 class="blockTitle">MiniMax</h3>
+					<!-- <hr class="smallHr"></hr>
+					<p class="blockParagraph">Minimax and expectimax agents try to forsee their opponents actions and act by consequence.</p> -->
+				</div>
+				<div class="blockAI">
+					<img id="AIgif" class="AIImage" src="ref/AIgif.gif"></img>
+					<h3 class="blockTitle">Genetic Algorithms</h3>
+					<!-- <hr class="smallHr"></hr>
+					<p class="blockParagraph">Get incredible AI agents miming the natural evolution process.</p> -->
+				</div>
+			</div>
+			<!---------------------------------------------------------------------------------------------------------->
+			<hr class="mainHr"></hr>
+			<br>
+			<div id="photosPart">
+				<h2>PHOTOS</h2>
+				<div class="slideshowBlock">
+					<img id="displayedImage" src=""></img>
+					<div class="prev" onclick="plusSlides(-1)">&nbsp;&#10094;</div>
+					<div class="next" onclick="plusSlides(1)">&#10095;&nbsp;</div>
+				</div>
+			</div>
+			
+			<!---------------------------------------------------------------------------------------------------------->
+			<div id="endPart">
+				<div id="copyright">
+					FOLLOW 
+					<br><br>
+					<a href="https://www.facebook.com/marco.selvatici.98" title="Facebook" target="_blank"><img src="ref/fb.png" width="40"></a>
+					&nbsp
+					<a href="https://www.instagram.com/marco_selvatici/" title="Instagram" target="_blank"><img src="ref/insta.png" width="40"></a>
+					&nbsp
+					<a href="https://github.com/MarcoSelvatici" title="Github" target="_blank"><img src="ref/github.png" width="40"></a>
+				</div>
 			</div>
 		</div>
-		
-		<!---------------------------------------------------------------------------------------------------------->
-		<br><br>
-		<hr class="mainHr"></hr>
-		<br>
-		<div id="projectsPart">
-			<h2>PROJECTS AND ACHIEVEMENTS</h2>
-			<div class="blockProject">
-				<img id="oiiImage" src="ref/oii.jpg" alt="image not found"></img>
-				<h3 class="blockTitle" onclick="showPopup('oiiPopup')">Informatics Olympiads</h3>
-				<span class="popup" id="oiiPopup">
-					<span class="closePopup" onclick="closePopup('oiiPopup')">X</span>
-					<p>OII Olympiads are national competiotions both individual or in teams.<br>
-					In the years 2015 and 2016 I competed in both of them achieving remarkable results:
-					<ul style="margin: 0px 10px 10px 10px">
-						<li>6th position at national level in Team Informatics Olympiads (over 300+ initial teams);</li>
-						<li>13th position at national level in Individual Informatics Olympiads (over 20'000+ initial contestants).</li>
-					</ul>
-					In these competitions you have to create your own algorithms in order to solve the task proposed with both time and memory limitations.<br>
-					The language used was C++.
-					</p>
-				</span>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Won a silver medal at individual Informatics Olympiads in 2016 (placed 13th over 20'000+ initial contestnats).</p>-->
-			</div>
-			<div class="blockProject">
-				<img id="snakeGif" src="ref/snake.gif" alt="sorry:( gif not found"></img>
-				<br><br>
-				<h3 class="blockTitle" onclick="showPopup('webPopup')">Web developing</h3>
-				<span class="popup" id="webPopup">
-					<span class="closePopup" onclick="closePopup('webPopup')">X</span>
-					<p>After having coded for a while in C++ and Python, in 2017 I started to learn HTML, CSS and javascript.<br>
-					The simple snake game you see in the gif was my first project (
-					<a class="popupLink" href="https://github.com/MarcoSelvatici/snake" target="_blank">see code</a>
-					or 
-					<a class="popupLink" href="ref/snake_basic.html" target="_blank">play</a>
-					) and then I coded this web page about me.
-					Have a look also at the <a class="popupLink" href="ref/fractalTree/tree.html" target="_blank">fractal tree generator</a>.
-					</p>
-				</span>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Recently started coding web pages using HTML, CSS and JavaScript.</p>
-				<p class="blockParagraph">Have a look at <a href="ref/snake_basic.html" target="_blank" style="color: black">this</a>.</p> -->
-			</div>
-			<div class="blockProject">
-				<img id="svImage" src="ref/sv.png" alt="image not found"></img>
-				<br><br>
-				<h3 class="blockTitle" onclick="showPopup('svPopup')">SpecialVideo</h3>
-				<span class="popup" id="svPopup">
-					<span class="closePopup" onclick="closePopup('svPopup')">X</span>
-					<p>SpecialVideo is a company that deals with industrial vision systems.<br>
-					During summer 2016 I worked for them on the feasibility study of an important application for the pharmaceutical industry. <br>
-					I had to develop a C# code that used three different Computer Vision libraries in order to test the performances of different OCR algorithms (Optical Charachter Recognition).<br>
-					Tests gave positive responses and in summer 2017 the complete system started working.
-					</p>
-				</span>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">In summer 2016 I got an internship at SpecialVideo where I developed the software for an OCR based system.</p>
-				<p class="blockParagraph">Now that system worths more than half million euros.</p> -->
-			</div>
-			<div class="blockProject">
-				<img id="tutorImage" src="ref/tutor.jpg" alt="sorry:( image not found"></img>
-				<br><br>
-				<h3 class="blockTitle" onclick="showPopup('tutorPopup')">Informatics Tutor</h3>
-				<span class="popup" id="tutorPopup">
-					<span class="closePopup" onclick="closePopup('tutorPopup')">X</span>
-					<p>Because of my good results at Informatics Olympiads I volounteered as a tutor for students in my school that were interested in that kind of competition.<br>
-					Together with a friend of mine (a volounteer too) we involved more than 50 students from 14 to 18 and started to teach them both the basics of programming and more advanced algorithms.<br>
-					In that way, one of our teams managed to won 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
-					</p>
-				</span>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">In 2016 and 2017 I tutored some of the informatics top ranked students in Italy.</p>
-				<p class="blockParagraph">We achieved several national level placements and winnings in Team Informatics Olympiads.</p> -->
-			</div>
-		</div>
-		
-		<!---------------------------------------------------------------------------------------------------------->
-		<br><br>
-		<hr class="mainHr"></hr>
-		<br>
-		<div id="AIPart">
-			<h2>ARTIFICIAL INTELLIGENCE</h2>
-			<div class="blockAI">
-				<img id="nnImage" src="ref/nn.png" alt="image not found"></img>
-				<br><br>
-				<h3 class="blockTitle">Neural Networks</h3>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Worked on several projects including Neural Networks.</p> -->
-			</div>
-			<div class="blockAI">
-				<img id="crawlerGif" src="ref/crawler.gif" alt="gif not found"></img>
-				<br><br>
-				<h3 class="blockTitle">Q-Learning</h3>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Q-agents manage to learn from outside environment by experiencing new actions.</p>
-				<p class="blockParagraph">The above robot learned to crawl completely by itself.<p> -->
-			</div>
-			<div class="blockAI">
-				<img id="pacmanGif" src="ref/pacman.gif" alt="gif not found"></img>
-				<br><br>
-				<h3 class="blockTitle">MiniMax</h3>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Minimax and expectimax agents try to forsee their opponents actions and act by consequence.</p> -->
-			</div>
-			<div class="blockAI">
-				<img id="AIgif" src="ref/AIgif.gif" alt="gif not found"></img>
-				<h3 class="blockTitle">Genetic Algorithms</h3>
-				<!-- <hr class="smallHr"></hr>
-				<p class="blockParagraph">Get incredible AI agents miming the natural evolution process.</p> -->
-			</div>
-		</div>
-		<!---------------------------------------------------------------------------------------------------------->
-		<hr class="mainHr"></hr>
-		<br>
-		<div id="photosPart">
-			<h2>PHOTOS</h2>
-			<div class="slideshowBlock">
-				<img id="displayedImage" src=""></img>
-				<div class="prev" onclick="plusSlides(-1)">&nbsp;&#10094;</div>
-  				<div class="next" onclick="plusSlides(1)">&#10095;&nbsp;</div>
-			</div>
-		</div>
-		
-		<!---------------------------------------------------------------------------------------------------------->
-		<div id="endPart">
-			<div id="copyright">
-				CONTACTS 
-				<br><br>
-				<a href="https://www.facebook.com/marco.selvatici.98" title="Facebook" target="_blank"><img src="ref/FB.png" width="50"></a>
-				&nbsp
-				<a href="https://www.instagram.com/marco_selvatici/" title="Instagram" target="_blank"><img src="ref/Insta.png" width="50"></a>
-				&nbsp
-				<a href="https://github.com/MarcoSelvatici" title="Github" target="_blank"><img src="ref/Github.png" width="50"></a>
-			</div>
-		</div>
-		
 	</div>
 </body>
 
@@ -494,7 +224,7 @@
 </script>
 
 <script>
-	var popupList=["alberghettiPopup", "imperialPopup", "svPopup", "tutorPopup", "oiiPopup", "webPopup"];
+	var popupList=["alberghettiPopup", "imperialPopup", "svPopup", "tutorPopup", "oiiPopup", "webPopup", "botsPopup", "olympiadsPopup"];
 	for(var i = 0; i < popupList.length; i++)
 		closePopup(popupList[i]);
 				
@@ -510,7 +240,16 @@
 		}
 	}
 	function closePopup(id){
-		document.getElementById (id).style.visibility="hidden";
+		document.getElementById(id).style.visibility="hidden";
+	}
+</script>
+
+<script>
+	function moveTop(){
+		document.body.scrollTop = 0;
+	}
+	function moveToId(id){
+		window.scrollTo(window.pageXOffset + window.scrollX, window.pageYOffset + document.getElementById(id).getBoundingClientRect().top - 70);
 	}
 </script>
 

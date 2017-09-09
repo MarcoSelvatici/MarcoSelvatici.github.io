@@ -1,0 +1,272 @@
+/* GENERAL############################################################ */
+body{
+	background: #bfbfbf; 
+	font-family: Verdana;
+	/*background-image: url('ref/orange.jpg');*/
+	background-attachment: fixed;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+h2{
+	font-size: 30px;
+	font-weight: bold;
+	text-align: center;
+}
+.mainHr{
+	width: 1070;
+	border-top: 3px solid #003666;
+}
+#studiesPart .smallHr{
+	width: 470;
+	border-top: 2px solid #003666;
+}
+		
+/* POPUP ############################################################ */
+.popup{
+	visibility: hidden;
+	width: 1100px;
+	height: auto;
+	background-color: #003666;
+	color: #f2f2f2;
+	text-align: left;
+	border-radius: 6px;
+	padding: 2px 8px 0px 8px;
+	position: absolute;
+	z-index: 1; /* foreground*/
+	left: 50%;
+	margin-left: -550px;
+	line-height: 1.3em;
+	font-size: 20px;
+	cursor: initial;
+}
+.closePopup{
+	width: 20;
+	height: 20;
+	font-weight: bold;
+	cursor: pointer;
+	float: right;
+}
+.popupLink{
+	text-decoration: underline;
+	color: white;
+}
+/* NAVIGATION BAR ############################################################ */
+.topnav {
+	position: fixed;
+	background-color: #003666;
+	width: 1200;
+	top: 0;
+	margin:auto;
+	z-index: 2;
+}
+.topnav div {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 22px;
+}
+.topnav div:hover {
+	background-color: #f2f2f2;
+	color: black;
+}
+
+/* PARTS ############################################################ */
+#mainPart{
+	width: 1200;
+	height: auto;
+	color: #003666;
+	text-align: center;
+	background: #f2f2f2;
+	margin: auto;
+}
+#profileImage{
+	width: 1200;
+}
+#name{
+	font-size: 40;
+}
+#briefly{
+	font-size: 25px;
+	text-align: center;
+}
+.parallaxImage{
+	top: 53px;
+	width: 1200;
+	height: 600;
+	position: fixed;
+	z-index: -2;
+}
+
+#info{
+	margin-top:653;
+}
+
+.blockTitle{
+	font-size: 24px;
+	font-weight: bold;
+	text-align: center;
+	margin: 10;
+	cursor: pointer;
+}
+.blockParagraph{
+	font-size: 18px;
+	text-align: center;
+	margin: 15;
+}
+
+/* STUDIES ############################################################ */
+.blockLeftStudies{
+	margin-left: 70;
+	width: 500;
+	height: 470;
+	display: inline-block;
+	float: left;
+	margin-bottom: 20;
+	border-radius: 10px;
+	background: #d9d9d9;
+}
+.blockRightStudies{
+	margin-right: 70;
+	width: 500;
+	height: 470;
+	display: inline-block;
+	float: right;
+	margin-bottom: 20;
+	border-radius: 10px;
+	background: #d9d9d9;
+}
+.blockLeftStudies:hover{
+	background-color: #b3b3b3;
+}
+.blockRightStudies:hover{
+	background-color: #b3b3b3;
+}
+#studiesPart{
+	height: 530;
+}
+#imperialImage{
+	width: 500;
+	height: 283;
+	cursor: pointer;
+}
+#alberghettiImage{
+	width: 500;
+	height: 283;
+	cursor: pointer;
+}
+
+/* PROJECTS ############################################################ */
+.blockProject{
+	background: #d9d9d9; /* #ffcc80 */
+	margin: 10;
+	width: 250;
+	height: 270;
+	display: inline-block;
+	float: left;
+	margin-bottom: 20;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.blockProject:hover{
+	background-color: #b3b3b3;
+}
+
+#projectsPart{
+	margin: auto;
+	height: 640;
+	width: 1085;
+}
+
+.projectsImage{
+	width: 250;
+	height: 185;
+}
+
+/* ARTIFICIAL INTELLIGENCE ############################################################ */
+.blockAI{
+	background: #d9d9d9;
+	margin: 10;
+	width: 250;
+	height: 245;
+	display: inline-block;
+	float: left;
+	margin-bottom: 20;
+	border-radius: 10px;
+	valign: middle;
+}
+
+#AIPart{
+	margin: auto;
+	height: 359;
+	width: 1085;
+}
+.AIImage{
+	width: 250;
+	height: 160;
+}
+#nnImage{
+	background: #666666;
+}
+
+/* PHOTOS ############################################################ */
+#photosPart{
+	height: 500;
+}
+.slideshowBlock{
+	height: 375;
+	width: 500;
+	background: #d9d9d9;
+	margin: auto;
+}
+.prev, .next{
+	height: 25;
+	width: 60;
+	font-weight: bold;
+	font-size: 18px;
+	color: gray;
+	position: absolute;
+}
+/* Position the "next button" to the right */
+.next {
+	margin-left: 440;
+	text-align:right;
+	border-radius: 3px 3px 3px 3px;
+}
+.prev {
+	text-align:left;
+	border-radius: 3px 3px 3px 3px;
+}
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+	background-color: rgba(0,0,0,0.8);
+}
+#displayedImage{
+	height: 375;
+	width: 500;
+}
+
+/* END ############################################################ */
+#endPart{
+	background-color:  #003666;
+	height: 160;
+	text-align: center;
+	font-weight: bold;
+}
+#copyright{
+	color: #f2f2f2;
+	padding: 1.5em 0em;
+	position: relative;
+	text-align: center;
+	font-size: 20px;
+}
+#copyright img{
+	border-radius: 8px;
+}
+
+#copyright img:hover{
+	border-radius: 15px;
+}
