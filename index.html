@@ -21,6 +21,21 @@
 		<div id="info">
 			<h1 id="name" style="padding-top: 20px">MARCO SELVATICI</h1>
 			<p id="briefly">Italian student with a passion for tecnology and informatics.</p>
+			<div id="more" onclick="showPersonalDetails()">Show personal details</div>
+			<br>
+			<div id="personalDetails">
+				<h3>Life</h3>
+				<p>Hi! My name is Marco Selvatici and I am an Italian student from Imola (near Bologna).<br>
+				I was born on 19th October 1998 in Lugo and I lived in Conselice until 2005. Then I moved to Imola where I attended the Alberghetti high school from 2012 to 2017.<br>
+				Currently I am living and studying in London.</p>
+				<br>
+				<h3>Hobbies and interests</h3>
+				<p>Since I was a child I always loved doing sports, therefore in the previous years I played football and basketball. However, I liked also other sports like table tennis, frisbee, volleyball, beach volley and racketball.<br>
+				I also really like to travel and meet new people from all over the world.<br>
+				In Italy I spent beautiful days with my friends at the riverside, the seaside or just in a park playng basketball and doing barbecues.<br>
+				I do not like so much nightclubs since my favourite kind of music is rock and I do not appreciate so much house (and raggaeton too) music.
+				</p>
+			</div>
 			<hr class="mainHr"></hr>
 			<div id="studiesPart">
 				<h2>STUDIES</h2>
@@ -30,7 +45,7 @@
 					<span class="popup" id="alberghettiPopup">
 						<span class="closePopup" onclick="closePopup('alberghettiPopup')">X</span>
 						<p>The Liceo Scientifico F. Alberghetti is an high school where the main focus is on scientific subjects, like maths, physics or science.<br>
-						In the last 3 years my average of marks was the higest among all the students of my year.
+						In the last 3 years my average of marks was the higest among all the students of my year.<br><br>
 						</p>
 					</span>
 					<hr class="smallHr"></hr>
@@ -45,6 +60,7 @@
 						<p>Imperial College London is one of the best universities in the world, in particular for engineering.<br>
 						Only a very small number of students from all over the world are admitted after a long selection process.<br>
 						Have a look at the <a href="http://www.imperial.ac.uk/study/ug/why-imperial/reputation-and-rankings/" target="_blank" style="color: white">rankings</a> for more informations.
+						<br><br>
 						</p>
 					</span>
 					<hr class="smallHr"></hr>
@@ -200,6 +216,24 @@
 		</div>
 	</div>
 </body>
+
+<script>
+	document.getElementById("personalDetails").style.display = "none";
+	
+	function showPersonalDetails(){
+		personalDetails = document.getElementById("personalDetails");
+		showText = document.getElementById("more");
+		if(personalDetails.style.display == "none"){
+			personalDetails.style.display = "block";
+			more.textContent = "Hide personal details";
+		}
+		else{
+			console.log(personalDetails.style.animation);
+			personalDetails.style.display = "none";
+			more.textContent = "Show personal details";
+		}
+	}
+</script>
 
 <script>
 	imagePaths = ["slides/fiume.JPG", "slides/G0010030.JPG","slides/G0031187.JPG","slides/G0451802.JPG","slides/GOPR0099.jpg","slides/GOPR1786.JPG"];

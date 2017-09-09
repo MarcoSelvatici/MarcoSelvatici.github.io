@@ -17,9 +17,14 @@ h2{
 	width: 1070;
 	border-top: 3px solid #003666;
 }
-#studiesPart .smallHr{
-	width: 470;
-	border-top: 2px solid #003666;
+/* ANIMATIONS #######################################################*/
+@keyframes appear{
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
 }
 		
 /* POPUP ############################################################ */
@@ -31,7 +36,7 @@ h2{
 	color: #f2f2f2;
 	text-align: left;
 	border-radius: 6px;
-	padding: 2px 8px 0px 8px;
+	padding: 2px 4px 2px 16px;
 	position: absolute;
 	z-index: 1; /* foreground*/
 	left: 50%;
@@ -39,6 +44,7 @@ h2{
 	line-height: 1.3em;
 	font-size: 20px;
 	cursor: initial;
+	animation: appear 1s;
 }
 .closePopup{
 	width: 20;
@@ -86,13 +92,6 @@ h2{
 #profileImage{
 	width: 1200;
 }
-#name{
-	font-size: 40;
-}
-#briefly{
-	font-size: 25px;
-	text-align: center;
-}
 .parallaxImage{
 	top: 53px;
 	width: 1200;
@@ -100,11 +99,47 @@ h2{
 	position: fixed;
 	z-index: -2;
 }
-
 #info{
 	margin-top:653;
 }
-
+#name{
+	font-size: 40;
+}
+#briefly{
+	font-size: 25px;
+	text-align: center;
+}
+#more{
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	text-decoration: underline;
+	cursor: pointer;
+}
+#personalDetails{
+	margin: auto;
+	width: 1006;
+	/* background: #d9d9d9; */
+	display: none;
+	border-style: solid;
+	border-color: #003666;
+	border-width: 3px;
+	border-radius: 5px;
+	padding: 25 30;
+	animation: appear 1s;
+}
+#personalDetails h3{
+	font-size: 23px;
+	font-weight: bold;
+	text-align: left;
+	margin: 5 0;
+}
+#personalDetails p{
+	margin: 0;
+	text-align: left;
+	font-size: 20px;
+	line-height: 1.3em;
+}
 .blockTitle{
 	font-size: 24px;
 	font-weight: bold;
@@ -140,13 +175,19 @@ h2{
 	background: #d9d9d9;
 }
 .blockLeftStudies:hover{
-	background-color: #b3b3b3;
+	background-color: #003666;
+	color: #f2f2f2;
 }
 .blockRightStudies:hover{
-	background-color: #b3b3b3;
+	background-color: #003666;
+	color: #f2f2f2;
 }
 #studiesPart{
 	height: 530;
+}
+#studiesPart .smallHr{
+	width: 470;
+	border-top: 2px solid #003666;
 }
 #imperialImage{
 	width: 500;
@@ -172,7 +213,8 @@ h2{
 	cursor: pointer;
 }
 .blockProject:hover{
-	background-color: #b3b3b3;
+	background-color: #003666;
+	color: #f2f2f2;
 }
 
 #projectsPart{
@@ -196,7 +238,6 @@ h2{
 	float: left;
 	margin-bottom: 20;
 	border-radius: 10px;
-	valign: middle;
 }
 
 #AIPart{
@@ -251,7 +292,7 @@ h2{
 
 /* END ############################################################ */
 #endPart{
-	background-color:  #003666;
+	background-color: #003666;
 	height: 160;
 	text-align: center;
 	font-weight: bold;
