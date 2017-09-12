@@ -39,28 +39,25 @@
 			<hr class="mainHr"></hr>
 			<div id="studiesPart">
 				<h2>STUDIES</h2>
-				<div class="blockLeftStudies">
-					<img id="alberghettiImage" src="ref/alberghetti.jpg" onclick=showPopup('alberghettiPopup')></img>
-					<h3 class="blockTitle"  onclick=showPopup('alberghettiPopup') style="font-size: 27px">High School</h3>
+				<div class="blockLeftStudies" onmouseover="showPopup('alberghettiPopup')" onmouseout="closePopup('alberghettiPopup')">
+					<img id="alberghettiImage" src="ref/alberghetti.jpg"></img>
+					<h3 class="blockTitle" style="font-size: 27px">High School</h3>
 					<span class="popup" id="alberghettiPopup">
-						<span class="closePopup" onclick="closePopup('alberghettiPopup')">X</span>
 						<p>The Liceo Scientifico F. Alberghetti is an high school where the main focus is on scientific subjects, like maths, physics or science.<br>
-						In the last 3 years my average of marks was the higest among all the students of my year.<br><br>
+						In the last 3 years my average of marks was the higest among all the students of my year.
 						</p>
 					</span>
 					<hr class="smallHr"></hr>
 					<p class="blockParagraph">Studied at Alberghetti's high school in Imola from 2012 to 2017.</p>
 					<p class="blockParagraph">Recently got the high school diploma with score 100/100.</p>
 				</div>
-				<div class="blockRightStudies">
-					<img id="imperialImage" src="ref/icl.jpg" onclick=showPopup('imperialPopup')></img>
-					<h3 class="blockTitle"  onclick=showPopup('imperialPopup') style="font-size: 27px">College</h3>
+				<div class="blockRightStudies" onmouseover="showPopup('imperialPopup')" onmouseout="closePopup('imperialPopup')">
+					<img id="imperialImage" src="ref/icl.jpg"></img>
+					<h3 class="blockTitle" style="font-size: 27px">College</h3>
 					<span class="popup" id="imperialPopup">
-						<span class="closePopup" onclick="closePopup('imperialPopup')">X</span>
 						<p>Imperial College London is one of the best universities in the world, in particular for engineering.<br>
 						Only a very small number of students from all over the world are admitted after a long selection process.<br>
 						Have a look at the <a href="http://www.imperial.ac.uk/study/ug/why-imperial/reputation-and-rankings/" target="_blank" style="color: white">rankings</a> for more informations.
-						<br><br>
 						</p>
 					</span>
 					<hr class="smallHr"></hr>
@@ -74,12 +71,11 @@
 			<br>
 			<div id="projectsPart">
 				<h2>PROJECTS AND ACHIEVEMENTS</h2>
-				<div class="blockProject">
-					<img id="oiiImage" class="projectsImage" src="ref/oii.jpg" onclick="showPopup('oiiPopup')"></img>
-					<h3 class="blockTitle" onclick="showPopup('oiiPopup')">Informatics Olympiads</h3>
+				<div class="blockProject" onmouseover="showPopup('oiiPopup')" onmouseout="closePopup('oiiPopup')">
+					<img id="oiiImage" class="projectsImage" src="ref/oii.jpg"></img>
+					<h3 class="blockTitle">Informatics Olympiads</h3>
 					<span class="popup" id="oiiPopup">
-						<span class="closePopup" onclick="closePopup('oiiPopup')">X</span>
-						<p>OII Olympiads are national competiotions both individual or in teams.<br>
+						<p>OII Olympiads are national competitions both individual or in teams.<br>
 						In the years 2015 and 2016 I competed in both of them achieving remarkable results:<br>
 						&bull; 6th position at national level in Team Informatics Olympiads (over 300+ initial teams);<br>
 						&bull; silver medal (13th overall position at national level) in Individual Informatics Olympiads (over 20'000+ initial contestants).<br>
@@ -88,28 +84,25 @@
 						</p>
 					</span>
 				</div>
-				<div class="blockProject">
-					<img id="snakeGif" class="projectsImage" src="ref/snake.gif" onclick="showPopup('webPopup')"></img>
+				<div class="blockProject" onmouseover="showPopup('webPopup')" onmouseout="closePopup('webPopup')">
+					<img id="snakeGif" class="projectsImage" src="ref/snake.gif"></img>
 					<br><br>
-					<h3 class="blockTitle" onclick="showPopup('webPopup')">Web developing</h3>
+					<h3 class="blockTitle">Web developing</h3>
 					<span class="popup" id="webPopup">
-						<span class="closePopup" onclick="closePopup('webPopup')">X</span>
 						<p>After having coded for a while in C++ and Python, in 2017, I started to learn HTML, CSS and javascript.<br>
-						The simple snake game you see in the gif was my first project (
-						<a class="popupLink" href="https://github.com/MarcoSelvatici/snake" target="_blank">see code</a>
+						The simple snake game you see in the gif was my first project (<a class="popupLink" href="https://github.com/MarcoSelvatici/snake" target="_blank">see code</a>
 						or 
-						<a class="popupLink" href="ref/snake_basic.html" target="_blank">play</a>
-						) and then I created this web page about me.
-						Have a look also at the <a class="popupLink" href="ref/fractalTree/tree.html" target="_blank">fractal tree generator</a>.
+						<a class="popupLink" href="ref/snake_basic.html" target="_blank">play</a>)
+						and then I created this web page about me.<br>
+						Have a look also at the <a class="popupLink" href="ref/fractalTree/tree.html" target="_blank">fractal tree generator</a> (<a class="popupLink" href="https://github.com/MarcoSelvatici/Fractal-tree-generator" target="_blank">code</a>).
 						</p>
 					</span>
 				</div>
-				<div class="blockProject">
-					<img id="svImage" class="projectsImage" src="ref/sv.png" onclick="showPopup('svPopup')"></img>
+				<div class="blockProject" onmouseover="showPopup('svPopup')" onmouseout="closePopup('svPopup')">
+					<img id="svImage" class="projectsImage" src="ref/sv.png"></img>
 					<br><br>
-					<h3 class="blockTitle" onclick="showPopup('svPopup')">SpecialVideo</h3>
+					<h3 class="blockTitle">SpecialVideo</h3>
 					<span class="popup" id="svPopup">
-						<span class="closePopup" onclick="closePopup('svPopup')">X</span>
 						<p>In summer 2016 I got an internship at SpecialVideo, a company that deals with industrial vision systems.<br>
 						I worked for them on the feasibility study of an important application for the pharmaceutical industry.<br>
 						I had to develop a C# code that used three different Computer Vision libraries in order to test the performances of different OCR (Optical Charachter Recognition) algorithms.<br>
@@ -117,35 +110,34 @@
 						</p>
 					</span>
 				</div>
-				<div class="blockProject">
-					<img id="tutorImage" class="projectsImage" src="ref/tutor.jpg" onclick="showPopup('tutorPopup')"></img>
-					<h3 class="blockTitle" onclick="showPopup('tutorPopup')">Informatics Tutor</h3>
+				<div class="blockProject" onmouseover="showPopup('tutorPopup')" onmouseout="closePopup('tutorPopup')">
+					<img id="tutorImage" class="projectsImage" src="ref/tutor.jpg"></img>
+					<h3 class="blockTitle">Informatics Tutor</h3>
 					<span class="popup" id="tutorPopup">
-						<span class="closePopup" onclick="closePopup('tutorPopup')">X</span>
 						<p>Because of my good results at Informatics Olympiads I volounteered as a tutor for students in my school that were interested in that kind of competition.<br>
 						Together with a friend of mine (a volounteer too) we involved more than 50 students from 14 to 18 and started to teach them both the basics of programming and more advanced algorithms.<br>
 						In that way, one of our teams managed to won 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
 						</p>
 					</span>
 				</div>
-				<div class="blockProject">
-					<img id="botsImage" class="projectsImage" src="ref/bot.jpg" onclick="showPopup('botsPopup')"></img>
+				<div class="blockProject" onmouseover="showPopup('botsPopup')" onmouseout="closePopup('botsPopup')">
+					<img id="botsImage" class="projectsImage" src="ref/bot.jpg"></img>
 					<br><br>
-					<h3 class="blockTitle" onclick="showPopup('botsPopup')">Telegram bots</h3>
+					<h3 class="blockTitle">Telegram bots</h3>
 					<span class="popup" id="botsPopup">
-						<span class="closePopup" onclick="closePopup('botsPopup')">X</span>
-						<p>In 2017 I started to create telegram bots in Python using the <a href="https://core.telegram.org/bots/api" target="_blank" style="color: white">Telegram Bot API</a>.<br>
-						Bots are automatic users that can help you in several everiday life actions, making your life easier. Unfortunatly, you need your own server in order to have them running and therefore noone of my bots is currently online.<br>
-						The most interesting bot I created is the @ms_notification_bot that sends you a message if you have new instagram or facebook notifications (very useful if you use web versions of the apps and therefore you should everytime manually check for new notifications by opening the broswer).<br>
+						<p>In 2017 I started to create telegram bots in Python using the <a href="https://core.telegram.org/bots/api" target="_blank" class="popupLink">Telegram Bot API</a>.<br>
+						Bots are automatic users that can help you in several everyday life actions, making your life easier. Unfortunately, you need your own server in order to have them running and therefore none of my bots is currently online.<br>
+						The most interesting one I created is the @ms_notification_bot
+						(<a class="popupLink" href="https://github.com/MarcoSelvatici/Telegram-notifications-bot" target="_blank">code</a>):
+						it sends you a message if you have new instagram or facebook notifications (very useful if you use web versions of the apps and therefore you should everytime manually check for new notifications by opening the broswer).<br>
 						In creating this bot I also learnt how to interact with web pages with a Python code.
 						</p>
 					</span>
 				</div>
-				<div class="blockProject">
-					<img id="olyImage" class="projectsImage" src="ref/oly.jpg" onclick="showPopup('olympiadsPopup')"></img>
-					<h3 class="blockTitle" onclick="showPopup('olympiadsPopup')">Natural Science Olympiads</h3>
+				<div class="blockProject" onmouseover="showPopup('olympiadsPopup')" onmouseout="closePopup('olympiadsPopup')">
+					<img id="olyImage" class="projectsImage" src="ref/oly.jpg"></img>
+					<h3 class="blockTitle">Natural Science Olympiads</h3>
 					<span class="popup" id="olympiadsPopup">
-						<span class="closePopup" onclick="closePopup('olympiadsPopup')">X</span>
 						<p>Natural Science Olympiads are national level competitions in natural science and biology.<br>
 						In 2014 I placed myself 12th at national level.<br>
 						I also took part at several other competitions, performing quite well in physics (bronze medal at regional level) and chemistry.
@@ -160,12 +152,19 @@
 			<br>
 			<div id="AIPart">
 				<h2>ARTIFICIAL INTELLIGENCE</h2>
-				<div class="blockAI">
+				<div class="blockAI" onmouseover="showPopup('nnPopup')" onmouseout="closePopup('nnPopup')">
 					<img id="nnImage" class="AIImage" src="ref/nn.png"></img>
 					<br><br>
 					<h3 class="blockTitle">Neural Networks</h3>
-					<!-- <hr class="smallHr"></hr>
-					<p class="blockParagraph">Worked on several projects including Neural Networks.</p> -->
+					<div class="popup" id="nnPopup">
+						<p>Followed several tutorials and read a lot about feed-forward neural networks. Even my final high school project was about that topic.<br>
+						I used both tensorflow and keras (with Theano backend) for simple feed-forward neural networks that was able to solve some environments on
+						<a class="popupLink" href="https://gym.openai.com/" target="_blank">OpenAI Gym</a>.<br>
+						Have a look at the <a class="popupLink" href="https://github.com/MarcoSelvatici/Feed-Forward-Neural-Networks" target="_blank">implementations</a> with:<br>
+						&bull; keras,<br>
+						&bull; tensorflow (with a genetic algorithm to get some good training samples).
+						</p>
+					</div>
 				</div>
 				<div class="blockAI">
 					<img id="crawlerGif" class="AIImage" src="ref/crawler.gif"></img>
@@ -175,18 +174,26 @@
 					<p class="blockParagraph">Q-agents manage to learn from outside environment by experiencing new actions.</p>
 					<p class="blockParagraph">The above robot learned to crawl completely by itself.<p> -->
 				</div>
-				<div class="blockAI">
+				<div class="blockAI" onmouseover="showPopup('mmPopup')" onmouseout="closePopup('mmPopup')">
 					<img id="pacmanGif" class="AIImage" src="ref/pacman.gif"></img>
 					<br><br>
 					<h3 class="blockTitle">MiniMax</h3>
-					<!-- <hr class="smallHr"></hr>
-					<p class="blockParagraph">Minimax and expectimax agents try to forsee their opponents actions and act by consequence.</p> -->
+					<span class="popup" id="mmPopup">
+						<p>In 2017 I attended an Artificial Intelligence <a class="popupLink" href="https://courses.edx.org/courses/BerkeleyX/CS188x_1/1T2013/course/" target="_blank">course</a> on EDX.
+						Have a look at my <a class="popupLink" href="https://github.com/MarcoSelvatici/4-in-a-row" target="_blank">four in a row game</a>
+						with an alpha-beta-pruning minimax.
+						</p>
+					</span>
 				</div>
-				<div class="blockAI">
+				<div class="blockAI" onmouseover="showPopup('genAlgPopup')" onmouseout="closePopup('genAlgPopup')">
 					<img id="AIgif" class="AIImage" src="ref/AIgif.gif"></img>
 					<h3 class="blockTitle">Genetic Algorithms</h3>
-					<!-- <hr class="smallHr"></hr>
-					<p class="blockParagraph">Get incredible AI agents miming the natural evolution process.</p> -->
+					<span class="popup" id="genAlgPopup">
+						<p>Genetic algorithms simulate the natural evolution process in order to get good AI.<br>
+						Have a look at my <a class="popupLink" href="https://github.com/MarcoSelvatici/Genetic-Algorithm" target="_blank">genetic algorithm</a>
+						(applied on an OpenAI Gym environment).
+						</p>
+					</span>
 				</div>
 			</div>
 			<!---------------------------------------------------------------------------------------------------------->
@@ -194,10 +201,17 @@
 			<br>
 			<div id="photosPart">
 				<h2>PHOTOS</h2>
-				<div class="slideshowBlock">
-					<img id="displayedImage" src=""></img>
-					<div class="prev" onclick="plusSlides(-1)">&nbsp;&#10094;</div>
-					<div class="next" onclick="plusSlides(1)">&#10095;&nbsp;</div>
+				<div class="slideshowCenter">
+					<img class="slide" id="cliffsMe" src="slides/cliffsMe.jpg" />
+					<img class="slide" id="matteoGrad" src="slides/matteoGrad.jpg" />
+					<img class="slide" id="lisbonTower" src="slides/lisbonTower.jpg" />
+					<img class="slide" id="lisbonCastle" src="slides/lisbonCastle.jpg" />
+					<img class="slide" id="florence" src="slides/florence.jpg" />
+					<img class="slide" id="group1" src="slides/group1.jpg" />
+					<img class="slide" id="ocean" src="slides/ocean.jpg" />
+					<img class="slide" id="group2" src="slides/group2.jpg" />
+					<div class="prev" onclick="plusSlides(-1)"><div style="margin-top:250">&nbsp;&#10094;</div></div>
+					<div class="next" onclick="plusSlides(1)"><div style="margin-top:250">&#10095;&nbsp;</div></div>
 				</div>
 			</div>
 			
@@ -236,44 +250,45 @@
 </script>
 
 <script>
-	imagePaths = ["slides/fiume.JPG", "slides/G0010030.JPG","slides/G0031187.JPG","slides/G0451802.JPG","slides/GOPR0099.jpg","slides/GOPR1786.JPG"];
+	var imageNames = ["cliffsMe", "matteoGrad", "lisbonTower", "lisbonCastle", "florence",    "group1", "ocean", "group2"];
 	var slideIndex = 0;
-	showSlides(slideIndex);
+	var image = document.getElementById(imageNames[slideIndex]);
+	image.classList.add("opaque");
 	
 	function plusSlides(i){
+		image = document.getElementById(imageNames[slideIndex]);
+		image.classList.remove("opaque");
 		slideIndex += i;
-		showSlides(slideIndex);
+		slideIndex = getIndex(slideIndex);
+		image = document.getElementById(imageNames[slideIndex]);
+		image.classList.add("opaque");
 	}
 	
-	function showSlides(index){
-		if (index > imagePaths.length - 1){
-			slideIndex = 0; 
+	function getIndex(index){
+		if (index > imageNames.length - 1){
+			index = 0; 
 		}
-  		if (index < 0){
-  			slideIndex = imagePaths.length - 1;
-  		}	
-  		image = document.getElementById("displayedImage");
-  		image.src = imagePaths[slideIndex];
+  		else if (index < 0){
+  			index = imageNames.length - 1;
+  		}
+		return index;
 	}
 </script>
 
 <script>
-	var popupList=["alberghettiPopup", "imperialPopup", "svPopup", "tutorPopup", "oiiPopup", "webPopup", "botsPopup", "olympiadsPopup"];
+	var popupList=["alberghettiPopup", "imperialPopup", "svPopup", "tutorPopup", "oiiPopup", "webPopup", "botsPopup", "olympiadsPopup", "nnPopup", "mmPopup", "genAlgPopup"];
 	for(var i = 0; i < popupList.length; i++)
 		closePopup(popupList[i]);
 				
 	function showPopup(id){
-		if(document.getElementById(id).style.visibility=="hidden"){
-			for(var i = 0; i < popupList.length; i++)
-				closePopup(popupList[i]);
-	
-			document.getElementById(id).style.visibility="visible";
-		}
-		else{
-			document.getElementById(id).style.visibility="hidden";
-		}
+		var popup = document.getElementById(id);
+		//var mainPartLeft = document.getElementById("mainPart").getBoundingClientRect().left;
+		//var mainPartRight = document.getElementById("mainPart").getBoundingClientRect().right;
+		popup.style.display="inline";
+		popup.style.visibility="visible";
 	}
 	function closePopup(id){
+		document.getElementById(id).style.display="none";
 		document.getElementById(id).style.visibility="hidden";
 	}
 </script>
@@ -283,7 +298,8 @@
 		document.body.scrollTop = 0;
 	}
 	function moveToId(id){
-		window.scrollTo(window.pageXOffset + window.scrollX, window.pageYOffset + document.getElementById(id).getBoundingClientRect().top - 70);
+		element = document.getElementById(id);
+		window.scrollTo(window.pageXOffset + window.scrollX, window.pageYOffset + element.getBoundingClientRect().top - 70);
 	}
 </script>
 

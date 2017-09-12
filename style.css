@@ -28,29 +28,24 @@ h2{
 		
 /* POPUP ############################################################ */
 .popup{
+	display: none;
 	visibility: hidden;
-	width: 1100px;
+	width: 600px;
 	height: auto;
 	background-color: #003666;
 	color: #f2f2f2;
 	text-align: left;
 	border-radius: 6px;
-	padding: 2px 4px 2px 16px;
+	padding: 2px 16px;
 	position: absolute;
-	z-index: 1; /* foreground*/
+	z-index: 100; /* foreground*/
 	left: 50%;
-	margin-left: -550px;
+	margin-left: -300px;
 	line-height: 1.3em;
 	font-size: 20px;
 	cursor: initial;
-	animation: appear 1s;
-}
-.closePopup{
-	width: 20;
-	height: 20;
-	font-weight: bold;
-	cursor: pointer;
-	float: right;
+	/*animation: appear;
+	animation-duration: 0.2s;*/
 }
 .popupLink{
 	text-decoration: underline;
@@ -64,6 +59,7 @@ h2{
 	top: 0;
 	margin:auto;
 	z-index: 2;
+	user-select: none;
 }
 .topnav div {
 	float: left;
@@ -76,7 +72,8 @@ h2{
 }
 .topnav div:hover {
 	background-color: #f2f2f2;
-	color: black;
+	color: #003666;
+	transition: background-color 0.2s linear;
 }
 
 /* PARTS ############################################################ */
@@ -125,7 +122,8 @@ h2{
 	border-width: 3px;
 	border-radius: 5px;
 	padding: 25 30;
-	animation: appear 1s;
+	animation: appear;
+	animation-duration: 1s;
 }
 #personalDetails h3{
 	font-size: 23px;
@@ -144,7 +142,6 @@ h2{
 	font-weight: bold;
 	text-align: center;
 	margin: 10;
-	cursor: pointer;
 }
 .blockParagraph{
 	font-size: 18px;
@@ -162,6 +159,8 @@ h2{
 	margin-bottom: 20;
 	border-radius: 10px;
 	background: #d9d9d9;
+	transition: transform 0.15s;
+	position:relative;
 }
 .blockRightStudies{
 	margin-right: 70;
@@ -172,14 +171,20 @@ h2{
 	margin-bottom: 20;
 	border-radius: 10px;
 	background: #d9d9d9;
+	transition: transform 0.15s;
+	position:relative;
 }
 .blockLeftStudies:hover{
 	background-color: #003666;
 	color: #f2f2f2;
+	transform: scale(1.05);
+	z-index: 100;
 }
 .blockRightStudies:hover{
 	background-color: #003666;
 	color: #f2f2f2;
+	transform: scale(1.05);
+	z-index: 100;
 }
 #studiesPart{
 	height: 530;
@@ -210,10 +215,14 @@ h2{
 	margin-bottom: 20;
 	border-radius: 10px;
 	cursor: pointer;
+	transition: transform 0.15s;
+	position:relative;
 }
 .blockProject:hover{
 	background-color: #003666;
 	color: #f2f2f2;
+	transform: scale(1.05);
+	z-index: 100;
 }
 
 #projectsPart{
@@ -237,7 +246,17 @@ h2{
 	float: left;
 	margin-bottom: 20;
 	border-radius: 10px;
+	cursor: pointer;
+	transition: transform 0.15s;
+	position:relative;
 }
+.blockAI:hover{
+	background-color: #003666;
+	color: #f2f2f2;
+	transform: scale(1.05);
+	z-index: 100;
+}
+
 
 #AIPart{
 	margin: auto;
@@ -254,39 +273,58 @@ h2{
 
 /* PHOTOS ############################################################ */
 #photosPart{
-	height: 500;
+	height: 630;
 }
-.slideshowBlock{
-	height: 375;
-	width: 500;
-	background: #d9d9d9;
+.slideshowCenter{
+	z-index: 0;
+	display: inline-block;
+	height: 525;
+	width: 700;
+	background: #f2f2f2;
 	margin: auto;
+	float: center;
+	z-index:0;
 }
+
 .prev, .next{
-	height: 25;
-	width: 60;
+	height: 525;
+	width: 100;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 30px;
 	color: gray;
 	position: absolute;
+	background-color: #003666;
+	transition: opacity 0.5s;
+	opacity: 0;
+	cursor: pointer;
+	user-select: none;
 }
 /* Position the "next button" to the right */
 .next {
-	margin-left: 440;
+	margin-left: 600;
 	text-align:right;
-	border-radius: 3px 3px 3px 3px;
+	border-radius: 3px;
 }
 .prev {
 	text-align:left;
-	border-radius: 3px 3px 3px 3px;
+	border-radius: 3px;
 }
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
-	background-color: rgba(0,0,0,0.8);
+	opacity: .7;
 }
-#displayedImage{
-	height: 375;
-	width: 500;
+.slide{
+	margin-left: -350px;
+	position: absolute;
+	height: 525;
+	width: 700;
+	opacity: 0;
+	transition: opacity 1s ease-in-out;
+	z-index:0;
+}
+.slide.opaque{
+	opacity: 1;
+	z-index: 0;
 }
 
 /* END ############################################################ */
@@ -305,8 +343,10 @@ h2{
 }
 #copyright img{
 	border-radius: 8px;
+	transition: transform 0.2s;
 }
 
 #copyright img:hover{
-	border-radius: 15px;
+	/*border-radius: 15px;*/
+	transform: scale(1.3);
 }

@@ -1,10 +1,12 @@
 body{
 	font-family: Arial;
 	text-align: center;
-	background-color:#999;
+	background-color:#003666;
+	color: #f2f2f2;
 }
 
 h1{
+	margin-top: 30;
 	font-size: 30;
 }
 
@@ -19,19 +21,21 @@ canvas{
 	height: 500;
 	width: 500;
 	float: left;
+	border: 2px solid #f2f2f2;
 }
 
 #rightSide{
+	font-size: 17;
 	display: inline-block;
 	height: auto;
 	width: 300;
-	float:right;
+	float: right;
 }
 
 #parametersArea{
 	height: auto;
 	width: 300;
-	border: 2px solid black;
+	border: 2px solid #f2f2f2;
 	border-radius: 5px;
 	margin-bottom: 10;
 }
@@ -62,7 +66,7 @@ form{
 #suggestions{
 	height: auto;
 	width: 300;
-	border: 2px solid black;
+	border: 2px solid #f2f2f2;
 	border-radius: 5px;
 }
 
