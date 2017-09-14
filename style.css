@@ -58,7 +58,7 @@ h2{
 	width: 1200;
 	top: 0;
 	margin:auto;
-	z-index: 2;
+	z-index: 3;
 	user-select: none;
 }
 .topnav div {
@@ -178,13 +178,13 @@ h2{
 	background-color: #003666;
 	color: #f2f2f2;
 	transform: scale(1.05);
-	z-index: 100;
+	z-index: 2;
 }
 .blockRightStudies:hover{
 	background-color: #003666;
 	color: #f2f2f2;
 	transform: scale(1.05);
-	z-index: 100;
+	z-index: 2;
 }
 #studiesPart{
 	height: 530;
@@ -222,7 +222,7 @@ h2{
 	background-color: #003666;
 	color: #f2f2f2;
 	transform: scale(1.05);
-	z-index: 100;
+	z-index: 2;
 }
 
 #projectsPart{
@@ -254,7 +254,7 @@ h2{
 	background-color: #003666;
 	color: #f2f2f2;
 	transform: scale(1.05);
-	z-index: 100;
+	z-index: 2;
 }
 
 
@@ -285,34 +285,6 @@ h2{
 	float: center;
 	z-index:0;
 }
-
-.prev, .next{
-	height: 525;
-	width: 100;
-	font-weight: bold;
-	font-size: 30px;
-	color: gray;
-	position: absolute;
-	background-color: #003666;
-	transition: opacity 0.5s;
-	opacity: 0;
-	cursor: pointer;
-	user-select: none;
-}
-/* Position the "next button" to the right */
-.next {
-	margin-left: 600;
-	text-align:right;
-	border-radius: 3px;
-}
-.prev {
-	text-align:left;
-	border-radius: 3px;
-}
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-	opacity: .7;
-}
 .slide{
 	margin-left: -350px;
 	position: absolute;
@@ -326,7 +298,49 @@ h2{
 	opacity: 1;
 	z-index: 0;
 }
-
+.prev, .next{
+	height: 525;
+	width: 100;
+	font-weight: bold;
+	font-size: 30px;
+	color: gray;
+	position: absolute;
+	background-color: #003666;
+	transition: opacity 0.5s;
+	opacity: 0;
+	cursor: pointer;
+	user-select: none;
+}
+.next {
+	margin-left: 600;
+	text-align:right;
+	border-radius: 3px;
+}
+.prev {
+	text-align:left;
+	border-radius: 3px;
+}
+.prev:hover, .next:hover {
+	opacity: .6;
+}
+#imageDescription{
+	height: 30;
+	width: 500;
+	margin-top: 485;
+	margin-left: 100;
+	position: absolute;
+	color: #f2f2f2;
+	font-size: 20;
+	background-color: #003666;
+	padding-top: 10;
+	border-radius: 5px;
+	cursor: default;
+	opacity: .6;
+	transition: opacity 0.5s;
+}
+#imageDescription:hover{
+	opacity: 1;
+}
 /* END ############################################################ */
 #endPart{
 	background-color: #003666;
@@ -345,7 +359,6 @@ h2{
 	border-radius: 8px;
 	transition: transform 0.2s;
 }
-
 #copyright img:hover{
 	/*border-radius: 15px;*/
 	transform: scale(1.3);
