@@ -247,6 +247,12 @@
 </body>
 
 <script>
+	if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+		setTimeout("alert('This website is optimized for Desktop browsers, some features could not work properly on your device.')", 300);
+	}
+</script>
+
+<script>
 	document.getElementById("personalDetails").style.display = "none";
 	
 	function showPersonalDetails(){
