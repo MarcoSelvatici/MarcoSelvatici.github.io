@@ -1,0 +1,53 @@
+<body>
+<div id="map" style="width:100%; height:100%;"></div>
+</body>
+
+<script>
+// var apiKey = "AIzaSyBKBNk0qrJ1ksVquGYlrY_lu2xpD8t4lQY";
+// http://mapszoom.com/it/coordinates-gps.php?
+
+function initMap() {
+	var imola = {lat: 44.359, lng: 11.712};
+	var bologna = {lat: 44.494, lng: 11.342};
+	var firenze = {lat: 43.769, lng: 11.255};
+	var london = {lat: 51.507, lng: -0.127};
+	var lisbona = {lat: 38.748, lng: -9.147};
+	var parigi = {lat: 48.856, lng: 2.352};
+	var monaco = {lat: 48.135, lng: 11.581};
+	var napoli = {lat: 40.851, lng: 14.268};
+	var roma = {lat: 41.902, lng: 12.496};
+	var catania = {lat: 37.508, lng: 15.083};
+	var strasburgo = {lat: 48.573, lng: 7.752};
+	var santaTeresaDiGallura = {lat: 41.239, lng: 9.188};
+	var vieste = {lat: 41.882, lng: 16.177};
+	var pisa = {lat: 43.722, lng: 10.401};
+	var volterra = {lat: 43.399, lng: 10.866};
+	var genova = {lat: 44.405, lng: 8.946};
+	var cortinaDAmpezzo = {lat: 46.540, lng: 12.136};
+	var milano = {lat: 45.464, lng: 9.189};
+	var verona = {lat: 45.438, lng: 10.992};
+	var salisburgo = {lat: 47.809, lng: 13.055};
+	var ravenna = {lat: 44.418, lng: 12.203};
+	var rimini = {lat: 44.067, lng: 12.569};
+	var cambridge = {lat: 52.205, lng: 0.121};
+	var broadstairs = {lat: 51.360, lng: 1.432};
+	var gallipoli = {lat: 40.055, lng: 17.992};
+	var caboDaRoca = {lat: 38.780, lng: -9.499};
+	var cities = [imola, bologna, firenze, london, lisbona, parigi, monaco, napoli, roma, catania, strasburgo, santaTeresaDiGallura, vieste,
+				pisa, volterra, genova, cortinaDAmpezzo, milano, verona, salisburgo, ravenna, rimini, cambridge, broadstairs, gallipoli];
+
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 6,
+		center: imola
+	});
+	
+	for(var i = 0; i < cities.length; i++){
+		var marker = new google.maps.Marker({
+			position: cities[i],
+			map: map
+		});
+	}
+}
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKBNk0qrJ1ksVquGYlrY_lu2xpD8t4lQY&callback=initMap"></script>

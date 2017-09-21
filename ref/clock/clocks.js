@@ -74,7 +74,6 @@ class Clock{
 	}
 	
 	updateClock(){
-		console.log(this.timeInDigits);
 		this.clearClock();
 		
 		// Draw the hands
@@ -120,5 +119,5 @@ var clock1 = new Clock("canvas1", "time1", 2 - offsetToUTC);
 // UK
 var clock2 = new Clock("canvas2", "time2", 1 - offsetToUTC);
 
-// USA
+// USA - California
 var clock3 = new Clock("canvas3", "time3", -7 - offsetToUTC);

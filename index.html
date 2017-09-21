@@ -32,14 +32,14 @@
 				<br>
 				<h3>Hobbies and interests</h3>
 				<p>Since I was a child I always loved doing sports, therefore in the previous years I played football and basketball. However, I liked also other sports like table tennis, frisbee, volleyball, beach volley and racketball.<br>
-				I also really like to travel and meet new people from all over the world.<br>
+				I also really like to travel and meet new people from all over the world (<a href="ref/map.html" style="color: #003666" target="_blank">see were I have already been!</a>).<br>
 				In Italy I spent beautiful days with my friends at the riverside, the seaside or just in a park playing basketball and doing barbecues.<br>
 				My favourite music genre is rock, but I also like pop and rap music.<br>
 				As you can easily notice, I am really interested in informatics and other technological stuffs.
 				</p>
 				<br>
 				<h3>Curriculum Vitae</h3>
-				<p><a href="ref/CV.doc" download="CV Marco Selvatici" style="color: #003666">Download my CV</a>.
+				<p><a href="ref/CV.pdf" download="CV Marco Selvatici" style="color: #003666">Download my CV</a>.
 			</div>
 			<hr class="mainHr"></hr>
 			<div id="studiesPart">
@@ -75,7 +75,7 @@
 			<hr class="mainHr"></hr>
 			<br>
 			<div id="projectsPart">
-				<h2>PROJECTS AND ACHIEVEMENTS</h2>
+				<h2>PROJECTS - ACTIVITIES - AWARDS</h2>
 				<div class="blockProject" onmouseover="showPopup('oiiPopup')" onmouseout="closePopup('oiiPopup')">
 					<img id="oiiImage" class="projectsImage" src="ref/oii.jpg"></img>
 					<h3 class="blockTitle">Informatics Olympiads</h3>
@@ -106,8 +106,7 @@
 				</div>
 				<div class="blockProject" onmouseover="showPopup('svPopup')" onmouseout="closePopup('svPopup')">
 					<img id="svImage" class="projectsImage" src="ref/sv.png"></img>
-					<br><br>
-					<h3 class="blockTitle">SpecialVideo</h3>
+					<h3 class="blockTitle">SpecialVideo Internship</h3>
 					<span class="popup" id="svPopup">
 						<p>In summer 2016 I got an internship at SpecialVideo, a company that deals with industrial vision systems.<br>
 						I worked for them on the feasibility study of an important application for the pharmaceutical industry.<br>
@@ -122,7 +121,7 @@
 					<span class="popup" id="tutorPopup">
 						<p>Because of my good results at Informatics Olympiads I volounteered as a tutor for students in my school that were interested in that kind of competition.<br>
 						Together with a friend of mine (a volounteer too) we involved more than 50 students from 14 to 18 and started to teach them both the basics of programming and more advanced algorithms.<br>
-						In that way, one of our teams managed to won 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
+						In that way, one of our teams managed to win 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).<br>  
 						</p>
 					</span>
 				</div>
@@ -148,6 +147,15 @@
 						<p>Natural Science Olympiads are competitions in natural science and biology.<br>
 						In 2014 I placed myself 12th at national level.<br>
 						I also took part at several other competitions, performing quite well in physics (bronze medal at regional level) and chemistry.
+						</p>
+					</span>
+				</div>
+				<div class="blockProject" onmouseover="showPopup('voltPopup')" onmouseout="closePopup('voltPopup')">
+					<img id="olyImage" class="projectsImage" src="ref/volt.jpg"></img>
+					<h3 class="blockTitle">Informatics Courses</h3>
+					<span class="popup" id="voltPopup">
+						<p>Thanks to my silver medal at Individual Informatics Olympiads I had the opportunity to attend two full-immersion Informatics courses with the other top 20 Olympiads contestants in preparation and selection for the International Informatics Olympiads<br>
+						Every course lasted 5 days and they were in October and November 2016.
 						</p>
 					</span>
 				</div>
@@ -302,11 +310,7 @@
 	}
 </script>
 
-<script>
-	var popupList=["alberghettiPopup", "imperialPopup", "svPopup", "tutorPopup", "oiiPopup", "webPopup", "botsPopup", "olympiadsPopup", "nnPopup", "QLPopup", "mmPopup", "genAlgPopup"];
-	for(var i = 0; i < popupList.length; i++)
-		closePopup(popupList[i]);
-				
+<script>		
 	function showPopup(id){
 		var popup = document.getElementById(id);
 		//var mainPartLeft = document.getElementById("mainPart").getBoundingClientRect().left;
