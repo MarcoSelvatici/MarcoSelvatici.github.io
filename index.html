@@ -32,14 +32,14 @@
 				<br>
 				<h3>Hobbies and interests</h3>
 				<p>Since I was a child I always loved doing sports, therefore in the previous years I played football and basketball. However, I liked also other sports like table tennis, frisbee, volleyball, beach volley and racketball.<br>
-				I also really like to travel and meet new people from all over the world (<a href="ref/map.html" style="color: #003666" target="_blank">see were I have already been!</a>).<br>
+				I also really like to travel and meet new people from all over the world (<a href="ref/map.html" style="color: #003666" target="_blank">places</a> I have already visited).<br>
 				In Italy I spent beautiful days with my friends at the riverside, the seaside or just in a park playing basketball and doing barbecues.<br>
 				My favourite music genre is rock, but I also like pop and rap music.<br>
 				As you can easily notice, I am really interested in informatics and other technological stuffs.
 				</p>
 				<br>
 				<h3>Curriculum Vitae</h3>
-				<p><a href="ref/CV.pdf" download="CV Marco Selvatici" style="color: #003666">Download my CV</a>.
+				<p><a href="ref/CV.pdf" style="color: #003666" target="_blank">See my CV</a>.
 			</div>
 			<hr class="mainHr"></hr>
 			<div id="studiesPart">
@@ -325,12 +325,26 @@
 </script>
 
 <script>
+	function scrollTo(element, to, duration) {
+		if (duration <= 0) return;
+		var difference = to - element.scrollTop;
+		var perTick = difference / duration * 3;
+
+		setTimeout(function() {
+			element.scrollTop = element.scrollTop + perTick;
+			if (element.scrollTop === to) return;
+			scrollTo(element, to, duration - 3);
+		}, 3);
+	}
+
 	function moveTop(){
-		document.body.scrollTop = 0;
+		scrollTo(document.body, 0, 250);
+		//document.body.scrollTop = 0;
 	}
 	function moveToId(id){
 		element = document.getElementById(id);
-		window.scrollTo(window.pageXOffset + window.scrollX, window.pageYOffset + element.getBoundingClientRect().top - 70);
+		scrollTo(document.body, window.pageYOffset + element.getBoundingClientRect().top - 75, 250);
+		//window.scrollTo(window.pageXOffset + window.scrollX, window.pageYOffset + element.getBoundingClientRect().top - 70);
 	}
 </script>
 
