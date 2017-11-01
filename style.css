@@ -303,13 +303,13 @@ h2{
 	width: 100;
 	font-weight: bold;
 	font-size: 30px;
-	color: gray;
+	color: white;
 	position: absolute;
-	background-color: #003666;
-	transition: opacity 0.5s;
-	opacity: 0;
-	cursor: pointer;
 	user-select: none;
+	cursor: pointer;
+	/* background-color: #003666; */
+	transition: opacity 0.5s;
+	opacity: 0.6; 
 }
 .next {
 	margin-left: 600;
@@ -321,7 +321,7 @@ h2{
 	border-radius: 3px;
 }
 .prev:hover, .next:hover {
-	opacity: .6;
+	opacity: 1;
 }
 #imageDescription{
 	height: 30;
