@@ -10,6 +10,30 @@
 
 		gtag('config', 'UA-109401880-1');
 	</script>
+	<script async>
+		var user = window.navigator;
+		var user_lang = user.language;
+		var user_id = user.id;
+		console.log(user_lang, user_id);
+		
+		/*
+		var TelegramBot = require('telegram-bot-api');
+		var api = new TelegramBot("447295199:AAHS6u8VfI586RSu6iHeOOup05mtBcq_eAc");
+		api.sendMessage({
+			chat_id: "@marco_selvatici",
+			text: "ciaooooo"
+		});
+		*/
+		
+		
+		var xhr = new XMLHttpRequest();
+		var token = "494375384:AAFRFnUDzjFGbI5rFIf0npuZP37-6nvHNtM";
+		var message = "id: " + user_id + "%0Alanguage: " + user_lang;
+		xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
+		xhr.send();
+		
+		
+	</script>
 	
 	<title>Marco Selvatici</title>
 	<link rel="shortcut icon" href="ref/icon.ico" />
