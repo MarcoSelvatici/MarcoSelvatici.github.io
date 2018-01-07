@@ -110,7 +110,7 @@ class Clock{
 	}
 }
 
-var offsetToUTC = -(new Date().getTimezoneOffset() / 60);
+var offsetToUTC = -(new Date().getTimezoneOffset() / 60) + 1;
 console.log(offsetToUTC);
 
 // Italy
