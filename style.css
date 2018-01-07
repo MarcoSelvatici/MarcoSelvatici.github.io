@@ -196,12 +196,10 @@ h2{
 #imperialImage{
 	width: 500;
 	height: 283;
-	cursor: pointer;
 }
 #alberghettiImage{
 	width: 500;
 	height: 283;
-	cursor: pointer;
 }
 
 /* PROJECTS ############################################################ */
@@ -214,7 +212,6 @@ h2{
 	float: left;
 	margin-bottom: 20;
 	border-radius: 10px;
-	cursor: pointer;
 	transition: transform 0.15s;
 	position:relative;
 }
@@ -246,7 +243,6 @@ h2{
 	float: left;
 	margin-bottom: 20;
 	border-radius: 10px;
-	cursor: pointer;
 	transition: transform 0.15s;
 	position:relative;
 }
