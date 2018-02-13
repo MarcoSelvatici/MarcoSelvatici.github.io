@@ -9,6 +9,13 @@
 </head>
 
 <body>
+	<!--div id="errorMessageX" class="errorMessage">
+		<span>x</span>
+		<h1>Error:</h1>
+		<p>description di questo bellissimo errore che mi farà girare i coglioni <br>
+			description di questo bellissimo errore che mi farà girare i coglioni
+		</p>
+	</div-->
 	<div id="bodyWrapper">
 		<header id="header">
 			<div id="logo">
@@ -67,9 +74,27 @@
 
 	<!-- DOM SCRIPTS -->
 	<script>
+	// remove the html error code
+	function close_error(errorId){
+		console.log(errorId);
+		var body = document.body;
+		for(var i = 0; i < body.childNodes.length; i++){
+			if(body.childNodes[i].id == errorId){
+				body.removeChild(body.childNodes[i]);
+				return;
+			}
+		}
+	}
+
 	// displays errors
 	function display_error(file_name, description){
-		window.alert("ERROR while handling " + file_name + ":\n" + description);
+		var error = document.createElement("DIV");
+		error.setAttribute("id", "error_"+file_name);
+		error.setAttribute("class", "errorMessage");
+		var errorId = "error_" + file_name;
+		var call = 'close_error("' + errorId + '")';
+		error.innerHTML = "<span onclick='"+call+"'>x</span><h1>Error handling "+file_name+":</h1><p>"+description+"<br><br>Press <code>F12</code> to open console and see details.</p>";
+		document.body.appendChild(error);
 	}
 	
 	/* file boxes scripts */
@@ -108,7 +133,7 @@
 	function update_fileStats_box_size(file_name, original_size, final_size){
 		var sizeLabelId = "sizeLabel_" + file_name;
 		var sizeLabel = document.getElementById(sizeLabelId);
-		sizeLabel.innerHTML = getSizeStr(original_size) + ' -> ' + getSizeStr(final_size);
+		sizeLabel.innerHTML = getSizeStr(original_size) + ' &rarr; ' + getSizeStr(final_size);
 	}
 
 	// return a string to the size with memory unit
@@ -137,13 +162,11 @@
 	}
 
 	function drag_over(event){
-		console.log("drag_over");
 		event.preventDefault();
 		document.getElementById("dropArea").style.opacity = "0.5";
 	}
 
 	function drag_leave(event){
-		console.log("drag_leave");
 		event.preventDefault();
 		document.getElementById("dropArea").style.opacity = "1";
 	}
@@ -188,7 +211,7 @@
 		const data_ptr = Module._malloc(size_of_data);
 		if(data_ptr == 0){	// error allocating memory
 			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
-			display_error("_", "failed allocation of " + size_of_data + " bytes. File too big.");
+			display_error(file_name, "failed allocation of " + size_of_data + " bytes.<br> The file is too big.");
 			throw new Error("Failed allocation of " + size_of_data + " bytes.");
 		}
 		return data_ptr;

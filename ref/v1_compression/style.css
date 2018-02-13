@@ -1,8 +1,9 @@
 /* CSS variables */
 :root{
     --header-color: rgb(0, 111, 167);
-    --buttons-color: rgba(0, 201, 107, 0.925);
-    --white: rgba(255, 255, 255, 0.931);
+    --buttons-color: rgb(37, 187, 117);
+    --white: rgb(235, 235, 235);
+    --error-color: rgb(199, 49, 49);
     --margin: 1%;
     --header-width: 98%; /* must be: 100-2*(margin-percent) */
     --header-height: 70px;
@@ -28,6 +29,42 @@ body{
     font-family: "Arial";
     display: flex;
     flex-direction: column;
+}
+
+.errorMessage{
+    align-self: center;
+    position: absolute;
+    z-index: 10;
+    width: auto;
+    min-width: 300px;
+    height: auto;
+    min-height: 100px;
+    border: 5px solid var(--error-color);
+    border-radius: 10px;
+    background-color: var(--error-color);
+    color: var(--white);
+    text-align: center;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.errorMessage span{
+    margin-top: -20px;
+    margin-right: -10px;
+    float: right;
+    font-weight: bold;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.errorMessage h1{
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.errorMessage p{
+    font-size: 1.2em;
+    margin-bottom: 0;
 }
 
 #bodyWrapper{
@@ -127,7 +164,8 @@ body{
     margin: .5%;
     border: 2px solid rgb(190, 190, 190);
     border-radius: 4px;
-    width: 44.5%;
+    /*width: 44.5%;*/
+    width: 320px;
     height: 125px;
     padding: 12px 15px 0px 15px;
     text-align: center;
