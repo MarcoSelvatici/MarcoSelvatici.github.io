@@ -1,0 +1,183 @@
+/* CSS variables */
+:root{
+    --header-color: rgb(0, 111, 167);
+    --buttons-color: rgba(0, 201, 107, 0.925);
+    --white: rgba(255, 255, 255, 0.931);
+    --margin: 1%;
+    --header-width: 98%; /* must be: 100-2*(margin-percent) */
+    --header-height: 70px;
+    --footer-height: 100px;
+    --footer-height-neg: -80px;
+    --mainPart-height: 81%; /* must be 100-(header-height) */
+    --fileArea-height: 350px; 
+    --fileArea-width: 60%;
+}
+
+@media (max-width: 1000px){
+    #bodyWrapper{
+        height: auto;
+        /*background-color: red;*/
+    }
+}
+
+body{
+    background-color: var(--white);
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    font-family: "Arial";
+    display: flex;
+    flex-direction: column;
+}
+
+#bodyWrapper{
+    overflow: auto;
+    height: 100%;
+    padding-bottom: var(--footer-height);
+}
+
+#header{
+    position: fixed;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--header-width);
+    padding-left: var(--margin);
+    padding-right: var(--margin);
+    height: var(--header-height);
+    color: var(--white);
+    background-color: var(--header-color);
+}
+
+#header #selectProduct a{
+    font-size: 0.7em;
+    color: var(--white);
+    text-decoration: underline;
+}
+
+#mainPart{
+    margin-top: var(--header-height);
+    font-size: 2em;
+    /* height: var(--mainPart-height);*/
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+#mainPart #fileArea{    
+    margin: var(--margin) var(--margin) 0px var(--margin);
+    width: var(--fileArea-width);
+    height: var(--fileArea-height);
+}
+
+#mainPart #fileArea #dropArea{
+    background-color: rgb(214, 214, 214);
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    border: 4px dashed rgb(88, 88, 88);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+#mainPart #fileArea #dropArea p{
+    margin-bottom: 0.5em;
+    overflow: hidden;
+}
+
+#mainPart #fileArea #dropArea label{
+    font-weight: normal;
+    font-size: .9em;
+    padding: 0.4em;
+    background-color: var(--buttons-color);
+    cursor: pointer;
+    overflow: hidden;
+}
+#mainPart #fileArea #dropArea label:hover{
+    opacity: 0.7;
+}
+
+#mainPart #fileArea #dropArea img{
+    vertical-align: middle;
+}
+
+#mainPart #fileArea #dropArea #fileSelector{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#mainPart #statsArea{
+    margin: var(--margin);
+    width: var(--fileArea-width);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#mainPart #statsArea .fileStats{
+    margin: .5%;
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 4px;
+    width: 44.5%;
+    height: 125px;
+    padding: 12px 15px 0px 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.6em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#mainPart #statsArea .fileStats .columns{
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+#mainPart #statsArea .fileStats .columns img{
+    vertical-align: middle;
+}
+
+#mainPart #statsArea .fileStats .columns .leftColumn{
+    text-align: left; 
+    float: left;
+}
+
+#mainPart #statsArea .fileStats .columns .rightColumn{
+    text-align: right; 
+    float: right;
+}
+
+footer{
+    position: relative;
+    clear: both;
+    height: var(--footer-height);
+    margin-top: var(--footer-height-neg);
+}
+
+#freeMemoryBtn{
+    background-color: var(--buttons-color);
+    margin: 20px 10px 10px 10px;
+    transform: translate(-20px, 0);
+    font-size: 1.5em;
+    border: 0px;
+    width: 300px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 5px;
+    float: right;
+    cursor: pointer;
+}
+
+#freeMemoryBtn:hover{
+    opacity: 0.8;
+}

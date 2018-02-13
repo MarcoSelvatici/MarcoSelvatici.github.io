@@ -1,0 +1,47 @@
+Followed tutorial on https://dev.classmethod.jp/client-side/javascript/emscripten-zstandard-on-browser/
+_________________________________________________________________________________________________________
+get source code:
+
+$ wget https://github.com/facebook/zstd/archive/v1.3.1.tar.gz
+$ tar xvf v1.3.1.tar.gz
+$ mv zstd-1.3.1{,-emscripten}
+$ cd zstd-1.3.1-emscripten
+_________________________________________________________________________________________________________
+build zstd with emscripten:
+
+$ emmake make lib-release
+ 
+## using static library .so
+$ mv lib/libzstd.{so,bc}
+ 
+$ echo 'module.exports = Module;' | cat > export_module.js
+
+## list of functions to put
+$ emcc -o zstd.js -O0 --memory-init-file 0 --post-js export_module.js -s EXPORTED_FUNCTIONS="['_ZSTD_isError', '_ZSTD_getFrameContentSize', '_ZSTD_decompress']" lib/libzstd.bc
+_________________________________________________________________________________________________________
+## this will create also the .wasm file
+$ emcc -o zstd.js -O0 --memory-init-file 0 --post-js export_module.js -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_isError', '_ZSTD_getFrameContentSize', '_ZSTD_decompress']" lib/libzstd.bc
+_________________________________________________________________________________________________________
+#########################################################################################################
+
+Note: zstd.js and zstd.wasm will be rewritten and placed inside the zstd-1.3.1-emscripten folder, now at ~/Documents/facebook/zstd-1.3.1-emscripten. You have to copy them in the folder of your project
+Note2: Remember to build for the functions you use and try bigger optimizations: -O2 or so on
+
+#########################################################################################################
+
+LAST BUILD WITH
+emcc -o zstd.html -O0 --memory-init-file 0 --post-js export_module.js -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_compress', '_ZSTD_compressBound', '_ZSTD_isError']" -s ALLOW_MEMORY_GROWTH=1 lib/libzstd.bc
+
+within ~/Documents/facebook/zstd-1.3.1-emscripten
+
+then copied ztsd.js and zstd.wasm in the project folder to make it run
+Note: commented last line "module.exports = Module;" to avoid an error in zstd.js
+
+#########################################################################################################
+
+If you have the Thread3 error is because the emcc version (emcc --version) you are using is 1.22.XX. To resolve:
+- go to ~/Documents/facebook/zstd-1.3.1-emscripten
+- run ./emsdk activate --build=Release sdk-incoming-64bit binaryen-master-64bit
+- run source ./emsdk_env.sh
+Now you should have emcc 1.37.XX (that works)
+

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Compression</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+	<!-- meta name="viewport" content="height=device-height, initial-scale=1.0" -->
+</head>
+
+<body>
+	<div id="bodyWrapper">
+		<header id="header">
+			<div id="logo">
+				<img src="ref/searchIcon.png">
+			</div>
+			<div id="selectProduct">
+				<a href="compression.html">Compression</a>
+				&nbsp;
+				<a href="decompression.html">Decompression</a>
+			</div>
+		</header>
+		<div id="mainPart">
+			<div id="fileArea">
+				<div id="dropArea" ondrop="recieve_dropped_files(event);" ondragover="drag_over(event);" ondragleave="drag_leave(event);">
+					<p>Drop file(s) here</p>
+					<p style="font-size: 0.8em; margin-top: 0px;">or</p>
+					<label for="fileSelector">
+						<img src="ref/searchIcon.png" width="23x" height="23px">
+						Browse
+					</label>
+					<input id="fileSelector" type="file" multiple="multiple">
+				</div>
+			</div>
+			<div id="statsArea">
+				<!--div class="fileStats" id="file_name">
+					file_name.pdf (234 bytes)
+					<div class="columns">
+						<div class="leftColumn">
+							<p class="loadLabel">
+								<img id="loadIcon" src="ref/successIcon.png" height="23px", width="23px">
+								&nbsp; Loading
+							</p>
+							<p class="compressLabel">
+								<img  id="compressIcon" src="ref/waitIcon.png" height="23px", width="23px">
+								&nbsp; Compressing
+							</p>
+						</div>
+						<div class="rightColumn">
+							<p id="sizeLabel">
+								From X to Y bytes
+							</p>
+							<p id="timeLabel">
+								Time: 341 ms
+							</p>
+						</div>
+					</div>		
+				</div-->
+			</div>
+		</div>
+	</div>
+	<footer>
+		<button id="freeMemoryBtn">Free Memory (refresh)</button>
+	</footer>
+	
+
+
+	<!-- DOM SCRIPTS -->
+	<script>
+	// displays errors
+	function display_error(file_name, description){
+		window.alert("ERROR while handling " + file_name + ":\n" + description);
+	}
+	
+	/* file boxes scripts */
+	// create the initial box for the file
+	// gives to the icons and labels a unique ID containing the file_name
+	function create_fileStats_box(file_name){
+		var statsArea = document.getElementById('statsArea');
+		statsArea.insertAdjacentHTML('afterbegin',
+			'<div class="fileStats" id="'+file_name+'">' + file_name + '<div class="columns"><div class="leftColumn"><p class="loadLabel"><img id="loadIcon_'+file_name+'" src="ref/waitIcon.png" height="23px", width="23px">&nbsp; Loading</p><p class="compressLabel"><img id="compressIcon_'+file_name+'" src="ref/waitIcon.png" height="23px", width="23px">&nbsp; Compressing</p></div><div class="rightColumn"><p id="sizeLabel_'+file_name+'">Size: [waiting]</p><p id="timeLabel_'+file_name+'">Time: [waiting]</p></div></div></div>'
+		);
+	}
+
+	// updates the two icons for load and compress
+	function update_fileStats_box_icon(file_name, action, success){
+		var iconId = action + "Icon_" + file_name;
+		var icon = document.getElementById(iconId);
+		if(success)
+			icon.setAttribute('src', 'ref/successIcon.png');
+		else{
+			icon.setAttribute('src', 'ref/failIcon.png');
+			if(action == "load"){ // if loading fails, then also compression fails
+				update_fileStats_box_icon(file_name, "compress", false);
+			}
+		}
+	}
+
+	function update_fileStats_box_time(file_name, time){
+		var timeLabelId = "timeLabel_" + file_name;
+		var timeLabel = document.getElementById(timeLabelId);
+		if(time > 1000)
+			timeLabel.innerHTML = 'Time: ' + Math.round(( (time/1000) * 10 ) / 10) + " s";
+		else
+			timeLabel.innerHTML = 'Time: ' + (Math.round( time * 10 ) / 10) + " ms";
+	}
+	
+	function update_fileStats_box_size(file_name, original_size, final_size){
+		var sizeLabelId = "sizeLabel_" + file_name;
+		var sizeLabel = document.getElementById(sizeLabelId);
+		sizeLabel.innerHTML = getSizeStr(original_size) + ' -> ' + getSizeStr(final_size);
+	}
+
+	// return a string to the size with memory unit
+	function getSizeStr(size){
+		if(size > (1024*1024*1024))
+			return (Math.round( size/(1024*1024*1024) * 10 ) / 10) + " GB";
+		if(size > (1024*1024))
+			return (Math.round( size/(1024*1024) * 10 ) / 10) + " MB";
+		if(size > 1024)
+			return (Math.round( size/(1024) * 10 ) / 10) + " KB";
+		return (Math.round( size * 10 ) / 10) + " B";
+	}
+
+	/* drop file scripts */
+	// recieve files from dropArea and pass them to the file_handler
+	function recieve_dropped_files(event){
+		drag_leave(event); 			// restore opacity
+		event.preventDefault(); 	// prevent default behavoiur on drop file (opening it or download it)
+		var data = event.dataTransfer;
+		// Use DataTransfer interface to access the file(s)
+		/*console.log("Dropping file(s):");
+		for (var i=0; i < data.files.length; i++) {
+      		console.log("... file[" + i + "].name = " + data.files[i].name);
+    	}*/
+		handle_files(data.files);
+	}
+
+	function drag_over(event){
+		console.log("drag_over");
+		event.preventDefault();
+		document.getElementById("dropArea").style.opacity = "0.5";
+	}
+
+	function drag_leave(event){
+		console.log("drag_leave");
+		event.preventDefault();
+		document.getElementById("dropArea").style.opacity = "1";
+	}
+	</script>
+
+
+	<!-- WASM SCRIPTS -->
+
+	<!-- Include the JavaScript glue code. -->
+	<!-- This will load the WebAssembly module and run its main. --> 
+	<script src="zstd.js"></script>
+
+	<script>
+	// wrapping C functions to call them from js
+	var ZSTD_compressBound = cwrap("ZSTD_compressBound", "number", ["number"]);
+	var ZSTD_compress = cwrap("ZSTD_compress", "number", ["number", "number", "number", "number", "number"]);
+	var ZSTD_isError = cwrap("ZSTD_isError", "number", ["number"]);
+	</script>
+
+	<script>
+	// input -> bytes of the file (Uint8Array), name of the file
+	// creates and downloads a file with that data
+	function download_binary_file(bynary_data,  file_name){
+		// creating blob
+		var mimetype = "application/octet-stream";
+		var blob = new Blob([bynary_data], {type: mimetype});
+		var url = window.URL.createObjectURL(blob);
+		
+		// download 
+		var element = document.createElement('a');
+		element.setAttribute('href', url);
+		element.setAttribute('download', (file_name));
+		element.style.display = 'none';
+		document.body.appendChild(element);
+		element.click();
+		document.body.removeChild(element);
+		window.URL.revokeObjectURL(url);
+	}
+
+	// tries to allocate the space required in WASM heap
+	function malloc_or_die(size_of_data, file_name){
+		const data_ptr = Module._malloc(size_of_data);
+		if(data_ptr == 0){	// error allocating memory
+			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
+			display_error("_", "failed allocation of " + size_of_data + " bytes. File too big.");
+			throw new Error("Failed allocation of " + size_of_data + " bytes.");
+		}
+		return data_ptr;
+	}
+
+	// tries to compress the data
+	function compress_or_die(compressed_data_ptr, estimated_size_of_compressed_data, raw_data_ptr, size_of_data, compression_level, file_name){
+		const actual_size_of_compressed_data = ZSTD_compress(compressed_data_ptr,				// compress data
+															estimated_size_of_compressed_data,	// and get the real size of 
+															raw_data_ptr, size_of_data,			// compressed data
+															compression_level);	
+		
+		if(ZSTD_isError(actual_size_of_compressed_data)){ // error compressing data
+			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
+			display_error(file_name, "Failed compression.");
+			throw new Error("Failed compression");
+		}
+		update_fileStats_box_icon(file_name, "compress", true);		// update icon with success	
+		return actual_size_of_compressed_data;
+	}
+
+	// input -> file (it is a Blob actually)
+	// 1. read the file
+	// 2. perform compression
+	// 3. download the new file
+	function read_and_compress(file){
+		var TIME_start = performance.now();			// measure performaces
+
+		var reader = new FileReader();				// FileReader object
+		var file_name = file.name;
+		reader.readAsArrayBuffer(file);				// perform reading
+
+		reader.onerror = (function(){				// fail reading
+			update_fileStats_box_icon(file_name, "load", false); // update icon with fail
+			display_error(file_name, "Error reading the file, make sure it is not a folder.");
+		});
+
+		reader.onload = (function(){				// when reading is successfully finished
+			update_fileStats_box_icon(file_name, "load", true); // update icon with success
+			var TIME_after_file_reading = performance.now();
+			
+			console.log("File reading finished");
+
+			var raw_data = new Uint8Array(reader.result, 0, reader.result.byteLength); 	// getting bytes in as a Uint8Array
+			var TIME_after_copying_data_to_array = performance.now();
+			const size_of_data = raw_data.length;										// size of my data
+
+			console.log("Passing the data to wasm");
+
+			// I only have 5Mb of stack
+			// instead of passing the array to ZSTD_compress I am copying it into the heap and then pass a pointer to it
+			const raw_data_ptr = malloc_or_die(size_of_data, file_name);
+			// writing the data directly in wasm memory, so I will use everything from the heap
+			Module.HEAPU8.set(raw_data, raw_data_ptr);
+			
+			var TIME_after_copying_data_to_heap = performance.now();
+			
+			// calls to wasm for compression
+			const estimated_size_of_compressed_data = ZSTD_compressBound(size_of_data);			// give an estimation space we will allocate
+			const compressed_data_ptr = malloc_or_die(estimated_size_of_compressed_data, file_name);	// allocate that space
+			const actual_size_of_compressed_data = compress_or_die(compressed_data_ptr,			// compress data
+															estimated_size_of_compressed_data,	// and get the real size of 
+															raw_data_ptr, size_of_data, 4,		// compressed data
+															file_name);							// file_name is for the DOM
+
+			var TIME_after_compression = performance.now();
+			
+			console.log("Compression:", size_of_data, "-->", actual_size_of_compressed_data);
+			update_fileStats_box_size(file_name, size_of_data, actual_size_of_compressed_data); 			// update the size
+			update_fileStats_box_time(file_name, TIME_after_compression - TIME_after_copying_data_to_heap);	// update time
+			
+			// compressed_data_ptr is a pointer to my compressed data in wasm memory
+			// getting data out of wasm memory
+			var compressed_data = new Uint8Array(Module.HEAPU8.buffer, compressed_data_ptr, actual_size_of_compressed_data);
+			
+			var TIME_after_extract_data_from_heap = performance.now();
+
+			download_binary_file(compressed_data, file_name + ".zst");
+			
+			var TIME_after_download = performance.now();
+			
+			// clear the heap to avoid memory leaks
+			Module._free(compressed_data_ptr);
+			Module._free(raw_data_ptr);
+
+			// print performance data
+			console.log("1. Reading the file:           ", TIME_after_file_reading - TIME_start);
+			console.log("2. Copying data to Uint8Array: ", TIME_after_copying_data_to_array - TIME_after_file_reading);
+			console.log("3. Copying data to Heap:       ", TIME_after_copying_data_to_heap - TIME_after_copying_data_to_array);
+			console.log("4. Compression:                ", TIME_after_compression - TIME_after_copying_data_to_heap);
+			console.log("5. Extract data from Heap:     ", TIME_after_extract_data_from_heap - TIME_after_compression);
+			console.log("6. Download file:              ", TIME_after_download - TIME_after_extract_data_from_heap);
+		});
+	}
+
+	// handles all files
+	function handle_files(files){
+		for(var i = 0; i < files.length; i++){
+			create_fileStats_box(files[i].name); // create the box under the drop area
+			read_and_compress(files[i]);
+		}
+	}
+
+	// recieve files from select button
+	function recieve_selected_files(event){
+		handle_files(event.target.files);
+	}
+
+	// add the event listener for files upload
+	document.getElementById("fileSelector").addEventListener("change", recieve_selected_files);
+
+	// add event listener to refresh the page
+	document.getElementById("freeMemoryBtn").addEventListener("click", function(){location.reload();});
+	</script>
+</body>
+
+</html>
