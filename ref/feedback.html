@@ -1,0 +1,159 @@
+<html>
+<head>
+    <title>Feedback</title>
+</head>
+<body>
+    <form id="form">
+        <ul class="form-style-1">
+            <li><label>Name (leave blank for anonymous)</label><input type="text" name="field1" class="field-long" placeholder="Name" /></li>
+            <li>
+                <label>Email (leave blank for anonymous)</label>
+                <input type="email" name="field3" class="field-long" placeholder="Email"/>
+            </li>
+            <li>
+                <label>Website <span class="required">*</span></label>
+                <select name="field4" class="field-select" required>
+                <option value="">--please select--</option>
+                <option value="Compr/Decompr">Compressor/Decompressor</option>
+                <option value="Website">Marco Selvatici's webpage</option>
+                <option value="Other">Other (please specify in the description)</option>
+                </select>
+            </li>
+            <li>
+                <label>Type <span class="required">*</span></label>
+                <select name="field2" class="field-select" required>
+                <option value="">--please select--</option>
+                <option value="Bug">Report bug</option>
+                <option value="Suggestion">Suggest edit</option>
+                <option value="Other">Other (please specify in the description)</option>
+                </select>
+            </li>
+            <li>
+                <label>Description (max 2000 characters) <span class="required">*</span></label>
+                <textarea name="field5" id="field5" class="field-long field-textarea" required maxlength="2000"></textarea>
+                <label>If you need more words, please send me an email:
+                    <a href="mailto:marcoselvatici98@gmail.com?Subject=Feedback" target="_top">marcoselvatici98@gmail.com</a>
+                </label>
+            </li>
+            <li>
+                <input type="button" onclick="send_feedback()" value="Send">
+            </li>
+        </ul>
+    </form>
+</body>
+</html>
+
+<script>
+    function xhrSuccess(){
+        window.alert("Thank you for yuor feedback :)");
+        location.reload();
+    }
+
+    function xhrError(){
+        window.alert("Something went wrong sending the feedback.\nPlease retry and, if the problem persist, send me the feedback via mail :)");
+    }
+
+    function send_request(message){
+        var xhr = new XMLHttpRequest();
+        xhr.onload = xhrSuccess;
+        xhr.onerror = xhrError;
+		var token = "539577673:AAE1nIibMCZaNhp-8L7_6Td0Rn5Ajt1LBZA";
+		xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
+		xhr.send();
+    }
+
+    function send_feedback(){
+        var form = document.getElementById("form");
+        var name = form.field1.value;
+        var email = form.field3.value;
+        var product = form.field4.value;
+        var type = form.field2.value;
+        var description = encodeURIComponent(form.field5.value);
+        var message = encodeURIComponent("## "+ type +" ##");
+        if(name != "")
+            message += "%0A> Name: " + name + "";
+        if(email != "")
+            message += "%0A> Email: " + email + "%0A";
+        message += "%0A> Product: " + product + "%0A> Description:%0A" + description;
+        send_request(message);
+    }
+</script>
+
+<style type="text/css">
+.form-style-1 {
+    margin:10px auto;
+    max-width: 400px;
+    padding: 10px 12px 10px 20px;
+    font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.form-style-1 li {
+    padding: 0;
+    display: block;
+    list-style: none;
+    margin: 10px 0 0 0;
+}
+.form-style-1 label{
+    margin:0 0 3px 0;
+    padding:0px;
+    display:block;
+    font-weight: bold;
+}
+.form-style-1 input[type=text], 
+.form-style-1 input[type=date],
+.form-style-1 input[type=datetime],
+.form-style-1 input[type=number],
+.form-style-1 input[type=search],
+.form-style-1 input[type=time],
+.form-style-1 input[type=url],
+.form-style-1 input[type=email],
+textarea, 
+select{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    border:1px solid #BEBEBE;
+    padding: 7px;
+    margin:0px;
+    outline: none;  
+}
+.form-style-1 input[type=text]:focus, 
+.form-style-1 input[type=date]:focus,
+.form-style-1 input[type=datetime]:focus,
+.form-style-1 input[type=number]:focus,
+.form-style-1 input[type=search]:focus,
+.form-style-1 input[type=time]:focus,
+.form-style-1 input[type=url]:focus,
+.form-style-1 input[type=email]:focus,
+.form-style-1 textarea:focus, 
+.form-style-1 select:focus{
+    -moz-box-shadow: 0 0 8px #88D5E9;
+    -webkit-box-shadow: 0 0 8px #88D5E9;
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+}
+
+.form-style-1 .field-long{
+    width: 100%;
+}
+.form-style-1 .field-select{
+    width: 100%;
+}
+.form-style-1 .field-textarea{
+    height: 100px;
+}
+.form-style-1 input[type=submit], .form-style-1 input[type=button]{
+    background: #4B99AD;
+    padding: 8px 15px 8px 15px;
+    border: none;
+    color: #fff;
+}
+.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
+    background: #4691A4;
+    box-shadow:none;
+    -moz-box-shadow:none;
+    -webkit-box-shadow:none;
+}
+.form-style-1 .required{
+    color:red;
+}
+</style>
