@@ -5,26 +5,45 @@
 	<title>Compression</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
-	<!-- meta name="viewport" content="height=device-height, initial-scale=1.0" -->
 </head>
 
 <body>
-	<!--div id="errorMessageX" class="errorMessage">
-		<span>x</span>
-		<h1>Error:</h1>
-		<p>description di questo bellissimo errore che mi farà girare i coglioni <br>
-			description di questo bellissimo errore che mi farà girare i coglioni
-		</p>
-	</div-->
+	<div id="advancedMenu">
+		<div class="menuLine">
+			<img src="ref/githubIcon.png" width="30px" height="30px">
+			&nbsp; <a  href="https://github.com" target="blank">See code</a>
+		</div>
+		<div class="menuLine">
+			<img src="ref/bugIcon.png" width="30px" height="30px">
+			&nbsp; <a  href="https://github.com" target="blank">Report a bug</a>
+		</div>
+		<!--hr style="height:1px; color: rgb(235, 235, 235); background-color:rgb(235, 235, 235)"-->
+		<div class="menuLine">
+			<img src="ref/authorsIcon.png" width="30px" height="30px">
+			&nbsp; Authors
+			<div id="authorsDetails">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Code: <a href="https://marcoselvatici.github.io/">Marco Selvatici</a><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Logo: <a href="null">Luisa Baroncini</a>
+			</div>
+		</div>
+	</div>
 	<div id="bodyWrapper">
 		<header id="header">
 			<div id="logo">
 				<img src="ref/searchIcon.png">
 			</div>
-			<div id="selectProduct">
-				<a href="compression.html">Compression</a>
-				&nbsp;
-				<a href="decompression.html">Decompression</a>
+			<div id="headerRight">
+				<div id="selectProduct">
+					<div class="product" style="float:left; background-color: rgb(235, 235, 235);">
+						<a href="compression.html" style="color: rgb(0, 111, 167)">Compression</a>
+					</div>
+					<div class="product" style="float:right;">
+						<a href="decompression.html">Decompression</a>
+					</div>
+				</div>
+				<div id="advanced" onclick="open_menu()">
+					<img src="ref/advancedIcon.png" width="40px" height="40px">
+				</div>
 			</div>
 		</header>
 		<div id="mainPart">
@@ -40,48 +59,81 @@
 				</div>
 			</div>
 			<div id="statsArea">
-				<!--div class="fileStats" id="file_name">
-					file_name.pdf (234 bytes)
-					<div class="columns">
-						<div class="leftColumn">
-							<p class="loadLabel">
-								<img id="loadIcon" src="ref/successIcon.png" height="23px", width="23px">
-								&nbsp; Loading
-							</p>
-							<p class="compressLabel">
-								<img  id="compressIcon" src="ref/waitIcon.png" height="23px", width="23px">
-								&nbsp; Compressing
-							</p>
-						</div>
-						<div class="rightColumn">
-							<p id="sizeLabel">
-								From X to Y bytes
-							</p>
-							<p id="timeLabel">
-								Time: 341 ms
-							</p>
-						</div>
-					</div>		
-				</div-->
+				<!-- fileStats boxes will be added here via JavaScript -->
 			</div>
 		</div>
 	</div>
 	<footer>
-		<button id="freeMemoryBtn">Free Memory (refresh)</button>
+		<button id="freeMemoryBtn" disabled title="No memory has been allocated yet">
+			<img src="ref/refreshIcon.png" width="28x" height="28px" style="vertical-align: middle">
+			Free Memory
+		</button>
 	</footer>
-	
 
 
 	<!-- DOM SCRIPTS -->
 	<script>
+	function close_all_windows() {
+		close_error("all");
+		close_menu();
+	}
+	
+	function close_menu(){
+		document.getElementById("advancedMenu").style.display = "none";
+		document.getElementById("advanced").style.backgroundColor = "rgb(0, 111, 167)";
+		//document.getElementById("bodyWrapper").style.opacity = "1";
+
+		document.getElementById("bodyWrapper").removeAttribute("onclick");
+	}
+	
+	function open_menu(){
+		event.stopPropagation(); // avoid the propagation of the click
+		document.getElementById("advancedMenu").style.display = "inline";
+		document.getElementById("advanced").style.backgroundColor = "rgb(0, 143, 214)";
+		//document.getElementById("bodyWrapper").style.opacity = "0.5";
+
+		// make all the page clickable to close the menu
+		document.getElementById("bodyWrapper").setAttribute("onclick", "close_all_windows()");
+	}
+	
 	// remove the html error code
 	function close_error(errorId){
-		console.log(errorId);
+		//console.log(errorId);
 		var body = document.body;
-		for(var i = 0; i < body.childNodes.length; i++){
-			if(body.childNodes[i].id == errorId){
-				body.removeChild(body.childNodes[i]);
-				return;
+		console.log("Closing error: ", errorId);
+		// remove all the errors in the page
+		if(errorId == 'all'){
+			for(var i = body.childNodes.length - 1; i >= 0; i--){
+				if(body.childNodes[i].id != undefined)
+					if(body.childNodes[i].id.slice(0, 6) == "error_")
+						body.removeChild(body.childNodes[i]);
+				else
+					// ideally, all the errors are at the very end of the body, so if it is no more an error, then break
+					break;
+			}
+			// no more errors, can remove the onclick attribute from bodywrapper
+			document.getElementById("bodyWrapper").removeAttribute("onclick");
+			document.getElementById("bodyWrapper").style.opacity = "1";
+		}
+		// remove only the element you selected by clicking x
+		else{
+			var count_errors = 0;
+			for(var i = body.childNodes.length - 1; i >= 0; i--){
+				if(body.childNodes[i].id != undefined){
+					if(body.childNodes[i].id.slice(0, 6) == "error_")
+						count_errors += 1;
+					if(body.childNodes[i].id == errorId){
+						body.removeChild(body.childNodes[i]);
+						count_errors -= 1;
+					}
+				}
+				else
+					// ideally, all the errors are at the very end of the body, so if it is no more an error, then break
+					break;
+			}
+			if(count_errors == 0){ // no more errors, can remove the onclick attribute from bodywrapper
+				document.getElementById("bodyWrapper").removeAttribute("onclick");
+				document.getElementById("bodyWrapper").style.opacity = "1";
 			}
 		}
 	}
@@ -95,6 +147,17 @@
 		var call = 'close_error("' + errorId + '")';
 		error.innerHTML = "<span onclick='"+call+"'>x</span><h1>Error handling "+file_name+":</h1><p>"+description+"<br><br>Press <code>F12</code> to open console and see details.</p>";
 		document.body.appendChild(error);
+		
+		// make all the page clickable to close all the errors
+		document.getElementById("bodyWrapper").setAttribute("onclick", "close_all_windows()");
+		document.getElementById("bodyWrapper").style.opacity = "0.5";
+	}
+
+	// make the button clickable
+	function allow_free_memory_button(){
+		var btn = document.getElementById("freeMemoryBtn");
+		btn.disabled = false;
+		btn.title = "Free memory used by this app";
 	}
 	
 	/* file boxes scripts */
@@ -150,6 +213,7 @@
 	/* drop file scripts */
 	// recieve files from dropArea and pass them to the file_handler
 	function recieve_dropped_files(event){
+		allow_free_memory_button();
 		drag_leave(event); 			// restore opacity
 		event.preventDefault(); 	// prevent default behavoiur on drop file (opening it or download it)
 		var data = event.dataTransfer;
@@ -317,6 +381,7 @@
 
 	// recieve files from select button
 	function recieve_selected_files(event){
+		allow_free_memory_button();
 		handle_files(event.target.files);
 	}
 
@@ -326,6 +391,8 @@
 	// add event listener to refresh the page
 	document.getElementById("freeMemoryBtn").addEventListener("click", function(){location.reload();});
 	</script>
+
+	<!-- errors boxes will be added here via JavaScript -->
 </body>
 
 </html>
