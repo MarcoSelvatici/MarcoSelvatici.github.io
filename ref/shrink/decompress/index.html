@@ -2,57 +2,57 @@
 <html>
 
 <head>
-	<title>Compression</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Decompression</title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
 </head>
 
 <body>
 	<div id="advancedMenu">
 		<div class="menuLine">
-			<img src="ref/githubIcon.png" width="30px" height="30px">
+			<img src="../ref/githubIcon.png" width="30px" height="30px">
 			&nbsp; <a  href="https://github.com" target="blank">See code</a>
 		</div>
 		<div class="menuLine">
-			<img src="ref/bugIcon.png" width="30px" height="30px">
+			<img src="../ref/bugIcon.png" width="30px" height="30px">
 			&nbsp; <a  href="https://marcoselvatici.github.io/ref/feedback.html" target="blank">Report a bug</a>
 		</div>
 		<!--hr style="height:1px; color: rgb(235, 235, 235); background-color:rgb(235, 235, 235)"-->
 		<div class="menuLine">
-			<img src="ref/authorsIcon.png" width="30px" height="30px">
+			<img src="../ref/authorsIcon.png" width="30px" height="30px">
 			&nbsp; Authors
 			<div id="authorsDetails">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Code: <a href="https://marcoselvatici.github.io/">Marco Selvatici</a><br>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Logo: <a href="null">Luisa Baroncini</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Code: <a href="https://marcoselvatici.github.io/" target="blank">Marco Selvatici</a><br>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&bull; Logo: <a href="https://www.instagram.com/luisabaroncini/" target="blank">Luisa Baroncini</a>
 			</div>
 		</div>
 	</div>
 	<div id="bodyWrapper">
 		<header id="header">
 			<div id="logo">
-				<img src="ref/searchIcon.png">
+				<img src="../ref/searchIcon.png">
 			</div>
 			<div id="headerRight">
 				<div id="selectProduct">
-					<div class="product" style="float:left; background-color: rgb(235, 235, 235);">
-						<a href="compression.html" style="color: rgb(0, 111, 167)">Compression</a>
+					<div class="product" style="float:left;">
+						<a href="../compress/index.html">Compression</a>
 					</div>
-					<div class="product" style="float:right;">
-						<a href="decompression.html">Decompression</a>
+					<div class="product" style="float:right; background-color: rgb(235, 235, 235);">
+						<a href="#"  style="color: rgb(0, 111, 167)">Decompression</a>
 					</div>
 				</div>
 				<div id="advanced" onclick="open_menu()">
-					<img src="ref/advancedIcon.png" width="40px" height="40px">
+					<img src="../ref/advancedIcon.png" width="40px" height="40px">
 				</div>
 			</div>
 		</header>
 		<div id="mainPart">
 			<div id="fileArea">
 				<div id="dropArea" ondrop="recieve_dropped_files(event);" ondragover="drag_over(event);" ondragleave="drag_leave(event);">
-					<p>Drop file(s) here</p>
+					<p>Drop here your .zst file(s)</p>
 					<p style="font-size: 0.8em; margin-top: 0px;">or</p>
 					<label for="fileSelector">
-						<img src="ref/searchIcon.png" width="23x" height="23px">
+						<img src="../ref/searchIcon.png" width="23x" height="23px">
 						Browse
 					</label>
 					<input id="fileSelector" type="file" multiple="multiple">
@@ -64,10 +64,12 @@
 		</div>
 	</div>
 	<footer>
-		<button id="freeMemoryBtn" disabled title="No memory has been allocated yet">
-			<img src="ref/refreshIcon.png" width="28x" height="28px" style="vertical-align: middle">
-			Free Memory
-		</button>
+		<div id="rightFooter">
+			<button id="freeMemoryBtn" disabled title="No memory has been allocated yet">
+				<img src="../ref/refreshIcon.png" width="28x" height="28px" style="vertical-align: middle">
+				Free Memory
+			</button>
+		</div>
 	</footer>
 
 
@@ -166,7 +168,7 @@
 	function create_fileStats_box(file_name){
 		var statsArea = document.getElementById('statsArea');
 		statsArea.insertAdjacentHTML('afterbegin',
-			'<div class="fileStats" id="'+file_name+'">' + file_name + '<div class="columns"><div class="leftColumn"><p class="loadLabel"><img id="loadIcon_'+file_name+'" src="ref/waitIcon.png" height="23px", width="23px">&nbsp; Loading</p><p class="compressLabel"><img id="compressIcon_'+file_name+'" src="ref/waitIcon.png" height="23px", width="23px">&nbsp; Compressing</p></div><div class="rightColumn"><p id="sizeLabel_'+file_name+'">Size: [waiting]</p><p id="timeLabel_'+file_name+'">Time: [waiting]</p></div></div></div>'
+			'<div class="fileStats" id="'+file_name+'">' + file_name + '<div class="columns"><div class="leftColumn"><p class="loadLabel"><img id="loadIcon_'+file_name+'" src="../ref/waitIcon.png" height="23px", width="23px">&nbsp; Loading</p><p class="compressLabel"><img id="compressIcon_'+file_name+'" src="../ref/waitIcon.png" height="23px", width="23px">&nbsp; Decompressing</p></div><div class="rightColumn"><p id="sizeLabel_'+file_name+'">Size: [waiting]</p><p id="timeLabel_'+file_name+'">Time: [waiting]</p></div></div></div>'
 		);
 	}
 
@@ -220,8 +222,8 @@
 		// Use DataTransfer interface to access the file(s)
 		/*console.log("Dropping file(s):");
 		for (var i=0; i < data.files.length; i++) {
-      		console.log("... file[" + i + "].name = " + data.files[i].name);
-    	}*/
+				console.log("... file[" + i + "].name = " + data.files[i].name);
+		}*/
 		handle_files(data.files);
 	}
 
@@ -235,7 +237,7 @@
 		document.getElementById("dropArea").style.opacity = "1";
 	}
 	</script>
-
+		
 
 	<!-- WASM SCRIPTS -->
 
@@ -245,8 +247,8 @@
 
 	<script>
 	// wrapping C functions to call them from js
-	var ZSTD_compressBound = cwrap("ZSTD_compressBound", "number", ["number"]);
-	var ZSTD_compress = cwrap("ZSTD_compress", "number", ["number", "number", "number", "number", "number"]);
+	var ZSTD_findDecompressedSize = cwrap("ZSTD_findDecompressedSize", "number", ["number", "number"]);
+	var ZSTD_decompress = cwrap("ZSTD_decompress", "number", ["number", "number", "number", "number"]);
 	var ZSTD_isError = cwrap("ZSTD_isError", "number", ["number"]);
 	</script>
 
@@ -275,33 +277,33 @@
 		const data_ptr = Module._malloc(size_of_data);
 		if(data_ptr == 0){	// error allocating memory
 			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
-			display_error(file_name, "failed allocation of " + size_of_data + " bytes.<br> The file is too big.");
+			display_error(file_name, "failed allocation of " + size_of_data + " bytes.<br> The file could be too big or have a wrong format.");
 			throw new Error("Failed allocation of " + size_of_data + " bytes.");
 		}
 		return data_ptr;
 	}
 
-	// tries to compress the data
-	function compress_or_die(compressed_data_ptr, estimated_size_of_compressed_data, raw_data_ptr, size_of_data, compression_level, file_name){
-		const actual_size_of_compressed_data = ZSTD_compress(compressed_data_ptr,				// compress data
-															estimated_size_of_compressed_data,	// and get the real size of 
-															raw_data_ptr, size_of_data,			// compressed data
-															compression_level);	
+	// tries to decompress the data
+	function decompress_or_die(decompressed_data_ptr, estimate_original_size, compressed_data_ptr, size_of_data, file_name){
+		const original_size = ZSTD_decompress(decompressed_data_ptr,
+												estimate_original_size,
+												compressed_data_ptr,
+												size_of_data);
 		
-		if(ZSTD_isError(actual_size_of_compressed_data)){ // error compressing data
+		if(ZSTD_isError(original_size)){ // error decompressing data
 			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
-			display_error(file_name, "Failed compression.");
-			throw new Error("Failed compression");
+			display_error(file_name, "Failed decompression.");
+			throw new Error("Failed decompression");
 		}
 		update_fileStats_box_icon(file_name, "compress", true);		// update icon with success	
-		return actual_size_of_compressed_data;
+		return original_size;
 	}
 
-	// input -> file (it is a Blob actually)
+	// input -> compressed file
 	// 1. read the file
-	// 2. perform compression
+	// 2. perform decompression
 	// 3. download the new file
-	function read_and_compress(file){
+	function read_and_decompress(file){
 		var TIME_start = performance.now();			// measure performaces
 
 		var reader = new FileReader();				// FileReader object
@@ -313,60 +315,62 @@
 			display_error(file_name, "Error reading the file, make sure it is not a folder.");
 		});
 
-		reader.onload = (function(){				// when reading is successfully finished
+		reader.onload = (function(){				// when reading is finished
 			update_fileStats_box_icon(file_name, "load", true); // update icon with success
 			var TIME_after_file_reading = performance.now();
 			
 			console.log("File reading finished");
 
-			var raw_data = new Uint8Array(reader.result, 0, reader.result.byteLength); 	// getting bytes in as a Uint8Array
+			var compressed_data = new Uint8Array(reader.result, 0, reader.result.byteLength); // getting bytes in as a Uint8Array
 			var TIME_after_copying_data_to_array = performance.now();
-			const size_of_data = raw_data.length;										// size of my data
+			const size_of_data = compressed_data.length;										// size of my data
 
 			console.log("Passing the data to wasm");
 
 			// I only have 5Mb of stack
 			// instead of passing the array to ZSTD_compress I am copying it into the heap and then pass a pointer to it
-			const raw_data_ptr = malloc_or_die(size_of_data, file_name);
+			const compressed_data_ptr = malloc_or_die(size_of_data, file_name);
 			// writing the data directly in wasm memory, so I will use everything from the heap
-			Module.HEAPU8.set(raw_data, raw_data_ptr);
+			Module.HEAPU8.set(compressed_data, compressed_data_ptr);
 			
 			var TIME_after_copying_data_to_heap = performance.now();
 			
 			// calls to wasm for compression
-			const estimated_size_of_compressed_data = ZSTD_compressBound(size_of_data);			// give an estimation space we will allocate
-			const compressed_data_ptr = malloc_or_die(estimated_size_of_compressed_data, file_name);	// allocate that space
-			const actual_size_of_compressed_data = compress_or_die(compressed_data_ptr,			// compress data
-															estimated_size_of_compressed_data,	// and get the real size of 
-															raw_data_ptr, size_of_data, 4,		// compressed data
-															file_name);							// file_name is for the DOM
+			const estimate_original_size = ZSTD_findDecompressedSize(compressed_data_ptr, size_of_data);
+			const decompressed_data_ptr = malloc_or_die(estimate_original_size, file_name);			// allocate that space
+			const original_size = decompress_or_die(decompressed_data_ptr,
+												estimate_original_size,
+												compressed_data_ptr,
+												size_of_data,
+												file_name);
 
-			var TIME_after_compression = performance.now();
+			var TIME_after_decompression = performance.now();
 			
-			console.log("Compression:", size_of_data, "-->", actual_size_of_compressed_data);
-			update_fileStats_box_size(file_name, size_of_data, actual_size_of_compressed_data); 			// update the size
-			update_fileStats_box_time(file_name, TIME_after_compression - TIME_after_copying_data_to_heap);	// update time
-			
+			console.log("Decompression:", size_of_data, "-->", original_size);
+			update_fileStats_box_size(file_name, size_of_data, original_size); 									// update the size
+			update_fileStats_box_time(file_name, TIME_after_decompression - TIME_after_copying_data_to_heap);	// update time
+
 			// compressed_data_ptr is a pointer to my compressed data in wasm memory
 			// getting data out of wasm memory
-			var compressed_data = new Uint8Array(Module.HEAPU8.buffer, compressed_data_ptr, actual_size_of_compressed_data);
+			var decompressed_data = new Uint8Array(Module.HEAPU8.buffer, decompressed_data_ptr, original_size);
 			
 			var TIME_after_extract_data_from_heap = performance.now();
 
-			download_binary_file(compressed_data, file_name + ".zst");
+			// removing .zst from the name
+			download_binary_file(decompressed_data, file_name.substring(0, file_name.length - 4));
 			
 			var TIME_after_download = performance.now();
 			
 			// clear the heap to avoid memory leaks
+			Module._free(decompressed_data_ptr);
 			Module._free(compressed_data_ptr);
-			Module._free(raw_data_ptr);
 
 			// print performance data
 			console.log("1. Reading the file:           ", TIME_after_file_reading - TIME_start);
 			console.log("2. Copying data to Uint8Array: ", TIME_after_copying_data_to_array - TIME_after_file_reading);
 			console.log("3. Copying data to Heap:       ", TIME_after_copying_data_to_heap - TIME_after_copying_data_to_array);
-			console.log("4. Compression:                ", TIME_after_compression - TIME_after_copying_data_to_heap);
-			console.log("5. Extract data from Heap:     ", TIME_after_extract_data_from_heap - TIME_after_compression);
+			console.log("4. Decompression:              ", TIME_after_decompression - TIME_after_copying_data_to_heap);
+			console.log("5. Extract data from Heap:     ", TIME_after_extract_data_from_heap - TIME_after_decompression);
 			console.log("6. Download file:              ", TIME_after_download - TIME_after_extract_data_from_heap);
 		});
 	}
@@ -374,18 +378,24 @@
 	// handles all files
 	function handle_files(files){
 		for(var i = 0; i < files.length; i++){
+			console.log("recieved ", files[i].name.length);
+			console.log(files[i].name.substring(files[i].name.length - 4, files[i].name.length));
+			if(files[i].name.length <= 5 || files[i].name.substring(files[i].name.length - 4, files[i].name.length) != ".zst"){
+				display_error(files[i].name, "the file does not end with <code>.zst</code>, ignored.");
+				continue;
+			}
+			allow_free_memory_button();
 			create_fileStats_box(files[i].name); // create the box under the drop area
-			read_and_compress(files[i]);
+			read_and_decompress(files[i]);
 		}
 	}
 
-	// recieve files from select button
+		// recieve files from select button
 	function recieve_selected_files(event){
-		allow_free_memory_button();
 		handle_files(event.target.files);
 	}
 
-	// add the event listener for files upload
+	// add the event listener
 	document.getElementById("fileSelector").addEventListener("change", recieve_selected_files);
 
 	// add event listener to refresh the page

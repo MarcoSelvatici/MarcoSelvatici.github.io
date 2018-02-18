@@ -12,27 +12,28 @@
 	</script>
 	<script async>
 		var user = window.navigator;
+
 		var user_lang = user.language;
-		var user_id = user.id;
-		console.log(user_lang, user_id);
-		
-		/*
-		var TelegramBot = require('telegram-bot-api');
-		var api = new TelegramBot("447295199:AAHS6u8VfI586RSu6iHeOOup05mtBcq_eAc");
-		api.sendMessage({
-			chat_id: "@marco_selvatici",
-			text: "ciaooooo"
-		});
-		*/
-		
+		var user_platform = user.oscpu || user.platform; // OS
+		var user_info = user.userAgent;
+		var browser = "unknown";
+		if(user_info.indexOf("Chrome") > -1) {
+			browser = "Google Chrome";
+		} else if (user_info.indexOf("Safari") > -1) {
+			browser = "Apple Safari";
+		} else if (user_info.indexOf("Opera") > -1) {
+			browser = "Opera";
+		} else if (user_info.indexOf("Firefox") > -1) {
+			browser = "Mozilla Firefox";
+		} else if (user_info.indexOf("MSIE") > -1) {
+			browser = "Microsoft Internet Explorer";
+		}
 		
 		var xhr = new XMLHttpRequest();
 		var token = "494375384:AAFRFnUDzjFGbI5rFIf0npuZP37-6nvHNtM";
-		var message = "id: " + user_id + "%0Alanguage: " + user_lang;
+		var message = "Lang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser;
 		xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
 		xhr.send();
-		
-		
 	</script>
 	
 	<title>Marco Selvatici</title>

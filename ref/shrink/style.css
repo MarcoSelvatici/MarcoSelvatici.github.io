@@ -9,8 +9,6 @@
     --header-width: 99%; /* must be: 100-2*(margin-percent) */
     --header-height: 70px;
     --header-height-min10: 60px;
-    --footer-height: 100px;
-    --footer-height-neg: -80px;
     --mainPart-height: 81%; /* must be 100-(header-height) */
     --fileArea-height: 350px; 
     --fileArea-width: 60%;
@@ -115,7 +113,6 @@ body{
 #bodyWrapper{
     overflow: auto;
     height: 100%;
-    padding-bottom: var(--footer-height);
 }
 
 #header{
@@ -269,23 +266,42 @@ body{
 }
 
 footer{
-    position: relative;
+    width: 100vw;
     clear: both;
-    height: var(--footer-height);
-    margin-top: var(--footer-height-neg);
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+}
+
+#rightFooter{
+    transform: translate(-20px, 0);
+    float: right;
+    flex-direction: column;
+}
+
+#compressOptions{
+    background-color: var(--buttons-color);
+    font-size: 1.3em;   
+    border: 0px;
+    width: 215px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#compressOptions #compressionSelector{
+    width: 210px;
 }
 
 #freeMemoryBtn{
     background-color: var(--buttons-color);
-    margin: 20px 10px 10px 10px;
-    transform: translate(-20px, 0);
     font-size: 1.5em;
     border: 0px;
-    width: 210px;
+    width: 235px;
     height: 50px;
     overflow: hidden;
     border-radius: 5px;
-    float: right;
     cursor: pointer;
 }
 
