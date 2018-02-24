@@ -1,0 +1,332 @@
+/* CSS variables */
+:root{
+    --header-color: rgb(0, 111, 167);
+    --header-selected-color: rgb(0, 143, 214);
+    --buttons-color: rgb(37, 187, 117);
+    --white: rgb(235, 235, 235);
+    --error-color: rgb(199, 49, 49);
+    --margin: 1%;
+    --header-width: 99%; /* must be: 100-2*(margin-percent) */
+    --header-height: 70px;
+    --header-height-plus-10: 80px; 
+    --header-height-min10: 60px;
+    --mainPart-height: 81%; /* must be 100-(header-height) */
+    --fileArea-height: 350px; 
+    --fileArea-width: 60%;
+}
+
+@media (max-width: 1000px){
+    #bodyWrapper{
+        height: auto;
+        /*background-color: red;*/
+    }
+}
+
+body{
+    background-color: var(--white);
+    width: 100vw;
+    height: 100vh;
+    margin: 0px;
+    font-family: "Arial";
+    display: flex;
+    flex-direction: column;
+}
+
+.errorMessage{
+    align-self: center;
+    position: absolute;
+    z-index: 10;
+    width: auto;
+    min-width: 350px;
+    height: auto;
+    min-height: 130px;
+    border: 5px solid var(--error-color);
+    border-radius: 10px;
+    background-color: var(--error-color);
+    color: var(--white);
+    text-align: center;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+.errorMessage span{
+    margin-top: -20px;
+    margin-right: -10px;
+    float: right;
+    font-weight: bold;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.errorMessage h1{
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.errorMessage p{
+    font-size: 1.2em;
+    margin-bottom: 0;
+}
+
+#advancedMenu{
+    display: none;
+    background-color: var(--header-selected-color);
+    align-self: flex-end;
+    /*align-self: center;*/
+    position: absolute;
+    z-index: 2;
+    width: 285;
+    min-width: 200px;
+    height: auto;
+    color: var(--white);
+    padding: 35px 25px 25px 25px;
+    border-radius: 10px;
+    margin-top: var(--header-height-min10);
+}
+
+#advancedMenu .menuLine{
+    min-height: 55px;
+    min-width: 250px;
+    font-size: 1.6em;
+    margin: 5px;      
+}
+
+#advancedMenu .menuLine img{
+    vertical-align: middle;
+    margin-bottom: 5px;
+}
+
+#advancedMenu .menuLine a{
+    color: var(--white);
+    text-decoration: none;
+}
+
+#advancedMenu .menuLine a:hover{
+    text-decoration: underline;
+}
+
+#advancedMenu .menuLine #authorsDetails{
+    font-size: 0.855em;
+}
+
+#advancedMenu .menuLine #authorsDetails a{
+    color: var(--white);
+    font-style: italic;
+    text-decoration: none;
+}
+
+#advancedMenu .menuLine #authorsDetails a:hover{
+    text-decoration: underline;
+}
+
+#bodyWrapper{
+    overflow: auto;
+    height: 100%;
+}
+
+#header{
+    z-index: 3;
+    position: fixed;
+    font-size: 2.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: var(--header-width);
+    padding-left: var(--margin);
+    height: var(--header-height);
+    color: var(--white);
+    background-color: var(--header-color);
+}
+
+#header #headerRight{
+    height: var(--header-height);
+}
+
+#header #headerRight #selectProduct{
+    height: var(--header-height);
+    float:left;
+}
+
+#header #headerRight #selectProduct .product{
+    height: 63px;
+    padding-top:7px;
+}
+
+#header #headerRight #selectProduct a{
+    cursor: pointer;
+    font-size: 0.7em;
+    color: var(--white);
+    text-decoration: none;
+    margin: 0px 25px 0px 25px;
+}
+
+#header #headerRight #selectProduct a:hover{
+    text-decoration: underline;
+}
+
+#header #headerRight #advanced{
+    cursor: pointer;
+    height: var(--header-height);
+    float: right;
+    padding: 0px 25px 0px 25px;
+}
+
+#header #headerRight #advanced img{
+    margin-top: 13px;
+}
+
+#mainPart{
+    margin-top: var(--header-height-plus-10);
+    font-size: 2em;
+    /* height: var(--mainPart-height);*/
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+#mainPart #fileArea{    
+    margin: var(--margin) var(--margin) 0px var(--margin);
+    width: var(--fileArea-width);
+    height: var(--fileArea-height);
+}
+
+#mainPart #fileArea #dropArea{
+    background-color: rgb(214, 214, 214);
+    font-weight: bold;
+    width: 100%;
+    height: 100%;
+    border: 4px dashed rgb(88, 88, 88);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+#mainPart #fileArea #dropArea p{
+    margin-bottom: 0.5em;
+    overflow: hidden;
+}
+
+#mainPart #fileArea #dropArea label{
+    font-weight: normal;
+    font-size: .9em;
+    padding: 0.4em;
+    background-color: var(--buttons-color);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+#mainPart #fileArea #dropArea label:hover{
+    opacity: 0.7;
+}
+
+#mainPart #fileArea #dropArea img{
+    vertical-align: middle;
+}
+
+#mainPart #fileArea #dropArea #fileSelector{
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#mainPart #statsArea{
+    margin: var(--margin);
+    width: var(--fileArea-width);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#mainPart #statsArea .fileStats{
+    margin: .5%;
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 4px;
+    /*width: 44.5%;*/
+    width: 320px;
+    height: 125px;
+    padding: 12px 15px 0px 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.6em;
+    font-weight: bold;
+    overflow: hidden;
+}
+
+#mainPart #statsArea .fileStats .columns{
+    font-size: 0.9em;
+    font-weight: normal;
+}
+
+#mainPart #statsArea .fileStats .columns img{
+    vertical-align: middle;
+}
+
+#mainPart #statsArea .fileStats .columns .leftColumn{
+    text-align: left; 
+    float: left;
+}
+
+#mainPart #statsArea .fileStats .columns .rightColumn{
+    text-align: right; 
+    float: right;
+}
+
+footer{
+    width: 100vw;
+    clear: both;
+    position: fixed;
+    z-index: 3;
+    bottom: 20px;
+}
+
+#rightFooter{
+    transform: translate(-20px, 0);
+    float: right;
+    flex-direction: column;
+}
+
+#compressOptions{
+    background-color: var(--buttons-color);
+    font-size: 1.3em;   
+    border: 0px;
+    width: 215px;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+#compressOptions #compressionSelector{
+    width: 210px;
+}
+
+#freeMemoryBtn{
+    background-color: var(--buttons-color);
+    font-size: 1.5em;
+    border: 0px;
+    width: 235px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#freeMemoryBtn:hover{
+    opacity: 0.8;
+}
+
+#freeMemoryBtn:disabled{
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+#freeMemoryBtn:disabled img{
+    opacity: 0.4;
+}

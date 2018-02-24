@@ -8,6 +8,7 @@
     --margin: 1%;
     --header-width: 99%; /* must be: 100-2*(margin-percent) */
     --header-height: 70px;
+    --header-height-plus-10: 80px; 
     --header-height-min10: 60px;
     --mainPart-height: 81%; /* must be 100-(header-height) */
     --fileArea-height: 350px; 
@@ -74,7 +75,7 @@ body{
     /*align-self: center;*/
     position: absolute;
     z-index: 2;
-    width: auto;
+    width: 285;
     min-width: 200px;
     height: auto;
     color: var(--white);
@@ -100,14 +101,22 @@ body{
     text-decoration: none;
 }
 
+#advancedMenu .menuLine a:hover{
+    text-decoration: underline;
+}
+
 #advancedMenu .menuLine #authorsDetails{
-    font-size: 0.9em;
+    font-size: 0.855em;
 }
 
 #advancedMenu .menuLine #authorsDetails a{
     color: var(--white);
     font-style: italic;
     text-decoration: none;
+}
+
+#advancedMenu .menuLine #authorsDetails a:hover{
+    text-decoration: underline;
 }
 
 #bodyWrapper{
@@ -151,6 +160,10 @@ body{
     margin: 0px 25px 0px 25px;
 }
 
+#header #headerRight #selectProduct a:hover{
+    text-decoration: underline;
+}
+
 #header #headerRight #advanced{
     cursor: pointer;
     height: var(--header-height);
@@ -163,7 +176,7 @@ body{
 }
 
 #mainPart{
-    margin-top: var(--header-height);
+    margin-top: var(--header-height-plus-10);
     font-size: 2em;
     /* height: var(--mainPart-height);*/
     display: flex;
