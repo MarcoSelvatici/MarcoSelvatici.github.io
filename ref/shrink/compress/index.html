@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-	<title>Compression</title>
+	<title>Shrink - compress</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+	<meta charset="utf-8">
+	<link rel="shortcut icon" href="ref/icon.ico">
+	<meta name="author" content="Marco Selvatici">
+	<meta name="description" content="Compress files online, quickly, without uploaoding and downloading them. Webassembly-based.">
+
+	<meta property="og:image" content="https://marcoselvatici.github.io/ref/shrink/decompress/ref/logo.png">
+	<meta property="og:description" content="Compress files online, quickly, without uploaoding and downloading them. Webassembly-based.">
+	<meta property="og:title" content="Shrink - compress">
 </head>
 
 <body>
@@ -85,6 +93,8 @@
 	if(location.protocol == "file:")
 		setTimeout(display_error, 200, "WASM","Webassembly is may not work if you open the app this way.<br>For security reasons, some browsers are not going to allow<br>asynchronus scripts to be loaded if the file <code>.html</code> is read from<br><code>file://</code>, thus maybe WASM is not going to be loaded.<br><br>You can use <code>python</code> to run an <code>HTTPServer</code> and open the file<br>from <code>localhost:xxxx</code>.");
 	
+	var open_errors = [];
+
 	// DOM update when move the slider
 	function update_slider_info(){
 		var slider_value = document.getElementById("compressionSelector").value;
@@ -121,51 +131,40 @@
 		// make all the page clickable to close the menu
 		document.getElementById("bodyWrapper").setAttribute("onclick", "close_all_windows()");
 	}
+
+	// remove an element from the page, given its id
+	function remove_element(id){
+		var elem = document.getElementById(id);
+		elem.parentNode.removeChild(elem);
+	}
 	
 	// remove the html error code
 	function close_error(errorId){
-		//console.log(errorId);
-		var body = document.body;
 		console.log("Closing error: ", errorId);
-		// remove all the errors in the page
-		if(errorId == 'all'){
-			for(var i = body.childNodes.length - 1; i >= 0; i--){
-				if(body.childNodes[i].id != undefined)
-					if(body.childNodes[i].id.slice(0, 6) == "error_")
-						body.removeChild(body.childNodes[i]);
-				else
-					// ideally, all the errors are at the very end of the body, so if it is no more an error, then break
-					break;
-			}
-			// no more errors, can remove the onclick attribute from bodywrapper
-			document.getElementById("bodyWrapper").removeAttribute("onclick");
-			document.getElementById("bodyWrapper").style.opacity = "1";
+		if(errorId == "all"){
+			for(var i = 0; i < open_errors.length; i++)
+				remove_element(open_errors[i]);
+			// clear the array
+			open_errors = [];
 		}
-		// remove only the element you selected by clicking x
 		else{
-			var count_errors = 0;
-			for(var i = body.childNodes.length - 1; i >= 0; i--){
-				if(body.childNodes[i].id != undefined){
-					if(body.childNodes[i].id.slice(0, 6) == "error_")
-						count_errors += 1;
-					if(body.childNodes[i].id == errorId){
-						body.removeChild(body.childNodes[i]);
-						count_errors -= 1;
-					}
-				}
-				else
-					// ideally, all the errors are at the very end of the body, so if it is no more an error, then break
-					break;
-			}
-			if(count_errors == 0){ // no more errors, can remove the onclick attribute from bodywrapper
-				document.getElementById("bodyWrapper").removeAttribute("onclick");
-				document.getElementById("bodyWrapper").style.opacity = "1";
-			}
+			remove_element(errorId);
+			open_errors.splice(open_errors.indexOf(errorId), 1);
+		}
+		// no more errors
+		if(open_errors.length == 0){
+			// remove opacity and click effect on the whole page
+			document.getElementById("bodyWrapper").removeAttribute("onclick");
+			// reset opacity
+			document.getElementById("bodyWrapper").style.opacity = "1";
+			document.getElementById("advancedMenu").style.opacity = "1";
+			document.getElementById("rightFooter").style.opacity = "1";
 		}
 	}
 
 	// displays errors
 	function display_error(file_name, description){
+		// create the error div and append it to the body
 		var error = document.createElement("DIV");
 		error.setAttribute("id", "error_"+file_name);
 		error.setAttribute("class", "errorMessage");
@@ -173,10 +172,15 @@
 		var call = 'close_error("' + errorId + '")';
 		error.innerHTML = "<span onclick='"+call+"'>x</span><h1>Error handling "+file_name+":</h1><p>"+description+"<br><br>Press <code>F12</code> to open console and see details.</p>";
 		document.body.appendChild(error);
+
+		open_errors.push(errorId); // add the error to the list of opened errors
 		
 		// make all the page clickable to close all the errors
 		document.getElementById("bodyWrapper").setAttribute("onclick", "close_all_windows()");
+		// set opacity to all the other elements
 		document.getElementById("bodyWrapper").style.opacity = "0.5";
+		document.getElementById("advancedMenu").style.opacity = "0.5";
+		document.getElementById("rightFooter").style.opacity = "0.5";
 	}
 
 	// make the button clickable
@@ -243,11 +247,6 @@
 		drag_leave(event); 			// restore opacity
 		event.preventDefault(); 	// prevent default behavoiur on drop file (opening it or download it)
 		var data = event.dataTransfer;
-		// Use DataTransfer interface to access the file(s)
-		/*console.log("Dropping file(s):");
-		for (var i=0; i < data.files.length; i++) {
-      		console.log("... file[" + i + "].name = " + data.files[i].name);
-    	}*/
 		handle_files(data.files);
 	}
 
@@ -272,8 +271,8 @@
 	<script>
 	// wrapping C functions to call them from js
 	var ZSTD_compressBound = cwrap("ZSTD_compressBound", "number", ["number"]);
-	var ZSTD_compress = cwrap("ZSTD_compress", "number", ["number", "number", "number", "number", "number"]);
-	var ZSTD_isError = cwrap("ZSTD_isError", "number", ["number"]);
+	var ZSTD_compress      = cwrap("ZSTD_compress", "number", ["number", "number", "number", "number", "number"]);
+	var ZSTD_isError       = cwrap("ZSTD_isError", "number", ["number"]);
 	</script>
 
 	<script>
@@ -314,18 +313,63 @@
 
 	// tries to compress the data
 	function compress_or_die(compressed_data_ptr, estimated_size_of_compressed_data, raw_data_ptr, size_of_data, compression_level, file_name){
-		const actual_size_of_compressed_data = ZSTD_compress(compressed_data_ptr,				// compress data
-															estimated_size_of_compressed_data,	// and get the real size of 
-															raw_data_ptr, size_of_data,			// compressed data
+		const actual_size_of_compressed_data = ZSTD_compress(compressed_data_ptr,				// WASM call
+															estimated_size_of_compressed_data,	
+															raw_data_ptr, size_of_data,			
 															compression_level);	
 		
-		if(ZSTD_isError(actual_size_of_compressed_data)){ // error compressing data
-			update_fileStats_box_icon(file_name, "compress", false); // update icon with fail
+		if(ZSTD_isError(actual_size_of_compressed_data)){ 				// error compressing data
+			update_fileStats_box_icon(file_name, "compress", false); 	// update icon with fail
 			display_error(file_name, "Failed compression.");
 			throw new Error("Failed compression");
 		}
-		update_fileStats_box_icon(file_name, "compress", true);		// update icon with success	
+		update_fileStats_box_icon(file_name, "compress", true);			// update icon with success	
 		return actual_size_of_compressed_data;
+	}
+
+	// compress the js Uint8Array of bytes and return another Uint8Array with the compressed bytes
+	// here happen all the calls to WASM functions
+	function compress_byteArray(raw_data, file_name){
+		const size_of_data = raw_data.length; // size of my data
+
+		// I only have 5Mb of stack
+		// instead of passing the array to ZSTD_compress I am copying it into the heap and then pass a pointer to it
+		const raw_data_ptr = malloc_or_die(size_of_data, file_name);
+		// writing the data directly in wasm memory, so I will use everything from the heap
+		Module.HEAPU8.set(raw_data, raw_data_ptr);
+
+		// read compression level
+		var compression_level = get_compression_level();
+		// to measure compression time
+		var TIME_before_compression = performance.now();
+		
+		// calls to wasm for compression
+		const estimated_size_of_compressed_data = ZSTD_compressBound(size_of_data);			// give an estimation space we will allocate
+		const compressed_data_ptr = malloc_or_die(estimated_size_of_compressed_data, file_name);	// allocate that space
+		const actual_size_of_compressed_data = compress_or_die(compressed_data_ptr,			// compress data  and get the real size of compressed data
+														estimated_size_of_compressed_data,
+														raw_data_ptr, size_of_data,		
+														compression_level,
+														file_name);							// file_name is for the DOM update
+		// to measure compression time
+		var TIME_after_compression = performance.now();
+		update_fileStats_box_size(file_name, size_of_data, actual_size_of_compressed_data); 	// update the size
+		update_fileStats_box_time(file_name, TIME_after_compression - TIME_before_compression);	// update time
+		
+		// compressed_data_ptr is a pointer to my compressed data in wasm memory
+		// getting data out of wasm memory
+		var compressed_data = new Uint8Array(Module.HEAPU8.buffer, compressed_data_ptr, actual_size_of_compressed_data);
+
+		// clear the heap to avoid memory leaks
+		Module._free(compressed_data_ptr);
+		Module._free(raw_data_ptr);
+
+		// print performance data
+		console.log("Success! [" + file_name + "]");
+		console.log("Compression:      ", size_of_data, "-->", actual_size_of_compressed_data);
+		console.log("Compression time: ", TIME_after_compression - TIME_before_compression);
+
+		return compressed_data;
 	}
 
 	// input -> file (it is a Blob actually)
@@ -333,76 +377,21 @@
 	// 2. perform compression
 	// 3. download the new file
 	function read_and_compress(file){
-		var TIME_start = performance.now();			// measure performaces
-
-		var reader = new FileReader();				// FileReader object
+		var reader = new FileReader();		// FileReader object
 		var file_name = file.name;
-		reader.readAsArrayBuffer(file);				// perform reading
+		reader.readAsArrayBuffer(file);		// perform reading
 
-		reader.onerror = (function(){				// fail reading
-			update_fileStats_box_icon(file_name, "load", false); // update icon with fail
+		reader.onerror = (function(){													// fail reading
+			update_fileStats_box_icon(file_name, "load", false); 						// update both icons with fail
 			display_error(file_name, "Error reading the file, make sure it is not a folder.");
 		});
 
-		reader.onload = (function(){				// when reading is successfully finished
-			update_fileStats_box_icon(file_name, "load", true); // update icon with success
-			var TIME_after_file_reading = performance.now();
-			
-			console.log("File reading finished");
-
+		reader.onload = (function(){													// when reading is successfully finished
+			console.log("File reading finished, passing data to WASM");
+			update_fileStats_box_icon(file_name, "load", true); 						// update icon with success
 			var raw_data = new Uint8Array(reader.result, 0, reader.result.byteLength); 	// getting bytes in as a Uint8Array
-			var TIME_after_copying_data_to_array = performance.now();
-			const size_of_data = raw_data.length;										// size of my data
-
-			console.log("Passing the data to wasm");
-
-			// I only have 5Mb of stack
-			// instead of passing the array to ZSTD_compress I am copying it into the heap and then pass a pointer to it
-			const raw_data_ptr = malloc_or_die(size_of_data, file_name);
-			// writing the data directly in wasm memory, so I will use everything from the heap
-			Module.HEAPU8.set(raw_data, raw_data_ptr);
-
-			// read compression level
-			var compression_level = get_compression_level();
-			
-			var TIME_after_copying_data_to_heap = performance.now();
-			
-			// calls to wasm for compression
-			const estimated_size_of_compressed_data = ZSTD_compressBound(size_of_data);			// give an estimation space we will allocate
-			const compressed_data_ptr = malloc_or_die(estimated_size_of_compressed_data, file_name);	// allocate that space
-			const actual_size_of_compressed_data = compress_or_die(compressed_data_ptr,			// compress data
-															estimated_size_of_compressed_data,	// and get the real size of 
-															raw_data_ptr, size_of_data,			// compressed data
-															compression_level,
-															file_name);							// file_name is for the DOM
-
-			var TIME_after_compression = performance.now();
-			
-			console.log("Compression:", size_of_data, "-->", actual_size_of_compressed_data);
-			update_fileStats_box_size(file_name, size_of_data, actual_size_of_compressed_data); 			// update the size
-			update_fileStats_box_time(file_name, TIME_after_compression - TIME_after_copying_data_to_heap);	// update time
-			
-			// compressed_data_ptr is a pointer to my compressed data in wasm memory
-			// getting data out of wasm memory
-			var compressed_data = new Uint8Array(Module.HEAPU8.buffer, compressed_data_ptr, actual_size_of_compressed_data);
-			
-			var TIME_after_extract_data_from_heap = performance.now();
-
-			download_binary_file(compressed_data, file_name + ".zst");
-			
-			var TIME_after_download = performance.now();
-			
-			// clear the heap to avoid memory leaks
-			Module._free(compressed_data_ptr);
-			Module._free(raw_data_ptr);
-
-			// print performance data
-			console.log("1. Reading the file:           ", TIME_after_file_reading - TIME_start);
-			console.log("2. Copying data to Uint8Array: ", TIME_after_copying_data_to_array - TIME_after_file_reading);
-			console.log("3. Copying data to Heap:       ", TIME_after_copying_data_to_heap - TIME_after_copying_data_to_array);
-			console.log("4. Compression:                ", TIME_after_compression - TIME_after_copying_data_to_heap);
-			console.log("5. Extract data from Heap:     ", TIME_after_extract_data_from_heap - TIME_after_compression);
-			console.log("6. Download file:              ", TIME_after_download - TIME_after_extract_data_from_heap);
+			var compressed_data = compress_byteArray(raw_data, file_name);				// compress the Uint8Array of bytes
+			download_binary_file(compressed_data, file_name + ".zst");					// download the bytes as a file
 		});
 	}
 
