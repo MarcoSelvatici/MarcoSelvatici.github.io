@@ -75,6 +75,11 @@
 
 	<!-- DOM SCRIPTS -->
 	<script>
+	// check if the url has file:// or http(s)://
+	// file:// is not going to be able to execute async js for security reasons
+	if(location.protocol == "file:")
+		setTimeout(display_error, 200, "WASM","Webassembly is may not work if you open the app this way.<br>For security reasons, some browsers are not going to allow<br>asynchronus scripts to be loaded if the file <code>.html</code> is read from<br><code>file://</code>, thus maybe WASM is not going to be loaded.<br><br>You can use <code>python</code> to run an <code>HTTPServer</code> and open the file<br>from <code>localhost:xxxx</code>.");
+	
 	function close_all_windows() {
 		close_error("all");
 		close_menu();
@@ -190,9 +195,9 @@
 		var timeLabelId = "timeLabel_" + file_name;
 		var timeLabel = document.getElementById(timeLabelId);
 		if(time > 1000)
-			timeLabel.innerHTML = 'Time: ' + Math.round(( (time/1000) * 10 ) / 10) + " s";
+			timeLabel.innerHTML = 'Time: ' + (time/1000).toFixed(3) + " s";
 		else
-			timeLabel.innerHTML = 'Time: ' + (Math.round( time * 10 ) / 10) + " ms";
+			timeLabel.innerHTML = 'Time: ' + time.toFixed(0) + " ms";
 	}
 	
 	function update_fileStats_box_size(file_name, original_size, final_size){

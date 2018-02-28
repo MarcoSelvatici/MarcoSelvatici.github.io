@@ -30,7 +30,7 @@ Note2: Remember to build for the functions you use and try bigger optimizations:
 #########################################################################################################
 
 LAST BUILD WITH
-emcc -o zstd.html -O0 --memory-init-file 0 --post-js export_module.js -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_compress', '_ZSTD_compressBound', '_ZSTD_isError']" -s ALLOW_MEMORY_GROWTH=1 lib/libzstd.bc
+emcc -o zstd.html -O2 --memory-init-file 0 --post-js export_module.js -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_compress', '_ZSTD_compressBound', '_ZSTD_isError']" -s ALLOW_MEMORY_GROWTH=1 -s ABORTING_MALLOC=0 lib/libzstd.bc
 
 within ~/Documents/facebook/zstd-1.3.1-emscripten
 

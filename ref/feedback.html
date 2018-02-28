@@ -62,6 +62,20 @@
 		xhr.send();
     }
 
+    function create_message(name, email, product, type, description){
+        var message = encodeURIComponent("## "+ type +" ##");
+        if(name != "")
+            message += "%0A> Name: " + name + "";
+        if(email != "")
+            message += "%0A> Email: " + email + "%0A";
+        message += "%0A> Product: " + product + "%0A> Description:%0A" + description;
+        return message;
+    }
+
+    function is_valid(product, type, description){
+        return ((product && type) && description);
+    }
+
     function send_feedback(){
         var form = document.getElementById("form");
         var name = form.field1.value;
@@ -69,13 +83,14 @@
         var product = form.field4.value;
         var type = form.field2.value;
         var description = encodeURIComponent(form.field5.value);
-        var message = encodeURIComponent("## "+ type +" ##");
-        if(name != "")
-            message += "%0A> Name: " + name + "";
-        if(email != "")
-            message += "%0A> Email: " + email + "%0A";
-        message += "%0A> Product: " + product + "%0A> Description:%0A" + description;
-        send_request(message);
+
+        if(is_valid(product, type, description)){  
+            var message = create_message(name, email, product, type, description);
+            send_request(message);
+        }
+        else{
+            window.alert("Some of the required fields are missing.");
+        }
     }
 </script>
 
