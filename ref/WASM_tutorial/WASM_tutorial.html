@@ -21,17 +21,36 @@
     }
 
     #titleImg{
-        display: inline-block;
         float: left;
     }
 
     #mainTitleWrapper{
         width: 300;
         margin-right: 350px;
-        display: inline-block;
         float: right;
         line-height: 70px;
         font-size: 40px;
+    }
+
+    #indexPart{
+        height: 445px;
+    }
+
+    #table_of_contents{
+        float: left;
+    }
+
+    #rightColumn{
+        float: right;
+        position: relative;
+        height: 445px;
+        width: 400px;
+    }
+
+    #author{
+        position: absolute;
+        bottom: 10;
+        right: 0;
     }
 
     .important{
@@ -61,7 +80,8 @@
     }
 
     h2{
-        margin: 40px auto 10px auto;
+        /*margin: 40px auto 10px auto;*/
+        margin: 30px 0px;
     }
 
     .center{
@@ -85,21 +105,30 @@
             </div>
         </div>
         <hr>
-        <div>
-            <h2 style="margin-top: 17px;">Table of contents</h2>
-            <ol style="font-size: 0.9em; width: 30%; margin-left:0px;">
-                <a href="#introduction"><li>Introduction</li></a>
-                <a href="#key_concepts"><li>Key concepts</li></a>
-                <a href="#WASM_workflow"><li>WASM workflow</li></a>
-                <a href="#browser_environment"><li>Browser environment</li></a>
-                <a href="#install_emscripten"><li>Install Emscripten</li></a>
-                <a href="#your_first_WASM_WebApp"><li>Your first WASM WebApp</li></a>
-                <a href="#functions"><li>Functions</li></a>
-                <a href="#call_javascript_from_C/C++"><li>Call JavaScript from C/C++</li></a>
-                <a href="#memory"><li>Memory</li></a>
-                <a href="#conclusion"><li>Conclusion</li></a>
-                <a href="#comments"><li>Comments</li></a>
-            </ol>
+        <div id="indexPart">
+            <div id="table_of_contents">
+                <h2 style="margin-top: 17px; margin-bottom: 10px;">Table of contents</h2>
+                <ol style="font-size: 0.9em; margin-left:0px;">
+                    <a href="#introduction"><li>Introduction</li></a>
+                    <a href="#key_concepts"><li>Key concepts</li></a>
+                    <a href="#WASM_workflow"><li>WASM workflow</li></a>
+                    <a href="#browser_environment"><li>Browser environment</li></a>
+                    <a href="#install_emscripten"><li>Install Emscripten</li></a>
+                    <a href="#your_first_WASM_WebApp"><li>Your first WASM WebApp</li></a>
+                    <a href="#functions"><li>Functions</li></a>
+                    <a href="#call_javascript_from_C/C++"><li>Call JavaScript from C/C++</li></a>
+                    <a href="#libraries"><li>Libraries</li></a>
+                    <a href="#memory"><li>Memory</li></a>
+                    <a href="#conclusion"><li>Conclusion</li></a>
+                    <a href="#references"><li>References</li></a>
+                    <a href="#comments"><li>Comments</li></a>
+                </ol>
+            </div>
+            <div id="rightColumn">
+                <div id="author">
+                    by <a href="http://marcoselvatici.github.io">Marco Selvatici</a>
+                </div>
+            </div>
         </div>
         <hr>
         <!-- ==================================== INTRODUCTION ==================================== -->
@@ -338,6 +367,17 @@ em++ hello.cpp -o hello.html
 </code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
+        </div><br>
+        <div class="important">
+            IMPORTANT:<br>
+            You can also compile your code using optimizations using <code class="inline">-Ox</code>, try them out:
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-bash"># -O2 is already a pretty high level of optimization
+emcc hello.c -o hello.js -O2 -s WASM=1
+</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+        
         </div>
 
         <!-- ==================================== FUNCTIONS ==================================== -->
@@ -574,6 +614,49 @@ int main(){
         <br>
         There is also a way to create a C API in JavaScript, but that requires a bit more work. If you are interested, you can find a good explanation of how to do it <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#implement-a-c-api-in-javascript">here</a>.
 
+        <!-- ==================================== LIBRARIES ==================================== -->
+        <h2 id="libraries">Libraries</h2>
+        You may have noticed that we already compiled some libraries with Emscripten. However, these libraries were "standard" libraries. Indeed, Emscripten already provides these libraries ready to be compiled.<br>
+        But what if you wanted to compile a non-standard library with Emscripten?<br>
+        <br>
+        The process is very similar to the one we have already seen to compile the C files.<br>
+        In case your library is small and has just some source files (<code class="inline">.c</code> or <code class="inline">.cpp</code>) and some headers file (<code class="inline">.h</code>) you just have to compile your "main" source file and your C code binding them together.<br>
+        If you want, you can download the source and the header of this very simple expression <a target="_blank" href="https://github.com/codeplea/tinyexpr">parsing library</a> (found on github):
+        <ul>
+            <li>header <a href="ref/tinyexpr.h" type="file" download>tinyexpr.h</a> (2 KB),</li>
+            <li>source <a href="ref/tinyexpr.c" type="file" download>tinyexpr.c</a> (20 KB).</li>
+        </ul>
+        Put them in the same folder and create another C file here containing:
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-c">#include &lt;stdio.h>
+#include "tinyexpr.h"
+
+int main(){
+    // te_interp just evaluates the expression in the string and returns a float
+    printf("The result of (2+23)/5-1 is: %f\n", te_interp("(2+23)/5-1", 0));
+    return 0;
+}</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+
+        And then compile binding them together like this:
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-bash">emcc hello.c tinyexpr.c -o hello.html -s WASM=1</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+
+        Now just open the hello.html file and you should see the result.<br>
+        Note that you don't need to export any function here because you call <code class="inline">te_interp</code> from the main of your C code and so it is automatically exported.<br>
+        If you want, you can wrap <code class="inline">te_interp</code> using <code class="inline">cwrap</code> and then you can call it from directly from JS as we have seen before (note that in this case you have to specify it as an exported function, if you don't use it also in the main).<br>
+        But pay attention: the first input parameter of that function is a string (<code class="inline">char*</code>) so you may should read the section about memory before trying to actually use it from JS.<br>
+        <br>
+        If the project is more complex and contains shared libraries (<code class="inline">.so</code>), static libraries (<code class="inline">.a</code>) or object files (<code class="inline">.o</code> or <code class="inline">.bc</code>) <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/compiling/Building-Projects.html">here</a> you can find a very good explanation on what to do. Remember that you may however need the flag <code class="inline">EXPORTED_FUNCTIONS</code> in order to let the compiler know which functions you want to use.<br>
+        For example, that is the command I used to compile the <a target="_blank" href="https://github.com/facebook/zstd">zstd compression library</a> for the <a target="_blank" href="https://marcoselvatici.github.io/ref/shrink/compress/index.html">WASM file compressor</a> I wrote:
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-bash">emcc lib/libzstd.bc -o zstd.js -O2 -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_compress', '_ZSTD_compressBound', '_ZSTD_isError']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['cwrap']" -s ALLOW_MEMORY_GROWTH=1 -s ABORTING_MALLOC=0</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+
         <!-- ==================================== MEMORY ==================================== -->
         <h2 id="memory">Memory</h2>
         So far, we have learnt quite a lot about how to use WASM and its features but we never talked about memory.<br>
@@ -809,14 +892,45 @@ function toUTF8Array(str) {
         <br>
         <div class="important">
             IMPORTANT:<br>
-            In these expamles, we always pass pointers to our data structured allocated in the heap.<br>
+            In these expamles, we always pass pointers to our data structur allocated in the heap.<br>
             There are ways to pass data sctructures like strings or arrays also using the stack, but there is the disavantage that you cannot grow the stack as like as you want (there is a default limit around 5MB).<br>
             On the other hand, with the heap, you can compile with the flag <code class="inline">-s ALLOW_MEMORY_GROWTH</code> and have much more space, dinamically.
         </div>
         <br>
         <span class="italic">Memory limitations</span><br>
-        By default you have a limited amount of memory you can allocate in WASM and this should be around 16MB. You can avoid this by adding the  <code class="inline">-s ALLOW_MEMORY_GROWTH=1</code> at compile time. This will allow you to grow the memory until your browser allows it (this can vary for many reasons, but something around 500MB or 1GB).<br>
+        By default you have a limited amount of memory you can allocate in WASM and this should be around 16MB. You can avoid this by adding the  <code class="inline">-s ALLOW_MEMORY_GROWTH=1</code> at compile time. This will allow you to grow the memory until your browser allows it (this can vary for many reasons, but usually something around 500MB or 1GB).<br>
         Another flag that can be very useful, is  <code class="inline">-s ABORTING_MALLOC=0</code>. This will return  <code class="inline">NULL</code> (0) from your  <code class="inline">Module._malloc</code> call instead of aborting the execution of your code.
+        
+        <!-- ==================================== CONCLUSIONS ==================================== -->
+        <h2 id="Conclusions">Conclusions</h2>
+        To sum, in this tutorial we leared:
+        <ul>
+            <li>What is Webassembly is and how it works.</li>
+            <li>How to compile C/C++ programs to Webassembly using Emscripten.</li>
+            <li>How to use C/C++ functions and how to call JavaScript from the compiled code.</li>
+            <li>How does memory works in Webassembly and how to pass data structures to C/C++ functions.</li>
+        </ul>
+        Of course, there is more that you can do with this technology, but now you are absolutely able to create amazing Webassembly WebApps.<br>
+        I really hope you enjoyed this tutorial and you have started to see the incredible potential of this technology.<br>
+        If you want to support me, just leave a like and suggest this tutorial to your coder friends!<br>
+        <br>
+        Thanks for reading!
+
+        <!-- ==================================== REFERENCES ==================================== -->
+        <h2 id="references">References</h2>
+        If you want to learn more, here you are the best references I found while doing my Webassembly project:
+        <ul>
+            <li>Emscripten website (absolutely amazing for details about Emscripten):<br><a target="_blank" href="https://kripken.github.io/emscripten-site">https://kripken.github.io/emscripten-site</a></li>
+            <li>MDN Webassembly section (good and detailed explanation of WASM concepts):<br><a target="_blank" href="https://developer.mozilla.org/en-US/docs/WebAssembly">https://developer.mozilla.org/en-US/docs/WebAssembly</a></li>
+        </ul>
+        <br>
+        <hr>
+        <div style="height: 20px;">
+            <div style="float: right;">
+                written by <a href="http://marcoselvatici.github.io">Marco Selvatici</a>
+            </div>
+        </div>
+        
     </div>
 
     <script src="prism.js"></script>
