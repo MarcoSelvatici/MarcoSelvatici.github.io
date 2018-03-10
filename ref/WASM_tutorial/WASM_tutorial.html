@@ -1,4 +1,14 @@
-<head>
+<head lang="en">
+    <title>WASM Tutorial</title>
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="ref/wasm.png">
+	<meta name="author" content="Marco Selvatici">
+	<meta name="description" content="Webassembly tutorial: from begginers to advanced concepts through examples.">
+
+    <meta property="og:image" content="ref/wasm.png">
+    <meta property="og:title" content="Webassembly tutorial">
+	<meta property="og:description" content="Webassembly tutorial: from begginers to advanced concepts through examples.">
+
     <link href="prism.css" rel="stylesheet" />
     <style>
     body{
@@ -300,6 +310,7 @@ sudo apt install emscripten.</code></pre>
                 </ul>
             </li>
         </ol>
+        <br>
         If you haven't tried to open the file hello.html file yet, do it with the browser of your choice. You should see something like this:<br>
         <img class="center" src="ref/helloworld.png" width="100%"/>
         If you open it with certain browsers (like Chrome) you may get an error message instead of the words "Hello World!".<br>
@@ -410,9 +421,9 @@ int main(){
         The easiest way to do this is to use two functions provided by the Emscripten "glue code":
         <ul>
             <li><code class="inline">ccall</code>: calls a compiled C function with the specified variables and return the result.</li>
-            <li><code class="inline">cwrap</code>: "wraps" a compiled C function and returns a JavaScript function you can call normally. That is by far more useful and we will focus on this method.</li>
+            <li><code class="inline">cwrap</code>: "wraps" a compiled C function and returns a JavaScript function you can call normally. That is, by far, more useful and we will focus on this method.</li>
         </ul>
-        You can call use as follows:
+        You can call it as follows:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-javascript">var js_wrapped_fib = Module.cwrap("fib", "number", ["number"]);</code></pre>
@@ -430,6 +441,7 @@ int main(){
             <li><span class="italic">return type</span>: the return type of the function. This can be <code class="inline">"number"</code>, <code class="inline">"string"</code> or <code class="inline">"array"</code>, which correspond to the appropriate JavaScript types (use number for any C pointer, and <code class="inline">"array"</code> for JavaScript arrays and typed arrays; note that arrays are 8-bit), or for a void function it can be <code class="inline">null</code> (note: the JavaScript null value, not a string containing the word "null").</li>
             <li><span class="italic">list of parameter's types (optional)</span>: within square brackets. An array of the types of arguments for the function (if there are no arguments, this can be omitted). Types are as in return type, except that array is not supported as there is no way for us to know the length of the array.</li>
         </ul>
+        <br>
         Another important thing to notice is that Emscripten, during compilation, ignore all the functions that seems unused in order to get a smaller .wasm file. Thus, we need to let it know that we want to keep that functions "alive".<br>
         Again, there are two ways to do this:
         <ul>
@@ -565,7 +577,7 @@ function set_background_color(color_idx){
         You should see a quite horrible change in the background color.<br>
         <br>
         You may noticed that to pass parameters this way is not very easy.<br>
-        Luckily, the function <code class="inline">EM_ASM</code> (and its variants) allows you to write js code, call js functions, pass parameters and even get return values. Have a look at the following example (you don't need to change anything in the your .html code):<br>
+        Luckily, the function <code class="inline">EM_ASM</code> (and its variants) allows you to write JS code, call JS functions, pass parameters and even get return values. Have a look at the following example (you don't need to change anything in the your .html code):<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-c">#include &lt;time.h>   // for time
@@ -661,7 +673,7 @@ int main(){
         <h2 id="memory">Memory</h2>
         So far, we have learnt quite a lot about how to use WASM and its features but we never talked about memory.<br>
         As stated in the beginning, WASM works in a protected environment (sandbox) and cannot directly access the memory out of it. The "trick" is that the memory needed for the execution of our C/C++ program, is represented by a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">JavaScript typed array</a>.<br>
-        When the JavaScript "glue code" is loaded, this array representing the WASM memory is automatically instantiated. Clearly, you can access this object both from js and from your C/C++ code (as if it was you "normal" memory), and this allows a sort of communication between the two sides.<br>
+        When the JavaScript "glue code" is loaded, the array representing the WASM memory is automatically instantiated. Clearly, you can access this object both from JS and from your C/C++ code (as if it was you "normal" memory), and this allows a sort of communication between the two sides.<br>
         <br>
         In order to understand what we are talking about, just run one of the previous examples, open the console and type:
 
@@ -684,7 +696,7 @@ int main(){
             <li><code class="inline">setValue(ptr, value, type)</code></li>
             <li><code class="inline">getValue(ptr, type)</code></li>
         </ul>
-        The first argument is the <span class="italic">pointer</span> to the memory location we want to write or read. Note that, since our memory is represented by a js array, a pointer is just a normal number that represents the offset from the beginning of that array.<br>
+        The first argument is the <span class="italic">pointer</span> to the memory location we want to write or read. Note that, since our memory is represented by a JS array, a pointer is just a normal number that represents the offset from the beginning of that array.<br>
         For example, if we call getValue with ptr = 5, we are going to read the fifth position of our memory.<br>
         The <span class="italic">type</span> argument is just the type of the value we want to get or set. The list of alternatives is different from the one we had for cwrap: we are working on a lower level of abstraction. Here we have to use one among <code class="inline">"i8"</code>, <code class="inline">"i16"</code>, <code class="inline">"i32"</code>, <code class="inline">"i64"</code>, <code class="inline">"float"</code>, <code class="inline">"double"</code>, or a pointer type like <code class="inline">"i8*"</code> or just <code class="inline">"*"</code>.<br>
         The <span class="italic">value</span> argument is just the value we want to set (note that this has to be of the type you have selected).<br>
@@ -752,10 +764,10 @@ function pressBtn(){
             Even if JavaScript has a garbage collector, C and C++ have not! Therefore, each time we alloc something to the heap with <code class="inline">malloc</code>, we have to remember to dealloc it with <code class="inline">free</code>.
         </div>
         <br>
-        Cool! Now you know how to allocate memory at runtime from js and fill it with data. But what if we wanted to pass an array of values or a string of characters?<br>
+        Cool! Now you know how to allocate memory at runtime from JS and fill it with data. But what if we wanted to pass an array of values or a string of characters?<br>
         <br>
         Of course you could iterate through all your values and set them one by one with setValue, but that would be very very slow.<br>
-        A better option is to write to the memory directly with pure js functions.<br>
+        A better option is to write to the memory directly with pure JS functions.<br>
         Say, for example, we have an array of 32-bit signed integers as a JavaScript Int32Array and we want add one to all the elements in that array using a C function. Here is what we should do (pay attention to details, it can be tricky).<br>
         Edit your hello.c to:
 
@@ -787,7 +799,7 @@ function pressBtn(){
     
 	Module.HEAP32.set(input_array, input_ptr / bytes_per_element); // write WASM memory calling the set method of the Int32Array, (see below for details)
 	addOne(input_ptr, output_ptr, len);   	                       // call the WASM function
-	var output_array = new Int32Array(Module.HEAP32.buffer, output_ptr, len); // extract data to another js array
+	var output_array = new Int32Array(Module.HEAP32.buffer, output_ptr, len); // extract data to another JS array
 	console.log("The starting array was:", input_array);
 	console.log("The result read is:	", output_array);
     
@@ -817,7 +829,7 @@ Uncaught RangeError: Source is too large</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
         <br>
         Let's have a look at another example.<br>
-        This time, we want to pass a js string and a character to a C function that counts the number of occurrences and returns it as an integer.<br>
+        This time, we want to pass a JS string and a character to a C function that counts the number of occurrences and returns it as an integer.<br>
         Change your hello.c to:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
