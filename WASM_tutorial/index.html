@@ -107,6 +107,18 @@
     </style>
 </head>
 <body>
+    <!-- Loaf FB comments -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <!-- Tutorial -->
     <div id="bodyWrapper">
         <div id="top">
             <img id="titleImg" src="ref/wasm.png" width="30%"/>
@@ -940,6 +952,11 @@ function toUTF8Array(str) {
         </ul>
         There exist also ways to use GUI C libraries like OpenGL so you can create games with 3D graphics that can run quickly on the browser, like <a target="_blank" href="http://webassembly.org/demo/">this</a>. Enjoy! 
         <br>
+        <!-- ==================================== COMMENTS ==================================== -->
+        <h2 id="comments">Comments</h2>
+        <!-- FB comments -->
+        <div class="fb-comments" data-href="https://marcoselvatici.github.io/WASM_tutorial/index.html" data-width="1000px" data-numposts="5"></div>
+        
         <hr>
         <div style="height: 20px;">
             <div style="float: right;">
