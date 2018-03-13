@@ -3,11 +3,11 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="ref/wasm.png">
 	<meta name="author" content="Marco Selvatici">
-	<meta name="description" content="Webassembly tutorial: from begginers to advanced concepts through examples.">
+	<meta name="description" content="Webassembly tutorial: from begginer to advanced concepts through examples.">
 
     <meta property="og:image" content="ref/wasm.png">
     <meta property="og:title" content="Webassembly tutorial">
-	<meta property="og:description" content="Webassembly tutorial: from begginers to advanced concepts through examples.">
+	<meta property="og:description" content="Webassembly tutorial: from begginer to advanced concepts through examples.">
 
     <link href="prism.css" rel="stylesheet" />
     <style>
@@ -86,6 +86,10 @@
         font-style: italic;
     }
 
+    .bold{
+        font-weight: bold;
+    }
+
     hr{
         border-top: 3px solid black;
         border-bottom: 0px;         
@@ -129,7 +133,7 @@
         if(document.getElementsByClassName("fb-comments")[0].childNodes[0].style.height == "100px"){
             document.getElementById("ads_blocker_msg").style.display = "block";
         }
-    }, 3000);
+    }, 5000);
     </script>
 
     <!-- Tutorial -->
@@ -170,12 +174,12 @@
         <!-- ==================================== INTRODUCTION ==================================== -->
         <h2 id="introduction">Introduction</h2>
         Webassembly (WASM) is an innovative low-level language that can run on all modern browsers. As the name suggests, this is an assembly-like language that have a very compact binary format (thus suitable to be loaded on web pages) and can run with near-native performance.<br>
-        Thanks to this technology, there is now the possibility to compile high-level languages and run them on the browser achieving high performance. Currently the only languages that can be compiled to WASM binaries are C and C++, but in future the list will probably grow a lot.<br>
+        Thanks to this technology, there is now the possibility to compile high-level languages and run them on the browser. Currently the only languages that can be compiled to WASM binaries are C and C++, but in future the list will probably grow a lot.<br>
         <br>
-        It is important to point out that WASM is not going to cut off JavaScript, you will still need it for several reasons that will be explained in this tutorial.<br>
+        It is important to point out that WASM is not going to cut off JavaScript, you will still need it for several reasons that will be explained later on.<br>
         <br>
-        In this tutorial, you will learn the basics concepts behind this technology and you will be then ready to create your incredible Webassembly-based webapp!<br>
-        Furthermore, I am going to guide you through this concepts by using examples and also presenting the online file compressor I created using a C library on the browser (you can find it here!).<br>
+        In this tutorial, you will learn the basics concepts behind this technology and then you will be ready to create a complete Webassembly-based WebApp!<br>
+        Furthermore, I am going to guide you through all the concepts by using examples inspired to what I learned creating an online <a target="_blank" href="https://marcoselvatici.github.io/ref/shrink/compress/index.html">WASM-based file compressor</a>.<br>
         <br>
         So... Let's get started!
 
@@ -183,8 +187,8 @@
         <h2 id="key_concepts">Key concepts</h2>
         There are a few key concepts that we need to know about WASM:
         <ul>
-            <li><span class="italic">Module</span>: it is the compiled binary source (in other words, the .wasm file).</li>
-            <li><span class="italic">Memory</span>: a JavaScript typed array that represents the memory for your program.</li>
+            <li><span class="italic">Module</span>: it is the compiled binary code (in other words, the .wasm file).</li>
+            <li><span class="italic">Memory</span>: a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">JavaScript typed array</a> that represents the memory for your program.</li>
             <li><span class="italic">Table</span>: an array (separated from the memory) that contains the references to the function that you use.</li>
             <li><span class="italic">Instance</span>: it is the union of a Module, a Memory and a Table plus some other values that needs to be stored.</li>
         </ul>
@@ -194,7 +198,7 @@
         <h2 id="WASM_workflow">WASM workflow</h2>
         If you are familiar with compiled languages, you probably know the steps that your code go through before being executed. Just as a reminder:<br>
         <img class="center" src="ref/compile.gif"/>
-        If you worked with C/C++, you probably used compilers like gcc or similar. In order to get a Webassembly binary file, we will need some other special compilers. There are more than one available, but currently the best one is Emscripten.<br>
+        If you worked with C/C++, you probably used compilers like gcc or similar. In order to get a Webassembly binary file, we will need some other special compilers. There are more than one available, but currently the best one is Emscripten (and it is open source!).<br>
         Differently from the "normal" assembly languages, Webassembly is not CPU specific and therefore can run on multiple platforms, from embedded systems like your phone to the CPU of your computer.<br>
         <br>
         Once we compile our C/C++ code with Emscripten, we obtain a proper WASM file that can run on the browser, pretty straightforward right?<br>
@@ -209,13 +213,14 @@
 
         <!-- ==================================== BROWSER ENVIRONMENT ==================================== -->
         <h2 id="browser_environment">Browser environment</h2>
-        It is really important to understand that WASM binaries are run in the same sandbox as JavaScript (in a nutshell, a sandbox is an isolated environment where your code is executed for security reasons).<br>
+        It is really important to understand that WASM binaries are run in the same <a target="_blank" href="https://www.howtogeek.com/169139/sandboxes-explained-how-theyre-already-protecting-you-and-how-to-sandbox-any-program/">sandbox</a> as JavaScript (in a nutshell, a sandbox is an isolated environment where your code is executed for security reasons).<br>
         <img class="center" src="ref/sandbox.gif" />
         Therefore, you will be able to access only the data that are also accessible with JavaScript. This means, for example, that you will not be able to access a file like this:<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
-<pre><code class="language-css">FILE *fp;
-fp=fopen("/path/to/file/test.txt", "r");</code></pre>
+<pre><code class="language-c">// valid C code to open a file
+FILE *fp;
+fp = fopen("/path/to/file/test.txt", "r");</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
         Instead, you will have to read them via JavaScript and then use them with WASM, but we will return on this later.<br>
@@ -225,9 +230,9 @@ fp=fopen("/path/to/file/test.txt", "r");</code></pre>
         <h2 id="install_emscripten">Install Emscripten</h2>
         
         First of all, let's install the WASM compiler, Emscripten.
-        We will focus on how to install it for Linux, but you can find documentation for other OS <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">here</a>.<br>
+        We will focus on how to install it for Linux, but you can find documentation for other OSes <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html">here</a>.<br>
         <br>
-        First of all you need to have installed a working compiler toolchain (the set of tools that allows you to compile the code and get an executable) since we will build the software from the source code. Open a terminal and type:<br>
+        First of all you need to have a working compiler toolchain installed (the set of tools that allows you to compile the code and get an executable) since we will build the software from the source code. Open a terminal and type:<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash"># Update the package lists
@@ -257,7 +262,8 @@ sudo apt-get install nodejs</code></pre>
         Great! Now we have all the prerequisites to install the Emscripten Software Development Kit (emsdk). Just follow these steps:
         <ol>
             <li>Download and unzip the Software Development Kit (SDK) package to the directory of your choice. Here is the the <a target="_blank" href="https://s3.amazonaws.com/mozilla-games/emscripten/releases/emsdk-portable.tar.gz">link</a>.</li>
-            <li>Open a terminal inside the folder <code class="inline">emsdk-portable</code> you already unzipped and run the emsdk commands to obtain the latest tools from Github and set them as active:<br>
+            <li>Open a terminal inside the folder <code class="inline">emsdk-portable</code> you already unzipped.</li>
+            <li>Now run the emsdk commands to obtain the latest tools from Github and set them as active:<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash"># Fetch the latest registry of available tools.
@@ -289,19 +295,19 @@ source ./emsdk_env.sh</code></pre>
 <pre><code class="language-c">#include &lt;stdio.h>
 
 int main(){
-    printf("hello world!\n");
+    printf("Hello world!\n");
     return 0;
 }</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-            <li>With your previous terminal, move in to the new directory and compile the C code to WASM using emscripten.<br>
+            <li>With your previous terminal, move in to the new directory and compile the C code to WASM using Emscripten.<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash">emcc hello.c -o hello.html -s WASM=1</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
                     
                 <div class="important">
-                    IMPORTANT:<br>
+                    <span class="bold">Important:</span><br>
                     when you open a new terminal you won't be able to run the emcc command. You will indeed obtain this error:<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
@@ -309,7 +315,7 @@ int main(){
 sudo apt install emscripten.</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-                    DON'T DO IT, the version that will be installed is outdated or broken and will give you tons of issues. Instead, just move back to the <code>emsdk-portable</code> directory and type:<br>
+                    DON'T DO IT, the version that will be installed is outdated or broken and will give you tons of issues. Instead, just move back to the <code class="inline">emsdk-portable</code> directory and type:<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash">source ./emsdk_env.sh</code></pre>
@@ -320,19 +326,19 @@ sudo apt install emscripten.</code></pre>
             </div>
 
             Explanation:<br>
-            <code class="inline">emcc</code> is program you call to compile your C code (similar to call gcc or g++ when you compile your C/C++ files).
+            <code class="inline">emcc</code> is the program you call to compile your C code (similar to call gcc or g++ when you compile your C/C++ files "normally").
             <ul>
-                <li><code class="inline">-o hello.html</code> tells the compiler to create hello.html so you can visualize the results of the WASM code.</li>
-                <li><code class="inline">-s WASM=1</code> tells the compiler to create a separated .wasm file. You can omit this and the everything will work the same, just your hello.js (see next point) will contain also the wasm binary.</li>
+                <li><code class="inline">-o hello.html</code> tells the compiler to create the hello.html file so you can visualize the results of the WASM code.</li>
+                <li><code class="inline">-s WASM=1</code> tells the compiler to create a separated .wasm file. You can omit this and the everything will work the same, just your hello.js (see next point) will contain also the WASM binary.</li>
             </ul>
-                Note that since this is the first time you use the stdio.h library, it needs to compile it to WASM binary before it can actually compile your code. This may take some moments.
+                Note that since this is the first time you use the stdio.h library, Emscripten needs to compile it to WASM binary before it can actually compile your code. This may take some moments.
             </li><br>
             <li>
                 Now you should be able to see other three files in the same directory: <code class="inline">hello.html</code>, <code class="inline">hello.js</code> and <code class="inline">hello.wasm</code>.
                 <ul>
                     <li><code class="inline">hello.wasm</code> is the file that contains the Webassembly code (the compiled code).</li>
                     <li><code class="inline">hello.js</code> is the "glue code" needed to allow JavaScript to call and "communicate" with WASM compiled code. Emscripten generates this automatically and it is absolutely needed in order to run WASM modules. If you compile without the <code class="inline">-s WASM=1</code> flag this file will contain also the content of hello.wasm (but makes no difference in reality).</li>
-                    <li><code class="inline">hello.html</code> is just a web page automatically generated that shows the result of your Webassembly code in a user friendly way. You don't actually need this file, but it is a cool way to quickly visualize what are you doing. You can tell Emscripten to not generate it by just doing <code class="inline">-o hello.js</code> instead of <code class="inline">-o hello.html</code> (everything else stays as before).</li>
+                    <li><code class="inline">hello.html</code> is just a web page automatically generated that shows the result of your Webassembly code in a user friendly way. You don't actually need this file, but it is a cool way to quickly visualize what are you doing. You can tell Emscripten not to generate it by just using <code class="inline">-o hello.js</code> instead of <code class="inline">-o hello.html</code> (everything else remains as before).</li>
                 </ul>
             </li>
         </ol>
@@ -340,7 +346,7 @@ sudo apt install emscripten.</code></pre>
         If you haven't tried to open the file hello.html file yet, do it with the browser of your choice. You should see something like this:<br>
         <img class="center" src="ref/helloworld.png" width="100%"/>
         If you open it with certain browsers (like Chrome) you may get an error message instead of the words "Hello World!".<br>
-        That is because the operation of loading of the WASM module is asynchronous, and some browsers (for security reasons) do not allow you to do this if the url is of the kind <code class="inline">file://path/to/file/file.html</code>.<br>
+        That is because the operation of loading of the WASM module is asynchronous, and some browsers (for security reasons) do not allow you to do this if the URL is of the kind <code class="inline">file://path/to/file/file.html</code>.<br>
         In order to solve that issue you can both change the browser you use for testing (Firefox will work) or run a local server this way:
         <ol>
             <li>open a terminal in the directory containing the file .html you want to run, and control your python version by typing:<br>
@@ -386,7 +392,7 @@ python -m http.server 8080
         Just don't worry about them, we are not using that method to create our WASM instance.<br>
         <br>
         <div class="important">
-            IMPORTANT:<br>
+            <span class="bold">Important:</span><br>
             everything we did in this section is perfectly transferable on a C++ code. Try changing hello.c to hello.cpp:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
@@ -409,7 +415,7 @@ em++ hello.cpp -o hello.html
 
         </div><br>
         <div class="important">
-            IMPORTANT:<br>
+            <span class="bold">Important:</span><br>
             You can also compile your code using optimizations using <code class="inline">-Ox</code>, try them out:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
@@ -427,11 +433,12 @@ emcc hello.c -o hello.js -O2 -s WASM=1
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-c">#include &lt;stdio.h>
+
 int fib(int n){
     if(n == 0 || n == 1)
         return 1;
     else
-        return fib(n-1)+fib(n-2);
+        return fib(n - 1) + fib(n - 2);
 }
 
 int main(){
@@ -447,7 +454,7 @@ int main(){
         Nothing special so far. But what if we want to call this function not just at the beginning (when main is executed) but when, for example, you press a button on the webpage?<br>
         This question basically translates to: how do I call C/C++ functions from the JavaScript of my web page?<br>
         <br>
-        The easiest way to do this is to use two functions provided by the Emscripten "glue code":
+        The easiest ways to do this are to use two functions provided by the Emscripten "glue code":
         <ul>
             <li><code class="inline">ccall</code>: calls a compiled C function with the specified variables and return the result.</li>
             <li><code class="inline">cwrap</code>: "wraps" a compiled C function and returns a JavaScript function you can call normally. That is, by far, more useful and we will focus on this method.</li>
@@ -467,11 +474,11 @@ int main(){
         Let's focus a bit on the parameters we need to pass to crwap:
         <ul>
             <li><span class="italic">name of the function</span>: name of the function in the C source code.</li>
-            <li><span class="italic">return type</span>: the return type of the function. This can be <code class="inline">"number"</code>, <code class="inline">"string"</code> or <code class="inline">"array"</code>, which correspond to the appropriate JavaScript types (use number for any C pointer, and <code class="inline">"array"</code> for JavaScript arrays and typed arrays; note that arrays are 8-bit), or for a void function it can be <code class="inline">null</code> (note: the JavaScript null value, not a string containing the word "null").</li>
+            <li><span class="italic">return type</span>: the return type of the function. This can be <code class="inline">"number"</code>, <code class="inline">"string"</code> or <code class="inline">"array"</code>, which correspond to the appropriate JavaScript types (use number for any C pointer), or for a void function it can be <code class="inline">null</code> (note: the JavaScript null value, not a string containing the word "null").</li>
             <li><span class="italic">list of parameter's types (optional)</span>: within square brackets. An array of the types of arguments for the function (if there are no arguments, this can be omitted). Types are as in return type, except that array is not supported as there is no way for us to know the length of the array.</li>
         </ul>
         <br>
-        Another important thing to notice is that Emscripten, during compilation, ignore all the functions that seems unused in order to get a smaller .wasm file. Thus, we need to let it know that we want to keep that functions "alive".<br>
+        Another important thing to notice is that Emscripten, during compilation, ignore all the functions that seem unused in order to get a smaller .wasm file. Thus, we need to let it know that we want to keep that functions "alive".<br>
         Again, there are two ways to do this:
         <ul>
             <li>You can add <code class="inline">EMSCRIPTEN_KEEPALIVE</code> to your C functions in the code as shown below:
@@ -484,7 +491,7 @@ int EMSCRIPTEN_KEEPALIVE fib(int n){
     if(n == 0 || n == 1)
         return 1;
     else
-        return fib(n-1)+fib(n-2);
+        return fib(n - 1) + fib(n - 2);
 }
 
 int main(){
@@ -517,11 +524,11 @@ function pressBtn(){
 &lt;p>Open the console to see the result!&lt;/p></code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-                Each time you press the "Click me!" button you should know see a "The result is 8" appearing on your console.
+                Each time you press the "Click me!" button you should see "The result of fib(5) is: 8" appearing on your console.
             </li>
             <br>
             <li>
-                Alternatively, you can just tell the compiler that you need that functions by using this command (this time you don't need to add to your C code nor the emscripten header, nor <code class="inline" >EMSCRITPEN_KEEPALIVE</code>):
+                Alternatively, you can just tell the compiler that you need that functions by using this command (this way you don't need to add anything to your C code):
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash">emcc hello.c -o hello.js -s WASM=1 -s EXPORTED_FUNCTIONS='["_fib"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap"]'</code></pre>
@@ -535,7 +542,7 @@ function pressBtn(){
 <pre><code class="language-bash">emcc hello.c -o hello.js -s WASM=1 -s EXPORTED_FUNCTIONS='["_fib", "_main"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap"]'</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-                Now your main will be again automatically executed at the beginning and you can also call it from js whenever you want if you wrap it by adding (note that there are no input parameters):
+                Now your main will be again automatically executed at the beginning. You can also call it from JS whenever you want if you wrap it by adding (note that there are no input parameters):
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-javascript">var js_wrapped_main = Module.cwrap("main", "number");</code></pre>
@@ -548,7 +555,7 @@ function pressBtn(){
         This will be covered in the section regarding the memory.
         <br><br>
         <div class="important">
-            IMPORTANT:<br>
+            <span class="bold">Important:</span><br>
             Exported functions need to be C functions (to avoid <a target="_blank" href="https://www.ibm.com/support/knowledgecenter/en/ssw_ibm_i_72/rzarg/name_mangling.htm">C++ name mangling</a>). In order to solve that issue you can write in your C++ code:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
@@ -566,7 +573,7 @@ int my_func(/* ... */){
         <!-- ==================================== CALL JAVASCRIPT FROM C/C++ ==================================== -->
         <h2 id="call_javascript_from_C/C++">Call JavaScript from C/C++</h2>
         
-        You can even call JavaScript functions from C code!<br>
+        You can even call JavaScript functions from C/C++ code!<br>
         The easiest way to do this is to use the <code class="inline">emscripten_run_script</code> function. Edit your hello.c to:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
@@ -580,7 +587,7 @@ int main(){
 }</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-        Compile and run it and you should see an alert on the browser as soon as WASM is ready.<br>
+        Compile and run it and you should see an alert on the browser as soon as the WASM instance is ready.<br>
         <br>
         You can also call your custom functions and even pass parameters! Edit your call in hello.c to:
 
@@ -606,7 +613,7 @@ function set_background_color(color_idx){
         You should see a quite horrible change in the background color.<br>
         <br>
         You may noticed that to pass parameters this way is not very easy.<br>
-        Luckily, the function <code class="inline">EM_ASM</code> (and its variants) allows you to write JS code, call JS functions, pass parameters and even get return values. Have a look at the following example (you don't need to change anything in the your .html code):<br>
+        Luckily, the function <code class="inline">EM_ASM</code> (and its variants) allows you to write JS code, call JS functions, pass parameters and even get return values, in a much more flexible way. Have a look at the following example (you don't need to change anything in the your .html code):<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-c">#include &lt;time.h>   // for time
@@ -627,14 +634,14 @@ int main(){
         // end of javascript code
     );
         
-    // note the underscore and the curly brackets
+    // note the underscore and the curly brackets (to pass one or more parameters)
     EM_ASM_({
         console.log("(2) I have received a parameter! It is:", $0);
         console.log("Setting the background to that color index!");
         set_background_color($0);
     }, color_idx);
         
-    // note that you have to specify the return type
+    // note that you have to specify the return type after EM_ASM_
     int result = EM_ASM_INT({
         console.log("(3) I received two parameters! They are:", $0, $1);
         console.log("Let's return their sum!");
@@ -657,12 +664,12 @@ int main(){
 
         <!-- ==================================== LIBRARIES ==================================== -->
         <h2 id="libraries">Libraries</h2>
-        You may have noticed that we already compiled some libraries with Emscripten. However, these libraries were "standard" libraries. Indeed, Emscripten already provides these libraries ready to be compiled.<br>
+        You may have noticed that we already compiled some libraries with Emscripten. However, these were all "standard" libraries. Indeed, Emscripten already provides these libraries ready to be compiled.<br>
         But what if you wanted to compile a non-standard library with Emscripten?<br>
         <br>
         The process is very similar to the one we have already seen to compile the C files.<br>
         In case your library is small and has just some source files (<code class="inline">.c</code> or <code class="inline">.cpp</code>) and some headers file (<code class="inline">.h</code>) you just have to compile your "main" source file and your C code binding them together.<br>
-        If you want, you can download the source and the header of this very simple expression <a target="_blank" href="https://github.com/codeplea/tinyexpr">parsing library</a> (found on github):
+        If you want, you can download the source and the header of this very simple <a target="_blank" href="https://github.com/codeplea/tinyexpr">expression parsing library</a> (found on github):
         <ul>
             <li>header <a href="ref/tinyexpr.h" type="file" download>tinyexpr.h</a> (2 KB),</li>
             <li>source <a href="ref/tinyexpr.c" type="file" download>tinyexpr.c</a> (20 KB).</li>
@@ -680,7 +687,7 @@ int main(){
 }</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-        And then compile binding them together like this:
+        And then compile binding yours and the library code together like this:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash">emcc hello.c tinyexpr.c -o hello.html -s WASM=1</code></pre>
@@ -689,7 +696,7 @@ int main(){
         Now just open the hello.html file and you should see the result.<br>
         Note that you don't need to export any function here because you call <code class="inline">te_interp</code> from the main of your C code and so it is automatically exported.<br>
         If you want, you can wrap <code class="inline">te_interp</code> using <code class="inline">cwrap</code> and then you can call it from directly from JS as we have seen before (note that in this case you have to specify it as an exported function, if you don't use it also in the main).<br>
-        But pay attention: the first input parameter of that function is a string (<code class="inline">char*</code>) so you may should read the section about memory before trying to actually use it from JS.<br>
+        But pay attention: the first input parameter of that function is a string (<code class="inline">char*</code>) so it may would be better to read the section about memory before trying to actually use it from JS.<br>
         <br>
         If the project is more complex and contains shared libraries (<code class="inline">.so</code>), static libraries (<code class="inline">.a</code>) or object files (<code class="inline">.o</code> or <code class="inline">.bc</code>) <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/compiling/Building-Projects.html">here</a> you can find a very good explanation on what to do. Remember that you may however need the flag <code class="inline">EXPORTED_FUNCTIONS</code> in order to let the compiler know which functions you want to use.<br>
         For example, that is the command I used to compile the <a target="_blank" href="https://github.com/facebook/zstd">zstd compression library</a> for the <a target="_blank" href="https://marcoselvatici.github.io/ref/shrink/compress/index.html">WASM file compressor</a> I wrote:
@@ -701,8 +708,8 @@ int main(){
         <!-- ==================================== MEMORY ==================================== -->
         <h2 id="memory">Memory</h2>
         So far, we have learnt quite a lot about how to use WASM and its features but we never talked about memory.<br>
-        As stated in the beginning, WASM works in a protected environment (sandbox) and cannot directly access the memory out of it. The "trick" is that the memory needed for the execution of our C/C++ program, is represented by a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">JavaScript typed array</a>.<br>
-        When the JavaScript "glue code" is loaded, the array representing the WASM memory is automatically instantiated. Clearly, you can access this object both from JS and from your C/C++ code (as if it was you "normal" memory), and this allows a sort of communication between the two sides.<br>
+        As stated at the beginning, WASM works in a protected environment (sandbox) and cannot directly access the memory out of it. The "trick" is that the memory needed for the execution of our C/C++ program, is represented by a <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays">JavaScript typed array</a>.<br>
+        When the JavaScript "glue code" is loaded, the array representing the WASM memory is automatically instantiated. Clearly, you can access this object from both JS and your C/C++ code (as if it was your "normal" memory), and this allows a sort of communication between the two sides.<br>
         <br>
         In order to understand what we are talking about, just run one of the previous examples, open the console and type:
 
@@ -714,20 +721,27 @@ int main(){
         <img class="center" src="ref/HEAP8.png" width="550"/>
         Indeed, that is an array of bytes that represents your WASM memory. That means you can write your memory byte by byte.<br>
         HEAP8 is just a way you can use to view memory as composed by 8-bit signed integers. That, of course, is not the only view, <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/api_reference/preamble.js.html#type-accessors-for-the-memory-model">here</a> there is the complete list of what you can use, in case you need something different.<br>
-        In other words, even if the array (the C memory) containing the data is exactly the same, we can look at it in different ways in order to work with different data types (you will see an example later).<br>
+        In other words, even if the array (the C/C++ memory) containing the data is exactly the same, we can look at it in different ways in order to work with different data types (you will see an example later).<br>
         <br>
-        Why should we bother about this? Well, directly writing the memory is actually the easiest way to pass data structures like arrays and strings (or even the content of a file) to WASM.
-        <br>
+        Why should we bother about this? Well, directly writing the memory is actually the easiest way to pass data structures like arrays and strings (or even the content of a file) to WASM.<br>
         Scared of writing directly on raw memory? You don't have to be, just make sure you understand everything you do.<br>
+        <br>
+        <div class="important">
+            <span class="bold">Important:</span><br>
+            For the next parts you need to be a bit familiar with:
+            <ul>
+                <li><a target="_blank" href="https://www.gribblelab.org/CBootCamp/7_Memory_Stack_vs_Heap.html">Stack and Heap memory</a></li>
+                <li><a target="_blank" href="https://www.codingunit.com/c-tutorial-the-functions-malloc-and-free">malloc and free</a></li>
+            </ul>
+        </div>
         <br>
         The easiest way to set or get a value from WASM memory is to use two runtime methods you can export during compilation (as we did for cwrap):
         <ul>
             <li><code class="inline">setValue(ptr, value, type)</code></li>
             <li><code class="inline">getValue(ptr, type)</code></li>
         </ul>
-        The first argument is the <span class="italic">pointer</span> to the memory location we want to write or read. Note that, since our memory is represented by a JS array, a pointer is just a normal number that represents the offset from the beginning of that array.<br>
-        For example, if we call getValue with ptr = 5, we are going to read the fifth position of our memory.<br>
-        The <span class="italic">type</span> argument is just the type of the value we want to get or set. The list of alternatives is different from the one we had for cwrap: we are working on a lower level of abstraction. Here we have to use one among <code class="inline">"i8"</code>, <code class="inline">"i16"</code>, <code class="inline">"i32"</code>, <code class="inline">"i64"</code>, <code class="inline">"float"</code>, <code class="inline">"double"</code>, or a pointer type like <code class="inline">"i8*"</code> or just <code class="inline">"*"</code>.<br>
+        The first argument is the <span class="italic">pointer</span> to the memory location we want to write or read. Note that, since our memory is represented by a JS array, a pointer is just a normal number that represents the offset from the beginning of that array. For example, if we call getValue with ptr = 5, we are going to read the fifth position of our memory.<br>
+        The <span class="italic">type</span> argument is just the type of the value we want to get or set. The list of alternatives is different from the one we had for cwrap since we are working on a lower level of abstraction. Here we have to use one among <code class="inline">"i8"</code> (8-bit integer), <code class="inline">"i16"</code>, <code class="inline">"i32"</code>, <code class="inline">"i64"</code>, <code class="inline">"float"</code> (floating point number), <code class="inline">"double"</code> (64-bit floating point number), or a pointer type like <code class="inline">"i8*"</code> or just <code class="inline">"*"</code>.<br>
         The <span class="italic">value</span> argument is just the value we want to set (note that this has to be of the type you have selected).<br>
         <br>
         So, let's try to interact with a C function using these two methods.<br>
@@ -746,16 +760,16 @@ void addOne(int* input_ptr, int* output_ptr){
 <pre><code class="language-bash">emcc hello.c -o hello.js -s WASM=1 -s EXPORTED_FUNCTIONS='["_addOne"]' -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap", "getValue", "setValue"]'</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-        Note that there are three runtime methods this time.
+        Note that there are three runtime methods this time.<br>
         Now edit your custom .html code as below and then run it:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-html">&lt;script src="hello.js">&lt;/script>
 &lt;script>
-var addOne = Module.cwrap("addOne", null, ["number", "number"]);
+var addOne = Module.cwrap("addOne", null, ["number", "number"]); // void function
 
 function pressBtn(){
-	// alloc 4 bytes of memory for the input and 4 for the output (integers)
+	// alloc 4 bytes of memory for the input and 4 for the output (32-bit integers)
 	var input_ptr = Module._malloc(4);
 	var output_ptr = Module._malloc(4);
     
@@ -765,7 +779,7 @@ function pressBtn(){
 	var result = Module.getValue(output_ptr, "i32"); // extract the result from WASM memory
 	console.log("The result read is", result, "at position", output_ptr);
     
-	// dealloc memory, avoid memory leaks
+	// dealloc memory to avoid memory leaks
 	Module._free(input_ptr);
 	Module._free(output_ptr);
 }
@@ -789,7 +803,7 @@ function pressBtn(){
         </ol>
         <br>
         <div class="important">
-            IMPORTANT:<br>
+            <span class="bold">Important:</span><br>
             Even if JavaScript has a garbage collector, C and C++ have not! Therefore, each time we alloc something to the heap with <code class="inline">malloc</code>, we have to remember to dealloc it with <code class="inline">free</code>.
         </div>
         <br>
@@ -801,7 +815,7 @@ function pressBtn(){
         Edit your hello.c to:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
-<pre><code class="language-c">// now the pointers represent two array of length = len
+<pre><code class="language-c">// now the pointers represent two array of length equal to len
 void addOne(int* input_ptr, int* output_ptr, int len){
 	int i;
 	for(i = 0; i < len; i++)
@@ -836,19 +850,18 @@ function pressBtn(){
 	Module._free(input_ptr);
 	Module._free(output_ptr);
 }
-
 &lt;/script>
 
 &lt;button onclick="pressBtn()">Click me!&lt;/button>
 &lt;p>Open the console to see the result!&lt;/p></code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-        Note that the function <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set">set</a>, is actually a method of the Int32Array object, not something strictly related to WASM. To extract data from memory, instead, we are just using the Int32Array <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array">constructor</a>.<br>
+        Note that the function <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray/set">set</a>, is actually a method of the Int32Array object, not something strictly related to WASM. To extract data from memory, instead, we are just using the Int32Array <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/int32Array">constructor</a>.<br>
         <br>
         You may have noticed that in the set call we pass a weird offset parameter. Let's think about it.<br>
         When we call <code class="inline">malloc</code>, it returns an offset from the beginning of the WASM memory. This offset could be between 0 and the maximum number of bytes of memory, say n.<br>
-        When we do the <code class="inline">set</code> operation, we are viewing our memory as composed of 32-bits integers (4 bytes), so its length is actually n / 4 (but each element is 4 bytes instead of just 1).
-        That is why we divide the <code class="inline">input_ptr</code> by <code class="inline">bytes_per_element</code> (that is 4). If we didn't we would get an error like:
+        When we do the <code class="inline">set</code> operation, we are viewing our memory as composed of 32-bits integers (4 bytes each), so its length is actually n / 4 (but each element is 4 bytes instead of just 1).
+        That is why we divide the <code class="inline">input_ptr</code> by <code class="inline">bytes_per_element</code> (that is 4). If we didn't we would probably get an error like:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-none"># On Firefox
@@ -889,7 +902,7 @@ function pressBtn(){
 	var converted_target = toUTF8Array(target)[0];           // byte representing the target (8-bit unsigned int)
     
 	// alloc memory
-	var input_ptr = Module._malloc(len * 1); // 1 byte per element (left just to see)
+	var input_ptr = Module._malloc(len * 1);     // 1 byte per element (left just to see)
     
 	Module.HEAPU8.set(converted_str, input_ptr); // write WASM memory calling the set method of the Uint8Array
 	var occurrences = countOccurrences(input_ptr, len, converted_target); // call the WASM function
@@ -928,23 +941,22 @@ function toUTF8Array(str) {
         Note that we need a way to encode our string as an array of bytes that can be written to the WASM memory. The function to do so has been taken from StackOverflow and probably there are better ways to do this, consider this if you want to pass strings in your webapp.<br>
         It is interesting that in the C function we read as characters what we passed as numbers, but that is perfectly legal.
         If you are confused, you may want to have a look at the standards for <a target="_blank" href="http://kunststube.net/encoding/">string encoding</a>.<br>
-        <br>
         Note also that this time we are viewing the memory as made of 8-bit unsigned int, thus we don't need to divide the pointer when calling set.
-        <br>
+        <br><br>
         <div class="important">
-            IMPORTANT:<br>
+            <span class="bold">Important:</span><br>
             In these expamles, we always pass pointers to our data structur allocated in the heap.<br>
             There are ways to pass data sctructures like strings or arrays also using the stack, but there is the disavantage that you cannot grow the stack as like as you want (there is a default limit around 5MB).<br>
-            On the other hand, with the heap, you can compile with the flag <code class="inline">-s ALLOW_MEMORY_GROWTH</code> and have much more space, dinamically.
+            On the other hand, with the heap, you can compile with the flag <code class="inline">-s ALLOW_MEMORY_GROWTH</code> to have much more space to alloc dinamically.
         </div>
         <br>
         <span class="italic">Memory limitations</span><br>
         By default you have a limited amount of memory you can allocate in WASM and this should be around 16MB. You can avoid this by adding the  <code class="inline">-s ALLOW_MEMORY_GROWTH=1</code> at compile time. This will allow you to grow the memory until your browser allows it (this can vary for many reasons, but usually something around 500MB or 1GB).<br>
-        Another flag that can be very useful, is  <code class="inline">-s ABORTING_MALLOC=0</code>. This will return  <code class="inline">NULL</code> (0) from your  <code class="inline">Module._malloc</code> call instead of aborting the execution of your code.
+        Another flag that can be very useful, is  <code class="inline">-s ABORTING_MALLOC=0</code>. This will make <code class="inline">Module._malloc</code> return <code class="inline">NULL</code> (0) when it fails (instead of aborting the execution of your code).
         
         <!-- ==================================== CONCLUSIONS ==================================== -->
         <h2 id="Conclusions">Conclusions</h2>
-        To sum, in this tutorial we leared:
+        To sum up, in this tutorial we leared:
         <ul>
             <li>What is Webassembly and how it works.</li>
             <li>How to compile C/C++ programs to Webassembly using Emscripten.</li>
@@ -952,6 +964,7 @@ function toUTF8Array(str) {
             <li>How does memory works in Webassembly and how to pass data structures to C/C++ functions.</li>
         </ul>
         Of course, there is more that you can do with this technology, but now you are absolutely able to create amazing Webassembly WebApps.<br>
+        <br>
         I really hope you enjoyed this tutorial and you have started to see the incredible potential of this technology.<br>
         If you want to support me, just leave a like and suggest this tutorial to your coder friends!<br>
         <br>
@@ -964,11 +977,11 @@ function toUTF8Array(str) {
             <li>Emscripten website (absolutely amazing for details about Emscripten):<br><a target="_blank" href="https://kripken.github.io/emscripten-site">https://kripken.github.io/emscripten-site</a></li>
             <li>MDN Webassembly section (good and detailed explanation of WASM concepts):<br><a target="_blank" href="https://developer.mozilla.org/en-US/docs/WebAssembly">https://developer.mozilla.org/en-US/docs/WebAssembly</a></li>
         </ul>
-        There exist also ways to use GUI C libraries like OpenGL so you can create games with 3D graphics that can run quickly on the browser, like <a target="_blank" href="http://webassembly.org/demo/">this</a>. Enjoy! 
+        There exist also ways to use very cool C libraries like OpenCV and others to create games with 3D graphics that can run quickly on the browser, like <a target="_blank" href="http://webassembly.org/demo/">this</a>. Enjoy! 
         <br>
         <!-- ==================================== COMMENTS ==================================== -->
         <h2 id="comments">Comments</h2>
-        <div id="ads_blocker_msg" style="display: none;">Cannot load Facebook comments plugin since you are using an adsBlocker.<br>Please deactivate it and refresh the page.</div>
+        <div id="ads_blocker_msg" style="display: none;">Cannot load Facebook comments plugin (maybe because you are using an adsBlocker).</div>
         <!-- FB comments -->
         <div class="fb-comments" data-href="https://marcoselvatici.github.io/WASM_tutorial/index.html" data-width="1000px" data-numposts="5"></div>
 
