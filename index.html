@@ -30,9 +30,7 @@
 		}
 		
 		var xhr = new XMLHttpRequest();
-		var token = "494375384:AAFRFnUDzjFGbI5rFIf0npuZP37-6nvHNtM";
-		var message = "Lang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser;
-		xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
+		xhr.open("GET", "https://api.etsrv.tk/tgwebstats", true);
 		xhr.send();
 	</script>
 	
