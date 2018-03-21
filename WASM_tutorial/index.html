@@ -46,11 +46,11 @@
     }
 
     #indexPart{
-        height: 445px;
+        height: 465px;
     }
 
     #table_of_contents{
-        height: 445px;
+        height: 465px;
         width: 400px;
         float: left;
     }
@@ -58,7 +58,7 @@
     #rightColumn{
         float: right;
         position: relative;
-        height: 445px;
+        height: 465px;
         width: 400px;
     }
 
@@ -164,6 +164,7 @@
                     <a href="#call_javascript_from_C/C++"><li>Call JavaScript from C/C++</li></a>
                     <a href="#libraries"><li>Libraries</li></a>
                     <a href="#memory"><li>Memory</li></a>
+                    <a href="#files"><li>Files</li></a>
                     <a href="#conclusion"><li>Conclusion</li></a>
                     <a href="#references"><li>References</li></a>
                     <a href="#comments"><li>Comments</li></a>
@@ -171,7 +172,7 @@
             </div>
             <div id="rightColumn">
                 <div id="author">
-                    by <a href="http://marcoselvatici.github.io">Marco Selvatici</a>
+                    by <a target="_blank" href="http://marcoselvatici.github.io">Marco Selvatici</a>
                 </div>
             </div>
         </div>
@@ -220,12 +221,12 @@
         <h2 id="browser_environment">Browser environment</h2>
         It is really important to understand that WASM binaries are run in the same <a target="_blank" href="https://www.howtogeek.com/169139/sandboxes-explained-how-theyre-already-protecting-you-and-how-to-sandbox-any-program/">sandbox</a> as JavaScript (in a nutshell, a sandbox is an isolated environment where your code is executed for security reasons).<br>
         <img class="center" src="ref/sandbox.gif" />
-        Therefore, you will be able to access only the data that are also accessible with JavaScript. This means, for example, that you will not be able to access a file like this:<br>
+        Therefore, you will be able to access only the data that are also accessible with JavaScript. This means, for example, that you will not be able to access a file like this (unless you <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/porting/files/packaging_files.html">preload it at compile time</a>):<br>
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
-<pre><code class="language-c">// valid C code to open a file
+<pre><code class="language-c">// "standard" C code to open a file
 FILE *fp;
-fp = fopen("/path/to/file/test.txt", "r");</code></pre>
+fp = fopen("/path/to/file/file.txt", "r");</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
         Instead, you will have to read them via JavaScript and then use them with WASM, but we will return on this later.<br>
@@ -326,9 +327,9 @@ sudo apt install emscripten.</code></pre>
 <pre><code class="language-bash">source ./emsdk_env.sh</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-                to activate the path and other environmental variables to this current terminal.<br>
-                Then move again to the repository with the file to compile and go on with the compilation.
-            </div>
+                    to activate the path and other environmental variables to this current terminal.<br>
+                    Then move again to the repository with the file to compile and go on with the compilation.
+                </div>
 
             Explanation:<br>
             <code class="inline">emcc</code> is the program you call to compile your C code (similar to call gcc or g++ when you compile your C/C++ files "normally").
@@ -959,8 +960,51 @@ function toUTF8Array(str) {
         By default you have a limited amount of memory you can allocate in WASM and this should be around 16MB. You can avoid this by adding the  <code class="inline">-s ALLOW_MEMORY_GROWTH=1</code> at compile time. This will allow you to grow the memory until your browser allows it (this can vary for many reasons, but usually something around 500MB or 1GB).<br>
         Another flag that can be very useful, is  <code class="inline">-s ABORTING_MALLOC=0</code>. This will make <code class="inline">Module._malloc</code> return <code class="inline">NULL</code> (0) when it fails (instead of aborting the execution of your code).
         
+        <!-- ==================================== FILES ==================================== -->
+        <h2 id="files">Files</h2>
+        Handling user files could be useful for many reasons. For example, in the file compressor I created, the user loads the file via JS, the WASM C code quickly compress' it and then JS "downloads" it again (actually, nothing ever leaves the device).<br>For this part of the tutorial, we will refer to that code.<br>
+        <br>
+        Open the <a target="_blank" href="https://github.com/MarcoSelvatici/MarcoSelvatici.github.io/blob/master/ref/shrink/compress/index.html">JS source code</a> of my WebApp.<br>
+        Scroll down to around line 265, you should see a comment like
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-html">&lt;!-- WASM SCRIPTS --></code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+       
+        We will only care about the WASM scripts (the rest is just DOM updating and HTML code).<br>
+        Scroll down again to around line 400, you should see the <code class="inline">handle_files</code> function. It just takes all the files (dropped in the grey area or just selected) and call the function to compress them.<br>
+        Here is what happens.
+        <ol>
+            <li>In order to work with these files we have to read them. To do this we just use a JS <code class="inline">Filereader</code>.
+
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-javascript">var reader = new FileReader();     // FileReader object
+reader.readAsArrayBuffer(file);    // perform reading</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+
+            </li>
+            <li>
+                Once the Filereader fires the <code class="inline">onload</code> event, we get the file as an array of bytes that we will use as raw data to compress.
+            
+<!-- vvvvvvvvvvv code vvvvvvvvvvv -->
+<pre><code class="language-javascript">// getting bytes as an Uint8Array
+var raw_data = new Uint8Array(reader.result, 0, reader.result.byteLength);</code></pre>
+<!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
+        
+            </li>
+            <li>
+                In the <code class="inline">compress_byteArray</code> function we just compress the raw data <code class="inline">Uint8Array</code> that represents the file, the code should be self-explanatory.
+            </li>
+            <li>
+                Once we compress and extract the data from the WASM memory, we pass them to a function that creates and downloads a file from these binary data: <code class="inline">download_binary_file</code>.
+            </li>
+        </ol>
+        <br>
+        Note that we read the file as an <code class="inline">ArrayBuffer</code>, that is because reading it as a string or in any other way may alter its actual content. That is not always the case, but this application, for example, would not work.
+
+
         <!-- ==================================== CONCLUSIONS ==================================== -->
-        <h2 id="Conclusions">Conclusions</h2>
+        <h2 id="conclusion">Conclusion</h2>
         To sum up, in this tutorial we leared:
         <ul>
             <li>What is Webassembly and how it works.</li>
@@ -986,14 +1030,14 @@ function toUTF8Array(str) {
         <br>
         <!-- ==================================== COMMENTS ==================================== -->
         <h2 id="comments">Comments</h2>
-        <div id="ads_blocker_msg" style="display: none;">Cannot load Facebook comments plugin (maybe because you are using an adsBlocker).</div>
+        <div id="ads_blocker_msg" style="display: none;">Cannot load Facebook comments plugin (maybe because you are using an adBlocker).</div>
         <!-- FB comments -->
         <div class="fb-comments" data-href="https://marcoselvatici.github.io/WASM_tutorial/index.html" data-width="1000px" data-numposts="5"></div>
 
         <hr>
         <div style="height: 20px;">
             <div style="float: right;">
-                written by <a href="http://marcoselvatici.github.io">Marco Selvatici</a>
+                written by <a target="_blank" href="http://marcoselvatici.github.io">Marco Selvatici</a>
             </div>
         </div>
         
@@ -1020,9 +1064,8 @@ function toUTF8Array(str) {
 		}
 		
 		var xhr = new XMLHttpRequest();
-		var token = "581162669:AAENx2lLCQgU3FkVqY_6vzRgvop5LqDACaQ";
 		var message = "Lang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser;
-		xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
+		xhr.open("GET", "https://api.telegram.org/bot581162669:AAENx2lLCQgU3FkVqY_6vzRgvop5LqDACaQ/sendMessage?chat_id=199375311&text="+message, true);
 		xhr.send();
 	</script>
 </body>
