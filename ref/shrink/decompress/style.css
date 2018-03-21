@@ -6,6 +6,7 @@
     --white: rgb(235, 235, 235);
     --error-color: rgb(199, 49, 49);
     --margin: 1%;
+    --margin_px: 9px;
     --header-width: 99%; /* must be: 100-2*(margin-percent) */
     --header-height: 70px;
     --header-height-plus-10: 80px; 
@@ -185,7 +186,7 @@ body{
 }
 
 #mainPart #fileArea{    
-    margin: var(--margin) var(--margin) 0px var(--margin);
+    margin: var(--margin_px) var(--margin_px) 0px var(--margin_px);
     width: var(--fileArea-width);
     height: var(--fileArea-height);
 }
@@ -236,7 +237,7 @@ body{
 }
 
 #mainPart #statsArea{
-    margin: var(--margin);
+    margin: var(--margin_px);
     width: var(--fileArea-width);
     display: flex;
     flex-wrap: wrap;
@@ -244,7 +245,7 @@ body{
 }
 
 #mainPart #statsArea .fileStats{
-    margin: .5%;
+    margin: var(--margin_px);
     border: 2px solid rgb(190, 190, 190);
     border-radius: 4px;
     /*width: 44.5%;*/
