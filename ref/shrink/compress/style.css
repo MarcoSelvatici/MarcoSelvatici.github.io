@@ -87,8 +87,8 @@ body{
 
 #advancedMenu .menuLine{
     min-height: 55px;
-    min-width: 250px;
-    font-size: 1.6em;
+    min-width: 246.8px;
+    font-size: 1.39em;
     margin: 5px;      
 }
 
@@ -139,6 +139,10 @@ body{
     background-color: var(--header-color);
 }
 
+#header #logo{
+    padding-top: 4px;
+}
+
 #header #headerRight{
     height: var(--header-height);
 }
@@ -149,13 +153,13 @@ body{
 }
 
 #header #headerRight #selectProduct .product{
-    height: 63px;
-    padding-top:7px;
+    height: 61px;
+    padding-top:9px;
 }
 
 #header #headerRight #selectProduct a{
     cursor: pointer;
-    font-size: 0.7em;
+    font-size: 0.6em;
     color: var(--white);
     text-decoration: none;
     margin: 0px 25px 0px 25px;
@@ -167,9 +171,9 @@ body{
 
 #header #headerRight #advanced{
     cursor: pointer;
-    height: var(--header-height);
+    height: 67px;
     float: right;
-    padding: 0px 25px 0px 25px;
+    padding: 3px 25px 0px 25px;
 }
 
 #header #headerRight #advanced img{
@@ -204,6 +208,7 @@ body{
     align-items: center;
     text-align: center;
     overflow: hidden;
+    color: rgb(78, 78, 78);
 }
 
 #mainPart #fileArea #dropArea p{
@@ -225,7 +230,8 @@ body{
 }
 
 #mainPart #fileArea #dropArea img{
-    vertical-align: middle;
+    transform: translate(0px, 3px);
+    opacity: 0.5;
 }
 
 #mainPart #fileArea #dropArea #fileSelector{
@@ -329,5 +335,5 @@ footer{
 }
 
 #freeMemoryBtn:disabled img{
-    opacity: 0.4;
+    opacity: 0.3;
 }
