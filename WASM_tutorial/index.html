@@ -477,7 +477,7 @@ int main(){
 <pre><code class="language-javascript">var result = js_wrapped_fib(parameter);</code></pre>
 <!-- ^^^^^^^^^^^ code ^^^^^^^^^^^ -->
 
-        Let's focus a bit on the parameters we need to pass to crwap:
+        Let's focus a bit on the parameters we need to pass to cwrap:
         <ul>
             <li><span class="italic">name of the function</span>: name of the function in the C source code.</li>
             <li><span class="italic">return type</span>: the return type of the function. This can be <code class="inline">"number"</code>, <code class="inline">"string"</code> or <code class="inline">"array"</code>, which correspond to the appropriate JavaScript types (use number for any C pointer), or for a void function it can be <code class="inline">null</code> (note: the JavaScript null value, not a string containing the word "null").</li>
