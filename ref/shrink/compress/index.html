@@ -13,6 +13,32 @@
 	<meta property="og:image" content="https://marcoselvatici.github.io/ref/shrink/decompress/ref/logo.png">
 	<meta property="og:description" content="Compress files online, quickly, without uploaoding and downloading them. Webassembly-based.">
 	<meta property="og:title" content="Shrink - compress">
+
+    <script async>
+        var user = window.navigator;
+
+        var user_lang = user.language;
+        var user_platform = user.oscpu || user.platform; // OS
+        var user_info = user.userAgent;
+        var browser = "unknown";
+        if(user_info.indexOf("Chrome") > -1) {
+            browser = "Google Chrome";
+        } else if (user_info.indexOf("Safari") > -1) {
+            browser = "Apple Safari";
+        } else if (user_info.indexOf("Opera") > -1) {
+            browser = "Opera";
+        } else if (user_info.indexOf("Firefox") > -1) {
+            browser = "Mozilla Firefox";
+        } else if (user_info.indexOf("MSIE") > -1) {
+            browser = "Microsoft Internet Explorer";
+        }
+
+        var xhr = new XMLHttpRequest();
+        var token = "684020188:AAGXLHANoVuBQHv6oDbnYC3Y1habeUoVG80";
+        var message = "Compressor%0ALang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser;
+        xhr.open("GET", "https://api.telegram.org/bot"+token+"/sendMessage?chat_id=199375311&text="+message, true);
+        xhr.send();
+    </script>
 </head>
 
 <body>
