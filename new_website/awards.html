@@ -12,7 +12,7 @@
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css">
-	<link href="css/templatemo_style.css" rel="stylesheet" type="text/css">	
+	<link href="css/templatemo_style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 	<div class="templatemo-logo visible-xs-block">
@@ -39,22 +39,120 @@
 
 				<!-- Page specific content -->
                 <h1 class="templatemo-header">Awards</h1>
-                <h2>University</h2>
-                <article>
-                    <div class="row">
-                        <div class="col-sm-10"><h3>Governors' BEng Prize in Electronic & Information Engineering</h3></div>
-                        <div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
-                    </div>
-                    <p>Official description: "To an outstanding student in the final year of BEng EIE".</p>
-                </article>
 
-                <article>
-                    <div class="row">
-                        <div class="col-sm-10"><h3>Class of 1974 Prize</h3></div>
-                        <div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
-                    </div>
-                    <p>Official description: "To a Beng Student who has achieved excellence in both technical and non-technical subjects and has shown exceptional achievements in extra-curricular activities".</p>
-                </article>
+				<!--Accordion wrapper-->
+				<div id="accordion" role="tablist" aria-multiselectable="true">
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading1">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+								<h3>University Prizes<i class="fa fa-angle-down rotate-icon" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse1" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion">
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Governors' BEng Prize in Electronic & Information Engineering</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
+								</div>
+								<p>To an outstanding student in the final year of BEng EIE.</p>
+							</article>
+			
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Class of 1974 Prize</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
+								</div>
+								<p>To a BEng student who has achieved excellence in both technical and non-technical subjects and has shown exceptional achievements in extra-curricular activities.</p>
+							</article>
+
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Dean's List (Year 3)</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
+								</div>
+								<p>To a student in the top 10% of their year.</p>
+							</article>
+
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Dean's List (Year 2)</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2019</i></h3></div>
+								</div>
+								<p>To a student in the top 10% of their year.</p>
+							</article>
+
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Dean's List (Year 1)</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2018</i></h3></div>
+								</div>
+								<p>To a student in the top 10% of their year.</p>
+							</article>
+
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Institute of Engineering & Technology Prize</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2018</i></h3></div>
+								</div>
+								<p>To the top student in first year EIE.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading2">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+								<h3>University Competitions<i class="fa fa-angle-down rotate-icon" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse2" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion">
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Network and Web Security Competition</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2020</i></h3></div>
+								</div>
+								<p>Awarded to the first student that would be able to deobfuscate a state-of-the-art obfuscated JavaScript malware (out of around 120 students). I actually was the second student to complete the challenge but the lecturer was so impressed that somebody was able to solve the challenge within a few hours that he awarded the prize to the top 2 students (it took me around 5 hours, while the fastest student only needed 4.5 hours).</p>
+							</article>
+
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Advanced Databases Competition</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>2019</i></h3></div>
+								</div>
+								<p>Awarded to the pair of students that created the most perfomant code to execute a series of SQL queries (out of around 40 teams). The solution me and me teammate proposed was more than 200 times faster than the course Teaching Assistant's one.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading3">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+								<h3>Programming Competitions<i class="fa fa-angle-down rotate-icon" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse3" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion">
+							<article>
+								<div class="row">
+									<div class="col-sm-10"><h3>Title</h3></div>
+									<div class="col-sm-2"><h3 class="right-aligned-company-column"><i>date</i></h3></div>
+								</div>
+								<p>descr</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+				</div><!--Accordion wrapper-->
 
 				<!-- End page specific content -->
 
@@ -67,6 +165,10 @@
 				</footer-->
 			</div>
 		</div> <!-- right section -->
-	</div>	
+	</div>
+
+	<!-- Necessary for the collapse animation -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>

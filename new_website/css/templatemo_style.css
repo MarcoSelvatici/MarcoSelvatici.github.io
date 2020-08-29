@@ -120,7 +120,7 @@ p { font-size: 15px; }
 	font-size: 30px;
 	margin-top: 0;
 }
-article { margin-top: 40px; }
+article { margin-top: 20px; }
 article p {
 	margin-bottom: 15px;
 	text-align: justify;
@@ -185,6 +185,19 @@ iframe { border: none; }
 .company-logo-wrapper {
 	display: flex;
 	align-items: center;
+}
+
+.collapse-header {
+	border-bottom: 1px solid #aaaaaa;
+}
+
+.collapse-body {
+	border-bottom: 1px solid #aaaaaa;
+	padding-bottom: 20px;
+}
+
+#accordion {
+	margin-top: 40px;
 }
 
 .fade-in { 
