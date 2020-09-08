@@ -92,7 +92,7 @@
 						<!-- Card body -->
 						<div id="collapse3" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion">
 							<article>
-								<p>During the second year of university, I wrote a compiler able to <b>compile a subset of C into MIPS assembly</b>, which can then be assembled and executed using the MIPS CPU simulator I created in another project.</p>
+								<p>During the second year of university, I wrote a compiler able to <b>compile a subset of C into MIPS assembly</b>, which can then be assembled and executed using the MIPS CPU simulator I created in another project. This project also features a transpiler from a subset of C to Python.</p>
 								<p>The compiler (<a href="https://github.com/MarcoSelvatici/C-compiler" target="_blank">source code on github</a>) supports loops, if-statements, pointers, arrays, global variables, cross-file linking, recursive functions and more.</p>
 								<p>The compiler has been implemented in C++, using flex for lexing and yacc for parsing.</p>
 							</article>
@@ -130,6 +130,117 @@
 						<div id="collapse5" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading5" data-parent="#accordion">
 							<article>
 								<p>At the end of first year of university, I lead a group of 3 in the creation of an <b>FPGA system that is able to challenge a human player in the connect four game</b>. The system receives a video stream of the connect four game board, analyses it using an FPGA and sends data to a an ARM CPU which uses them to calculate the next move. The moves are calclated via a very optimised alpha-beta pruning minimax (<a href="https://github.com/MarcoSelvatici/FPGA-connect4" target="_blank">source code on github</a>).</p>
+								<p>The FPGA hardware have been specified via C++ code with FPGA-specific pragmas. The minimax algorithm have been implemented in Python as it was the only language the minimal OS of SoC supported.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading6">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+								<h3>WebAssembly tutorial<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse6" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading6" data-parent="#accordion">
+							<article>
+								<p>After the Facebook Hack a Project experience (see below), <b>I wrote a tutorial about WebAssembly</b>. I decided to do so as back in 2018 there were very few resources to learn such topics. The tutorial received several compliments and it is visited by around 20 developers every day.</p>
+								<p>You can find it <a href="https://marcoselvatici.github.io/WASM_tutorial/index.html" target="_blank">here</a>.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading7">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+								<h3>Facebook Hack a Project<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse7" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading7" data-parent="#accordion">
+							<article>
+								<p>During my first year of university I got selected for a 14 weeks long hackathon with Facebook where <b>I developed a WebAssembly-based webapp</b>.</p>
+								<p><a href="https://marcoselvatici.github.io/ref/shrink/decompress/index.html" target="_blank">The webapp</a> allows users to compress and decompress files directly in the client in an extremely perfomant way. In fact, the compression library used is written in C and runs in the browser at near native speed thanks to WebAssembly (<a href="https://github.com/MarcoSelvatici/MarcoSelvatici.github.io/tree/master/ref/shrink" target="_blank">source code on github</a>).</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading8">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse8" aria-expanded="false" aria-controls="collapse8">
+								<h3>Computer Science tutor<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse8" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading8" data-parent="#accordion">
+							<article>
+								<p>Because of my good results at Informatics Olympiads <b>I volounteered as a tutor for students in my high school</b> that were interested in that kind of competition. Together with a friend of mine we involved more than 50 students from 14 to 18 years old, and started to teach them both the basics of programming and more advanced algorithms and data structures.</p>
+								<p>One of our teams managed to win 3 over 5 contests at national level and 5 students reached the final round at Individual Informatics Olympiads (to which are admitted around 100 contestants over the initial 20'000+).</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading9">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse9" aria-expanded="false" aria-controls="collapse9">
+								<h3>Artificial Intelligence small projects<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse9" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading9" data-parent="#accordion">
+							<article>
+								<p>Across the years, I attended several online AI courses and experimented with numerous AI algorithms and technologies.</p>
+								<p>
+									Online courses I attednded:<br>
+									- <a href="https://www.davidsilver.uk/teaching/" target="_blank">David Silver's course on Reinforcement Learning</a> (University College of London),<br>
+									- <a href="https://courses.edx.org/courses/BerkeleyX/CS188x_1/1T2013/course/" target="_blank">Introduction to Artificial Intelligence</a> (Berkeley University).
+								</p>
+								<p>
+									Technologies I used:<br>
+									- Tensorflow,<br>
+									- Pytorch,<br>
+									- Keras.
+								</p>
+								<p>
+									Algorithms I familiarised with:<br>
+									- Search algorithms such as DFS, BFS, A*, <br>
+									- Feed-forward and convolutional neural networks,<br>
+									- Reinforcement Learning algorithms such as Q-learning,<br>
+									- Evolutionary algorithms.
+								</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading10">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse10" aria-expanded="false" aria-controls="collapse10">
+								<h3>Other fun small projects<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse10" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading10" data-parent="#accordion">
+							<article>
+								<p>
+									Collection of fun small projects:<br>
+									- <a href="https://marcoselvatici.github.io/ref/snake_basic.html" target="_blank">JavaScript snake game</a>,<br>
+									- <a href="https://marcoselvatici.github.io/ref/fractalTree/tree.html" target="_blank">JavaScript fractal tree generator</a>.
+								</p>
 							</article>
 						</div>
 					</div><!-- Accordion card -->

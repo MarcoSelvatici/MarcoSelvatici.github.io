@@ -39,6 +39,6 @@ Image on the left, linkedin-like
 * Compiler
 * MIPS VM
 * FPGA first year
-* Webassembly
+* Webassembly + Hack a project
 * AI stuff?
 * Tutoring and teaching computer science
