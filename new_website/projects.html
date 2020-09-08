@@ -40,38 +40,100 @@
 				<!-- Page specific content -->
                 <h1 class="templatemo-header">Projects</h1>
 
-                <div class="row">
-					<article class="templatemo-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<h2>DEflow</h2>
-						<img src="ref/images/DEflow.png" class="projects-img" />
-						<p>As <a href="ref/docs/dissertation.pdf" target="_blank">BEng thesis</a> I created an open source <b>electronic circuits designer and simulator</b>. The application is much more modern and intuitive than existing alternatives, which were common choices in education. Starting from 2020, <b>Imperial College Electrical, Electronic and Computer Engineers will be using my application</b> to learn Digital Electronics.</p>
-						<p>The application (<a href="https://github.com/MarcoSelvatici/DEflow" target="_blank">source code on github</a>) was almost entirely developed using the F# functional programming language, together with React and Electron.</p>
-					</article>
-					<article class="templatemo-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<h2>Blue</h2>
-						<img src="ref/images/DEflow.png" class="projects-img" />			
-						<p>During the third year of university I lead a team of 4 students to design and implement Blue, a <b>functional programming language with a Hindley Minler type system</b>. Blue features several data types (including untyped lists), two runtimes (SKI reducer and Beta reducer), type inference and type checking. The language also supports currying, lambda functions and higher order functions. We also created an IDE with syntax highlighting to easily run and test Blue code.</p>
-						<p>In order to test Blue's capabilities we used it to implement a series of libraries which include common functions such as map, reduce, fold and sort. We then used these libraries to implement <a href="https://github.com/MarcoSelvatici/Blue/blob/master/src/demo-code/lexngram.s" target="_blank">a lexer for Blue using Blue itself</a>.</p>
-						<p>The Blue language (<a href="https://github.com/MarcoSelvatici/Blue" target="_blank">source code on github</a>) was developed with the F# functional programming lanuage. The IDE was created with Electron.</p>
-					</article>
-                </div>
-                
-                <div class="row">
-					<article class="templatemo-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<h2>C to MIPS compiler</h2>
-						<img src="ref/images/mips.jpg" class="projects-img" />
-						<p>During the second year of university, I wrote a compiler able to compile a subset of C into MIPS assembly, which can then be assembled and executed using the MIPS CPU simulator I created in another project.</p>
-						<p>The compiler (<a href="https://github.com/MarcoSelvatici/C-compiler" target="_blank">source code on github</a>) supports loops, if-statements, pointers, arrays, global variables, cross-file linking, recursive functions and more.</p>
-						<p>The compiler has been implemented in C++, using flex for lexing and yacc for parsing.</p>
-					</article>
-					<article class="templatemo-item col-lg-6 col-md-6 col-sm-12 col-xs-12">
-						<h2>MIPS CPU simulator</h2>
-						<img src="ref/images/mips.jpg" class="projects-img" />			
-						<p>During the second year of university, I created a simulator for the MIPS CPU architecture. The simulator (<a href="https://github.com/MarcoSelvatici/MIPS-CPU-simulator" target="_blank">source code on github</a>) can successfully execute binaries compiled and assembled for such an architecture.</p>
-						<p>The simulator has been implemented in C++.</p>
-					</article>
-				</div>
 
+				<!--Accordion wrapper-->
+				<div id="accordion" role="tablist" aria-multiselectable="true">
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading1">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse1" aria-expanded="false" aria-controls="collapse1">
+								<h3>DEflow: an intuitive hardware design platform<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse1" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading1" data-parent="#accordion">
+							<article>
+								<p>As <a href="ref/docs/dissertation.pdf" target="_blank">BEng thesis</a> I created an open source <b>electronic circuits designer and simulator</b>. The application is much more modern and intuitive than existing alternatives, which were common choices in education. Starting from 2020, <b>Imperial College Electrical, Electronic and Computer Engineers will be using my application</b> to learn Digital Electronics.</p>
+								<p>The application (<a href="https://github.com/MarcoSelvatici/DEflow" target="_blank">source code on github</a>) was almost entirely developed using the F# functional programming language, together with React and Electron.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading2">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+								<h3>Blue: a strongly typed funcional programming language<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse2" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading2" data-parent="#accordion">
+							<article>
+								<p>During the third year of university I lead a team of 4 students to design and implement Blue, a <b>functional programming language with a Hindley Minler type system</b>. Blue features several data types (including untyped lists), two runtimes (SKI reducer and Beta reducer), type inference and type checking. The language also supports currying, lambda functions and higher order functions. We also created an IDE with syntax highlighting to easily run and test Blue code.</p>
+								<p>In order to test Blue's capabilities we used it to implement a series of libraries which include common functions such as map, reduce, fold and sort. We then used these libraries to implement <a href="https://github.com/MarcoSelvatici/Blue/blob/master/src/demo-code/lexngram.s" target="_blank">a lexer for Blue using Blue itself</a>.</p>
+								<p>The Blue language (<a href="https://github.com/MarcoSelvatici/Blue" target="_blank">source code on github</a>) was developed with the F# functional programming lanuage. The IDE was created with Electron.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading3">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+								<h3>C-to-MIPS compiler<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse3" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading3" data-parent="#accordion">
+							<article>
+								<p>During the second year of university, I wrote a compiler able to <b>compile a subset of C into MIPS assembly</b>, which can then be assembled and executed using the MIPS CPU simulator I created in another project.</p>
+								<p>The compiler (<a href="https://github.com/MarcoSelvatici/C-compiler" target="_blank">source code on github</a>) supports loops, if-statements, pointers, arrays, global variables, cross-file linking, recursive functions and more.</p>
+								<p>The compiler has been implemented in C++, using flex for lexing and yacc for parsing.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading4">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+								<h3>MIPS CPU simulator<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse4" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading4" data-parent="#accordion">
+							<article>
+								<p>During the second year of university, I created a <b>simulator for the MIPS CPU architecture</b>. The simulator (<a href="https://github.com/MarcoSelvatici/MIPS-CPU-simulator" target="_blank">source code on github</a>) can successfully execute binaries compiled and assembled for such an architecture.</p>
+								<p>The simulator has been implemented in C++.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading5">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+								<h3>FPGA-based connect four<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+					
+						<!-- Card body -->
+						<div id="collapse5" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading5" data-parent="#accordion">
+							<article>
+								<p>At the end of first year of university, I lead a group of 3 in the creation of an <b>FPGA system that is able to challenge a human player in the connect four game</b>. The system receives a video stream of the connect four game board, analyses it using an FPGA and sends data to a an ARM CPU which uses them to calculate the next move. The moves are calclated via a very optimised alpha-beta pruning minimax (<a href="https://github.com/MarcoSelvatici/FPGA-connect4" target="_blank">source code on github</a>).</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+				</div><!--Accordion wrapper-->
 
 				<!-- End page specific content -->
 
@@ -84,6 +146,10 @@
 				</footer-->
 			</div>
 		</div> <!-- right section -->
-	</div>	
+	</div>
+
+	<!-- Necessary for the collapse animation -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
 </html>
