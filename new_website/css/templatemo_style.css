@@ -77,19 +77,11 @@ p { font-size: 15px; }
 	padding-top: 20px;
 }
 .logo-left {
-	border-top: 1px solid gray;
-	border-right: none; 
-	border-bottom: 1px solid gray;
-	border-left: 1px solid gray;
 	float: right;
 	padding: 20px 30px 20px 100px;
 	text-align: right;
 }
 .logo-right {
-	border-top: 1px solid gray;
-	border-right: 1px solid gray;
-	border-bottom: 1px solid gray;
-	border-left: none;
 	float: left;
 	padding: 20px 100px 20px 30px;
 }
@@ -104,14 +96,14 @@ p { font-size: 15px; }
 .templatemo-nav>li>a {
 	border: 2px solid #8C8C8C;
 	border-radius: 8px;
-	color: white;
+	color: #222222;
 	padding: 15px 50px;
 	margin-bottom: 20px;
 	transition: background-color 0.3s;
 }
 .templatemo-nav>li>a:hover, .templatemo-nav>li>a:focus, .templatemo-nav>li>a.active {
-	background-color: #fff;
-	color: #222222;
+	background-color: #222222;
+	color: #fff;
 	font-weight: 700;
 }
 .templatemo-nav>li>a>.fa { margin-right: 10px; }
