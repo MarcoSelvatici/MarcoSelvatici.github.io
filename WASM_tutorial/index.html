@@ -185,7 +185,7 @@
         It is important to point out that WASM is not going to cut off JavaScript, you will still need it for several reasons that will be explained later on.<br>
         <br>
         In this tutorial, you will learn the basics concepts behind this technology and then you will be ready to create a complete Webassembly-based WebApp!<br>
-        Furthermore, I am going to guide you through all the concepts by using examples inspired to what I learned creating an online <a target="_blank" href="https://marcoselvatici.github.io/ref/shrink/compress/index.html">WASM-based file compressor</a>.<br>
+        Furthermore, I am going to guide you through all the concepts by using examples inspired to what I learned creating an online <a target="_blank" href="../shrink/compress/index.html">WASM-based file compressor</a>.<br>
         <br>
         So... Let's get started!
 
@@ -705,7 +705,7 @@ int main(){
         But pay attention: the first input parameter of that function is a string (<code class="inline">char*</code>) so it may would be better to read the section about memory before trying to actually use it from JS.<br>
         <br>
         If the project is more complex and contains shared libraries (<code class="inline">.so</code>), static libraries (<code class="inline">.a</code>) or object files (<code class="inline">.o</code> or <code class="inline">.bc</code>) <a target="_blank" href="https://kripken.github.io/emscripten-site/docs/compiling/Building-Projects.html">here</a> you can find a very good explanation on what to do. Remember that you may however need the flag <code class="inline">EXPORTED_FUNCTIONS</code> in order to let the compiler know which functions you want to use.<br>
-        For example, that is the command I used to compile the <a target="_blank" href="https://github.com/facebook/zstd">zstd compression library</a> for the <a target="_blank" href="https://marcoselvatici.github.io/ref/shrink/compress/index.html">WASM file compressor</a> I wrote:
+        For example, that is the command I used to compile the <a target="_blank" href="https://github.com/facebook/zstd">zstd compression library</a> for the <a target="_blank" href="../shrink/compress/index.html">WASM file compressor</a> I wrote:
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
 <pre><code class="language-bash">emcc lib/libzstd.bc -o zstd.js -O2 -s WASM=1 -s EXPORTED_FUNCTIONS="['_ZSTD_compress', '_ZSTD_compressBound', '_ZSTD_isError']" -s EXTRA_EXPORTED_RUNTIME_METHODS="['cwrap']" -s ALLOW_MEMORY_GROWTH=1 -s ABORTING_MALLOC=0</code></pre>
@@ -964,7 +964,7 @@ function toUTF8Array(str) {
         <h2 id="files">Files</h2>
         Handling user files could be useful for many reasons. For example, in the file compressor I created, the user loads the file via JS, the WASM C code quickly compress' it and then JS "downloads" it again (actually, nothing ever leaves the device).<br>For this part of the tutorial, we will refer to that code.<br>
         <br>
-        Open the <a target="_blank" href="https://github.com/MarcoSelvatici/MarcoSelvatici.github.io/blob/master/ref/shrink/compress/index.html">JS source code</a> of my WebApp.<br>
+        Open the <a target="_blank" href="https://github.com/MarcoSelvatici/MarcoSelvatici.github.io/blob/master/shrink/compress/index.html">JS source code</a> of my WebApp.<br>
         Scroll down to around line 265, you should see a comment like
 
 <!-- vvvvvvvvvvv code vvvvvvvvvvv -->
