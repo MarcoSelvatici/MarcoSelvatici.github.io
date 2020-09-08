@@ -28,7 +28,7 @@ p { font-size: 15px; }
 .left-container {
 	display: table-cell;
 	float: none;
-	width: 38%;
+	width: 30%;
 	padding-bottom: 20px;
 	padding-left: 30px;
 	padding-right: 0;
@@ -36,7 +36,7 @@ p { font-size: 15px; }
 .right-container {
 	display: table-cell;
 	float: none;
-	width: 62%;
+	width: 70%;
 	padding-bottom: 20px;
 	padding-left: 0;
 	padding-right: 30px;
@@ -50,7 +50,7 @@ p { font-size: 15px; }
 .tm-left-inner-container { margin-right: 30px; }
 .tm-right-inner-container {
 	margin-left: 30px;
-	max-width: 715px;
+	max-width: 740px;
 }
 .templatemo-logo { 
 	display: table;
@@ -96,14 +96,14 @@ p { font-size: 15px; }
 .templatemo-nav>li>a {
 	border: 2px solid #8C8C8C;
 	border-radius: 8px;
-	color: #222222;
+	color: white;
 	padding: 15px 50px;
 	margin-bottom: 20px;
 	transition: background-color 0.3s;
 }
 .templatemo-nav>li>a:hover, .templatemo-nav>li>a:focus, .templatemo-nav>li>a.active {
-	background-color: #222222;
-	color: #fff;
+	background-color: #fff;
+	color: #222222;
 	font-weight: 700;
 }
 .templatemo-nav>li>a>.fa { margin-right: 10px; }
@@ -245,6 +245,7 @@ iframe { border: none; }
 @media screen and (max-width: 767px) {
 	.templatemo-logo, .templatemo-container { display: block; }
 	.logo-left-container, .logo-right-container, .left-container, .right-container {
+		margin-top: 30px;
 		display: block;
 		width: 100%;
 	}
@@ -265,10 +266,19 @@ iframe { border: none; }
 		margin-bottom: 30px;
 		padding: 20px;
 	}
+	.black-bg {
+		background-color: white;
+	}
 	.tm-left-inner-container { margin-right: 0; }
 	.tm-right-inner-container {	margin-left: 0;	}
+	.templatemo-nav>li>a:hover, .templatemo-nav>li>a:focus, .templatemo-nav>li>a.active {
+		background-color: #fff;
+		color: #222222;
+		font-weight: 700;
+	}
 	.templatemo-nav { max-width: 100%; }
 	.templatemo-nav>li>a {
+		color: #222222;
 		margin-bottom: 5px;
 		text-align: center;
 	}
@@ -280,6 +290,6 @@ iframe { border: none; }
 		border: none;
 		max-width: none;
 	}
-	.left-container, .right-container {	padding-top: 40px; }
+	.left-container, .right-container {	padding-top: 10px; }
 	.templatemo-logo .col-lg-6, .templatemo-logo .col-md-6, .templatemo-logo .col-sm-6 { padding-top: 0; }
 }
