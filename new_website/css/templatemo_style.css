@@ -216,6 +216,11 @@ iframe { border: none; }
 	transform: rotate(0deg);
 }
 
+.projects-img {
+	width: 100%;
+	height: auto;
+}
+
 @keyframes fadeInAnimation { 
     0% { 
         opacity: 0; 
