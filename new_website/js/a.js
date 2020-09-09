@@ -4,6 +4,8 @@
 const user = window.navigator;
 const user_lang = user.language;
 const user_platform = user.oscpu || user.platform;
+const page_splits = location.pathname.split("/");
+const page = page_splits[page_splits.length - 1].slice(0, -5);
 const user_info = user.userAgent;
 let browser = "unknown";
 if(user_info.indexOf("Chrome") > -1) {
@@ -18,8 +20,8 @@ if(user_info.indexOf("Chrome") > -1) {
     browser = "Microsoft Internet Explorer";
 }
 let xhr = new XMLHttpRequest();
-const message = "Lang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser;
+const message = "Lang: " + user_lang + "%0AOS: " + user_platform + "%0ABrowser: " + browser + "%0APage: " + page;
 xhr.open("GET", "https://api.telegram.org/bot494375384:AAFRFnUDzjFGbI5rFIf0npuZP37-6nvHNtM/sendMessage?chat_id=199375311&text="+message, true);
 xhr.send();
-let node = document.getElementById("analytics");
+let node = document.getElementById("a");
 node.parentNode.removeChild(node);
