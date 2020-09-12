@@ -84,6 +84,25 @@
 					<!-- Accordion card -->
 					<div class="card">
 						<!-- Card header -->
+						<div class="collapse-header" role="tab" id="heading11">
+							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse11" aria-expanded="false" aria-controls="collapse11">
+								<h3>Functional implementation of the RAFT distributed consensus algorithm<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
+							</a>
+						</div>
+
+						<!-- Card body -->
+						<div id="collapse11" class="collapse collapse-body" role="tabpanel" aria-labelledby="heading11" data-parent="#accordion">
+							<article>
+								<p><a href="https://raft.github.io" target="_blank">RAFT</a> is a well known distributed algorithm to reach consensus via leader election in an eventually synchronous system.</p>
+								<p>During the third year of university, <b>I implemented it using Elixir, a functional programming language</b> for distributed systems. The system was tested and analysed in a series of scenarios, with several faulty or slow processes. These had the aim to simulate a real world scenario where servers or clients might crash.</p>
+								<p>The algorithm (<a href="https://github.com/MarcoSelvatici/RAFT-distributed-consensus-algorithm" target="_blank">source code on github</a>) was developed with the Elixir functional programming lanuage. Elixir makes use of the Erlang VM, which allows to spawn many lightweight "processes" which communicate among each other via message-passing.</p>
+							</article>
+						</div>
+					</div><!-- Accordion card -->
+
+					<!-- Accordion card -->
+					<div class="card">
+						<!-- Card header -->
 						<div class="collapse-header" role="tab" id="heading3">
 							<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
 								<h3>C-to-MIPS compiler<i class="fa fa-angle-down collapse-arrow" style="float:right; font-weight: 900;"></i></h3>
@@ -247,6 +266,8 @@
 						</div>
 					</div><!-- Accordion card -->
 				</div><!--Accordion wrapper-->
+
+				<!-- Latest used: 11 -->
 
 				<!-- End page specific content -->
 
