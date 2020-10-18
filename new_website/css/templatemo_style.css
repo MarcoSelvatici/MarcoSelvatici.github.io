@@ -226,22 +226,20 @@ iframe { border: none; }
 ----------------------------------------*/
 
 @media (min-width: 767px) {
-    .right-aligned-company-column { text-align: right; }
-}
+	.right-aligned-company-column { text-align: right; }
 
-@media (min-width: 767px) {
+	/* Make left column not scrollable. */
+	.left-container {
+		position: fixed;
+		height: 100%;
+	}
+
 	.row.equal {
-	  display: flex;
-	  flex-wrap: wrap;
-	}
-  }
-
-@media screen and (max-width: 991px) {
-	.templatemo-social {
-		margin-top: 15px;
-		text-align: left;
+	  	display: flex;
+	  	flex-wrap: wrap;
 	}
 }
+
 @media screen and (max-width: 767px) {
 	.templatemo-logo, .templatemo-container { display: block; }
 	.logo-left-container, .logo-right-container, .left-container, .right-container {
